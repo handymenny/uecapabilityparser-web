@@ -7,7 +7,7 @@ It's using [Qwik](https://qwik.builder.io) framework with [QwikCity](https://qwi
 
 ## Build and Run
 > **Note**<br>
-You may want to tweak `.env` and `.env.dev` before running or building this Web App
+You may want to tweak `.env` and `.env.ssr` before running or building this Web App
 
 ### Development
 
