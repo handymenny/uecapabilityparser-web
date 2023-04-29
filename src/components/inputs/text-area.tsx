@@ -26,7 +26,7 @@ export default component$((props: Props) => {
   const randId = useId();
   const id = `text-input-${randId}`;
   const hiddenCssClass = hidden ? 'hidden' : '';
-  const halfHeightCssClass = halfHeight ? 'h-48' : 'h-96';
+  const halfHeightCssClass = halfHeight ? 'h-40' : 'h-80';
 
   return (
     <div class="relative flex flex-col">
