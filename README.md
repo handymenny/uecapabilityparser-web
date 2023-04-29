@@ -4,10 +4,10 @@ This is an example of Web App that can interact with [UE Capability Parser](http
 
 It's using [Qwik](https://qwik.builder.io) framework with [QwikCity](https://qwik.builder.io/qwikcity/overview/)
 
-
 ## Build and Run
+
 > **Note**<br>
-You may want to tweak `.env` and `.env.ssr` before running or building this Web App
+> You may want to tweak `.env` and `.env.ssr` before running or building this Web App
 
 ### Development
 
@@ -30,6 +30,5 @@ npm run preview
 The production build will generate client and server modules by running both client and server build commands. Additionally, the build command will use Typescript to run a type check on the source code.
 
 ```shell
-npm run build 
+npm run build
 ```
-
