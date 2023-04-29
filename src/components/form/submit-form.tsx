@@ -164,7 +164,6 @@ export default component$(() => {
           label="Log Type"
           placeholder="log-type"
           options={options}
-          value="defaultType"
           name="type"
           disabled={submitting.value}
           onInput$={(value) => {

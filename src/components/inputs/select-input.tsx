@@ -9,7 +9,6 @@ interface Option {
 interface Props {
   label?: string;
   placeholder?: string;
-  value?: string;
   options: Option[];
   onInput$?: PropFunction<(value: string) => void>;
   name?: string;
@@ -17,8 +16,7 @@ interface Props {
 }
 
 export default component$((props: Props) => {
-  const { label, placeholder, value, options, onInput$, name, disabled } =
-    props;
+  const { label, placeholder, options, onInput$, name, disabled } = props;
   const randId = useId();
   const id = `text-input-${randId}`;
 
@@ -38,11 +36,7 @@ export default component$((props: Props) => {
         disabled={disabled}
       >
         {options.map((option) => (
-          <option
-            key={option.value}
-            value={option.value}
-            selected={value == option.value}
-          >
+          <option key={option.value} value={option.value}>
             {option.label}
           </option>
         ))}
