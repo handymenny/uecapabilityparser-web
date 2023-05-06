@@ -5,10 +5,11 @@ import Button from '~/components/inputs/button';
 import { encode, fromUint8Array } from 'js-base64';
 import axios from 'axios';
 import InputFile from '~/components/inputs/input-file';
+import type { Capabilities } from '~/@types/uecapabilityparser.d.ts';
 
 export default component$(() => {
   const defaultType = 'H';
-  const resultData: { value: any } = useStore({ value: null });
+  const resultData: { value: Capabilities | null } = useStore({ value: null });
   const submitting = useSignal(false);
   const type = useSignal(defaultType);
 
@@ -83,7 +84,10 @@ export default component$(() => {
     { label: 'Qcat UE Capability Information', value: 'QC' },
   ];
 
-  const csvButtons = [
+  const csvButtons: {
+    label: string;
+    type: 'lteca' | 'endc' | 'nrca' | 'nrdc';
+  }[] = [
     { label: 'Download LTE CA CSV', type: 'lteca' },
     { label: 'Download EN DC CSV', type: 'endc' },
     { label: 'Download NR CA CSV', type: 'nrca' },
