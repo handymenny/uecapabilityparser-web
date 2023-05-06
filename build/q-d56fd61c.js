@@ -1,0 +1,1 @@
+const i=()=>{const t="_qCityPopstateFallback",o="_qCityHistory";window[t]||(window[t]=()=>{window[o]||location.reload()},setTimeout(()=>{addEventListener("popstate",window[t])},0))};export{i as s_KnNE9eL0qfc};
