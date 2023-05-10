@@ -6,6 +6,13 @@ import { encode, fromUint8Array } from 'js-base64';
 import axios from 'axios';
 import InputFile from '~/components/inputs/input-file';
 import type { Capabilities } from '~/@types/uecapabilityparser.d.ts';
+import Lteca from '~/components/table/lteca';
+import Endc from '~/components/table/endc';
+import Nrca from '~/components/table/nrca';
+import Nrdc from '~/components/table/nrdc';
+import LteBands from '~/components/table/lte-bands';
+import NrBands from '~/components/table/nr-bands';
+import Other from '~/components/table/other';
 
 export default component$(() => {
   const defaultType = 'H';
@@ -261,6 +268,44 @@ export default component$(() => {
             }}
           />
         ))}
+      </div>
+      <div class="m-auto w-full max-w-6xl overflow-x-auto">
+        <div class="w-full text-sm sm:w-fit sm:min-w-[32rem] md:min-w-[36rem]">
+          <Other
+            cap={resultData.value ?? undefined}
+            title="Generic Capabilities"
+          />
+        </div>
+      </div>
+      <div class="m-auto w-full max-w-6xl overflow-x-auto">
+        <div class="w-full text-sm sm:w-fit sm:min-w-[32rem] md:min-w-[36rem]">
+          <LteBands bands={resultData.value?.lteBands} title="LTE Bands" />
+        </div>
+      </div>
+      <div class="m-auto w-full max-w-6xl overflow-x-auto">
+        <div class="w-full text-sm sm:w-fit sm:min-w-[32rem] md:min-w-[36rem]">
+          <NrBands bands={resultData.value?.nrBands} title="NR Bands" />
+        </div>
+      </div>
+      <div class="m-auto w-full max-w-6xl overflow-x-auto">
+        <div class="w-full text-sm sm:w-fit sm:min-w-[32rem] md:min-w-[36rem]">
+          <Lteca combos={resultData.value?.lteca} title="LTE CA Combos" />
+        </div>
+      </div>
+      <div class="m-auto w-full max-w-6xl overflow-x-auto">
+        <div class="w-full text-sm sm:w-fit sm:min-w-[32rem] md:min-w-[36rem]">
+          <Endc combos={resultData.value?.endc} title="EN-DC Combos" />
+        </div>
+      </div>
+      <div class="m-auto w-full max-w-6xl overflow-x-auto">
+        <div class="w-full text-sm sm:w-fit sm:min-w-[32rem] md:min-w-[36rem]">
+          <Nrca combos={resultData.value?.nrca} title="NR CA Combos" />
+        </div>
+      </div>
+      <div class="m-auto w-full max-w-6xl overflow-x-auto">
+        <div class="w-full text-sm sm:w-fit sm:min-w-[32rem] md:min-w-[36rem]">
+          <Nrdc combos={resultData.value?.nrdc} title="NR DC Combos" />
+        </div>
       </div>
     </>
   );
