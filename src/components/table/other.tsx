@@ -17,7 +17,7 @@ export default component$(({ cap, title }: Props) => {
     <details open={true}>
       <summary class="mt-10 text-xl font-bold">{title}</summary>
       <table class="w-full table-auto border-collapse border border-gray-500 text-left">
-        <tbody class="whitespace-pre-line align-text-top">
+        <tbody class="whitespace-pre align-text-top">
           <tr>
             <th class="border-collapse border border-gray-500 p-1.5">
               LTE Category (DL/UL)

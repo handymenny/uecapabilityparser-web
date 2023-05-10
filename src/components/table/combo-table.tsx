@@ -32,7 +32,7 @@ export default component$((props: Props) => {
             ))}
           </tr>
         </thead>
-        <tbody class="whitespace-pre-line align-text-top">
+        <tbody class="whitespace-pre align-text-top">
           {data[0].map((_, rowIndex) => (
             <tr key={rowIndex}>
               {data.map((column, columnIndex) => (
