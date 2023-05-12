@@ -20,7 +20,7 @@ export default component$(({ bands, title }: Props) => {
     data.push([]);
   }
 
-  bands.map((band) => {
+  bands.forEach((band) => {
     let i = 0;
     data[i++].push(band.band.toString());
     data[i++].push(mimoToStr(band.mimoDl));
