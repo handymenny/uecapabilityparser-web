@@ -2,7 +2,7 @@
 // Run gradlew genTsTypes to update this file.
 export interface Capabilities {
   lteca?: ComboLte[];
-  lteBands?: ComponentLte[];
+  lteBands?: BandLteDetails[];
   nrNsaBandsEutra?: BandNrDetails[];
   nrSaBandsEutra?: BandNrDetails[];
   nrBands?: BandNrDetails[];
@@ -22,20 +22,17 @@ export interface ComboLte {
   bcs?: BCS;
 }
 
-export interface ComponentLte {
+export interface BandLteDetails {
   band: number;
-  bwClassDl?: BwClass;
-  bwClassUl?: BwClass;
   mimoDl?: Mimo;
   mimoUl?: Mimo;
   modulationDl?: Modulation;
   modulationUl?: Modulation;
+  powerClass?: PowerClass;
 }
 
 export interface BandNrDetails {
   band: number;
-  bwClassDl?: BwClass;
-  bwClassUl?: BwClass;
   mimoDl?: Mimo;
   mimoUl?: Mimo;
   modulationDl?: Modulation;
@@ -94,8 +91,6 @@ export namespace BCS {
   }
 }
 
-export type BwClass = string;
-
 export type Mimo = Mimo.empty | Mimo.mixed | Mimo.single;
 
 export namespace Mimo {
@@ -148,7 +143,7 @@ export namespace Modulation {
 }
 
 export enum PowerClass {
-  NONE = 'NONE',
+  none = 'none',
   pc1 = 'pc1',
   pc1dot5 = 'pc1dot5',
   pc2 = 'pc2',
@@ -157,6 +152,16 @@ export enum PowerClass {
   pc5 = 'pc5',
   pc6 = 'pc6',
   pc7 = 'pc7',
+}
+
+export interface ComponentLte {
+  band: number;
+  bwClassDl?: BwClass;
+  bwClassUl?: BwClass;
+  mimoDl?: Mimo;
+  mimoUl?: Mimo;
+  modulationDl?: Modulation;
+  modulationUl?: Modulation;
 }
 
 export enum ModulationOrder {
@@ -186,3 +191,5 @@ export interface ComponentNr {
   bw90mhzSupported?: boolean;
   maxScs?: number;
 }
+
+export type BwClass = string;

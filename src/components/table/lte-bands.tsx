@@ -1,10 +1,10 @@
 import { component$ } from '@builder.io/qwik';
-import type { ComponentLte } from '~/@types/uecapabilityparser';
+import type { BandLteDetails } from '~/@types/uecapabilityparser';
 
 import { modulationToStr, mimoToStr } from '~/helpers/bands';
 import ComboTable from '~/components/table/combo-table';
 interface Props {
-  bands?: ComponentLte[];
+  bands?: BandLteDetails[];
   title?: string;
 }
 
