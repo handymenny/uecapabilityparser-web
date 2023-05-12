@@ -1,1 +1,0 @@
-import{p as e,z as t,_ as a}from"./q-544d05d5.js";const r=e(t(()=>a(()=>import("./q-0838df0a.js"),["build/q-0838df0a.js","build/q-544d05d5.js"]),"s_xYL1qOwPyDI")),o={title:"UE Capability Parser Web",meta:[{name:"description",content:"UE Capability Parser Web"}]};export{r as default,o as head};
