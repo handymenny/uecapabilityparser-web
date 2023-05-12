@@ -1,4 +1,9 @@
-import type { BwsNr, Mimo, Modulation } from '~/@types/uecapabilityparser';
+import type {
+  BwsNr,
+  Mimo,
+  Modulation,
+  PowerClass,
+} from '~/@types/uecapabilityparser';
 
 export function modulationToStr(modulation?: Modulation) {
   if (modulation === undefined || modulation.type != 'single') {
@@ -40,4 +45,25 @@ export function bwsUlToStr(bwsNr?: BwsNr[]) {
     (bwsNr) => `${bwsNr.scs}kHz: ${bwsNr.bandwidthsUl.join(', ')}`
   );
   return result ?? [];
+}
+
+export function powerClassToStr(powerclass?: PowerClass) {
+  switch (powerclass) {
+    case 'pc1':
+      return '1';
+    case 'pc1dot5':
+      return '1.5';
+    case 'pc2':
+      return '2';
+    case 'pc4':
+      return '4';
+    case 'pc5':
+      return '5';
+    case 'pc6':
+      return '6';
+    case 'pc7':
+      return '7';
+    default:
+      return '3';
+  }
 }

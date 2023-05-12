@@ -41,7 +41,7 @@ export interface BandNrDetails {
   modulationDl?: Modulation;
   modulationUl?: Modulation;
   maxUplinkDutyCycle?: number;
-  powerClass?: number;
+  powerClass?: PowerClass;
   bandwidths?: BwsNr[];
   rateMatchingLteCrs?: boolean;
 }
@@ -145,6 +145,18 @@ export namespace Modulation {
     type: Modulation.Type.single;
     value: ModulationOrder;
   }
+}
+
+export enum PowerClass {
+  NONE = 'NONE',
+  pc1 = 'pc1',
+  pc1dot5 = 'pc1dot5',
+  pc2 = 'pc2',
+  pc3 = 'pc3',
+  pc4 = 'pc4',
+  pc5 = 'pc5',
+  pc6 = 'pc6',
+  pc7 = 'pc7',
 }
 
 export enum ModulationOrder {

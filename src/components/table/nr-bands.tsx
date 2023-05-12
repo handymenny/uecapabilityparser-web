@@ -6,6 +6,7 @@ import {
   bwsDlToStr,
   bwsUlToStr,
   mimoToStr,
+  powerClassToStr,
 } from '~/helpers/bands';
 import ComboTable from '~/components/table/combo-table';
 interface Props {
@@ -44,7 +45,7 @@ export default component$(({ bands, title }: Props) => {
     data[i++].push(mimoToStr(band.mimoUl));
     data[i++].push(modulationToStr(band.modulationUl));
     data[i++].push(bwsUlToStr(band.bandwidths).join('\n'));
-    data[i++].push(band.powerClass?.toString() ?? '3');
+    data[i++].push(powerClassToStr(band.powerClass));
     data[i++].push(band.rateMatchingLteCrs === true ? 'True' : 'False');
   });
 
