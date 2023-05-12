@@ -1,7 +1,7 @@
 import { component$ } from '@builder.io/qwik';
 import type { BandLteDetails } from '~/@types/uecapabilityparser';
 
-import { modulationToStr, mimoToStr } from '~/helpers/bands';
+import { modulationToStr, mimoToStr, powerClassToStr } from '~/helpers/bands';
 import ComboTable from '~/components/table/combo-table';
 interface Props {
   bands?: BandLteDetails[];
@@ -13,7 +13,14 @@ export default component$(({ bands, title }: Props) => {
     return <></>;
   }
 
-  const headers = ['Band', 'MIMO DL', 'MOD DL', 'MIMO UL', 'MOD UL'];
+  const headers = [
+    'Band',
+    'MIMO DL',
+    'MOD DL',
+    'MIMO UL',
+    'MOD UL',
+    'Power Class',
+  ];
 
   const data: string[][] = [];
   for (let i = 0; i < headers.length; i++) {
@@ -27,6 +34,7 @@ export default component$(({ bands, title }: Props) => {
     data[i++].push(modulationToStr(band.modulationDl));
     data[i++].push(mimoToStr(band.mimoUl));
     data[i++].push(modulationToStr(band.modulationUl));
+    data[i++].push(powerClassToStr(band.powerClass));
   });
 
   return (
