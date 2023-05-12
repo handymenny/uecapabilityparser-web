@@ -382,12 +382,12 @@ function equalsBwScs(component: ComponentNr, other: ComponentNr) {
 
 function groupComponentsDl(components: Component[], nr?: boolean) {
   const array: Component[][] = [];
-  let prevComponent: Component | undefined;
+  let prevComponent: Component | undefined = undefined;
   for (const component of components) {
     if (component.bwClassDl === undefined) {
       continue;
     }
-    if (prevComponent !== undefined && dlEquals(component, prevComponent, nr)) {
+    if (prevComponent != undefined && dlEquals(component, prevComponent, nr)) {
       array.at(-1)!.push(component);
     } else {
       array.push([component]);
@@ -399,7 +399,7 @@ function groupComponentsDl(components: Component[], nr?: boolean) {
 
 function groupComponentsUl(components: Component[], nr?: boolean) {
   const array: Component[][] = [];
-  let prevComponent: Component | undefined;
+  let prevComponent: Component | undefined = undefined;
   for (const component of components) {
     if (component.bwClassUl === undefined) {
       continue;
