@@ -6,10 +6,16 @@ import type {
 } from '~/@types/uecapabilityparser';
 
 export function modulationToStr(modulation?: Modulation) {
-  if (modulation === undefined || modulation.type != 'single') {
+  if (modulation === undefined || modulation.type === 'empty') {
     return '';
   }
-  switch (modulation.value) {
+  let modOrder;
+  if (modulation.type === 'mixed') {
+    modOrder = modulation.value[0];
+  } else {
+    modOrder = modulation.value;
+  }
+  switch (modOrder) {
     case 'qpsk':
       return 'QPSK';
     case 'qam16':
@@ -26,8 +32,10 @@ export function modulationToStr(modulation?: Modulation) {
 }
 
 export function mimoToStr(mimo?: Mimo) {
-  if (mimo === undefined || mimo.type != 'single') {
+  if (mimo === undefined || mimo.type === 'empty') {
     return '';
+  } else if (mimo.type === 'mixed') {
+    return mimo.value[0].toString();
   } else {
     return mimo.value.toString();
   }
