@@ -500,12 +500,16 @@ export function componentsModDlToStr(
       nr
     );
     if (modStr !== null) {
-      result.push(
-        ...multipleFeaturesToStr(modStr, value.length, minMultiplier)
-      );
+      if (modStr.basicFeature.length === 1) {
+        result.push(modStr.basicFeature[0]);
+      } else {
+        result.push(...multipleFeaturesToStr(modStr, value.length, 1));
+      }
     }
   });
-  return result.join(' + ');
+  const firstMod = result[0];
+  const allEquals = result.every((mod) => mod === firstMod);
+  return allEquals ? firstMod : result.join(' + ');
 }
 
 export function componentsModUlToStr(
@@ -522,12 +526,18 @@ export function componentsModUlToStr(
       nr
     );
     if (modStr !== null) {
-      result.push(
-        ...multipleFeaturesToStr(modStr, value.length, minMultiplier)
-      );
+      if (modStr.basicFeature.length === 1) {
+        result.push(modStr.basicFeature[0]);
+      } else {
+        result.push(
+          ...multipleFeaturesToStr(modStr, value.length, minMultiplier)
+        );
+      }
     }
   });
-  return result.join(' + ');
+  const firstMod = result[0];
+  const allEquals = result.every((mod) => mod === firstMod);
+  return allEquals ? firstMod : result.join(' + ');
 }
 
 export function componentsScsDlToStr(components: ComponentNr[]): string {
