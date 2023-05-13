@@ -34,16 +34,24 @@ export function mimoToStr(mimo?: Mimo) {
 }
 
 export function bwsDlToStr(bwsNr?: BwsNr[]) {
-  const result = bwsNr?.map(
-    (bwsNr) => `${bwsNr.scs}kHz: ${bwsNr.bandwidthsDl.join(', ')}`
-  );
+  const result = bwsNr?.map((bwsNr) => {
+    if (bwsNr.bandwidthsDl.length > 0) {
+      return `${bwsNr.scs}kHz: ${bwsNr.bandwidthsDl.join(', ')}`;
+    } else {
+      return '';
+    }
+  });
   return result ?? [];
 }
 
 export function bwsUlToStr(bwsNr?: BwsNr[]) {
-  const result = bwsNr?.map(
-    (bwsNr) => `${bwsNr.scs}kHz: ${bwsNr.bandwidthsUl.join(', ')}`
-  );
+  const result = bwsNr?.map((bwsNr) => {
+    if (bwsNr.bandwidthsUl.length > 0) {
+      return `${bwsNr.scs}kHz: ${bwsNr.bandwidthsUl.join(', ')}`;
+    } else {
+      return '';
+    }
+  });
   return result ?? [];
 }
 
