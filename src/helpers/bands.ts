@@ -55,6 +55,8 @@ export function powerClassToStr(powerclass?: PowerClass) {
       return '1.5';
     case 'pc2':
       return '2';
+    case 'pc3':
+      return '3';
     case 'pc4':
       return '4';
     case 'pc5':
@@ -64,6 +66,6 @@ export function powerClassToStr(powerclass?: PowerClass) {
     case 'pc7':
       return '7';
     default:
-      return '3';
+      return '';
   }
 }
