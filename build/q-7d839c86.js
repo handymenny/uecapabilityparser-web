@@ -1,0 +1,1 @@
+import{A as t}from"./q-c22996cb.js";const l=()=>t("header",null,{class:"flex justify-between bg-black px-5 py-2"},[t("a",null,{class:"text-xl text-white",href:"/",title:"UE Capability Parser"},"UE Capability Parser",3,null),t("a",null,{class:"text-xl text-white",href:"https://github.com/HandyMenny",target:"_blank"},"by handymenny",3,null)],3,"SN_0");export{l as s_ceU05TscGYE};
