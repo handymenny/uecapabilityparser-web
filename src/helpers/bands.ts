@@ -85,3 +85,11 @@ export function powerClassToStr(powerclass?: PowerClass) {
       return '';
   }
 }
+
+export function maxUplinkDutyCycleClassToStr(maxUplinkDutyCycle?: number) {
+  if (maxUplinkDutyCycle === undefined) {
+    return '';
+  } else {
+    return `${maxUplinkDutyCycle}%`;
+  }
+}
