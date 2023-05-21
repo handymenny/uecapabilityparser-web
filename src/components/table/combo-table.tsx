@@ -9,7 +9,7 @@ interface Props {
 export default component$((props: Props) => {
   const { title, headers, data, hideEmpty } = props;
   const emptyColumns = data.map((column) => {
-    return column.every((cell) => cell === '');
+    return column.every((cell) => cell === '' || cell === undefined);
   });
 
   return (
