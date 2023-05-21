@@ -5,7 +5,7 @@ import Button from '~/components/inputs/button';
 import { encode, fromUint8Array } from 'js-base64';
 import axios from 'axios';
 import InputFile from '~/components/inputs/input-file';
-import type { Capabilities } from '~/@types/uecapabilityparser.d.ts';
+import type { Capabilities } from '~/@types/uecapabilityparser';
 import Lteca from '~/components/table/lteca';
 import Endc from '~/components/table/endc';
 import Nrca from '~/components/table/nrca';
