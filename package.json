@@ -35,7 +35,7 @@
     "js-base64": "^3.7.5",
     "postcss": "^8.4.16",
     "prettier": "^2.8.8",
-    "prettier-plugin-tailwindcss": "^0.2.7",
+    "prettier-plugin-tailwindcss": "^0.3.0",
     "qwik-feather-icons": "^1.2.1",
     "tailwindcss": "^3.1.8",
     "typescript": "^5.0.4",
