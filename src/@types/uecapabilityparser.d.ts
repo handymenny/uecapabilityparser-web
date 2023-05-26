@@ -15,6 +15,7 @@ export interface Capabilities {
   parserVersion: string;
   timestamp: number;
   metadata: { [key: string]: string };
+  id?: string;
 }
 
 export interface ComboLte {

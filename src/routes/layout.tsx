@@ -5,7 +5,7 @@ export default component$(() => {
   return (
     <div class="flex min-h-screen flex-col bg-gray-100">
       <Header />
-      <main class="flex flex-1 flex-col justify-center p-10 py-5 sm:p-12 sm:py-6">
+      <main class="flex flex-1 flex-col justify-center px-10 py-4 sm:px-12">
         <Slot />
       </main>
     </div>
