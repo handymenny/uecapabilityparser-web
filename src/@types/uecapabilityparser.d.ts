@@ -12,6 +12,7 @@ export interface Capabilities {
   nrca?: ComboNr[];
   nrdc?: ComboNrDc[];
   logType: string;
+  ueCapFilters?: IUeCapabilityFilter[];
   parserVersion: string;
   timestamp: number;
   metadata: { [key: string]: string };
@@ -61,6 +62,45 @@ export interface ComboNrDc {
   componentsFr1: ComponentNr[];
   componentsFr2: ComponentNr[];
   bcs?: BCS;
+}
+
+export type IUeCapabilityFilter =
+  | IUeCapabilityFilter.UeCapabilityFilterLte
+  | IUeCapabilityFilter.UeCapabilityFilterNr;
+
+export namespace IUeCapabilityFilter {
+  export enum Type {
+    UeCapabilityFilterLte = 'UeCapabilityFilterLte',
+    UeCapabilityFilterNr = 'UeCapabilityFilterNr',
+  }
+
+  export interface UeCapabilityFilterLte {
+    type: IUeCapabilityFilter.Type.UeCapabilityFilterLte;
+    rat: Rat;
+    lteBands?: BandFilterLte[];
+    reducedFormat?: boolean;
+    reducedIntNonContComb?: boolean;
+    skipFallbackCombRequested?: boolean;
+    diffFallbackCombList?: ComboLte[];
+    maxCCsDl?: number;
+    maxCCsUl?: number;
+    includeNrDc?: boolean;
+    includeNeDc?: boolean;
+    omitEnDc?: boolean;
+    uplinkTxSwitchRequest?: boolean;
+  }
+
+  export interface UeCapabilityFilterNr {
+    type: IUeCapabilityFilter.Type.UeCapabilityFilterNr;
+    rat: Rat;
+    lteBands?: BandFilterLte[];
+    nrBands?: BandFilterNr[];
+    eutraNrOnly?: boolean;
+    includeNrDc?: boolean;
+    includeNeDc?: boolean;
+    omitEnDc?: boolean;
+    uplinkTxSwitchRequest?: boolean;
+  }
 }
 
 export type BCS = BCS.all | BCS.empty | BCS.multi | BCS.single;
@@ -155,6 +195,17 @@ export enum PowerClass {
   pc7 = 'pc7',
 }
 
+export enum Rat {
+  EUTRA = 'EUTRA',
+  UTRA = 'UTRA',
+  GERAN_CS = 'GERAN_CS',
+  GERAN_PS = 'GERAN_PS',
+  CDMA2000_1XRTT = 'CDMA2000_1XRTT',
+  NR = 'NR',
+  EUTRA_NR = 'EUTRA_NR',
+  SPARE1 = 'SPARE1',
+}
+
 export interface ComponentLte {
   band: number;
   bwClassDl?: BwClass;
@@ -191,6 +242,20 @@ export interface ComponentNr {
   maxBw?: number;
   bw90mhzSupported?: boolean;
   maxScs?: number;
+}
+
+export interface BandFilterLte {
+  band: number;
+  bwClassDl?: BwClass;
+  bwClassUl?: BwClass;
+}
+
+export interface BandFilterNr {
+  band: number;
+  maxBwDl?: number;
+  maxBwUl?: number;
+  maxCCsDl?: number;
+  maxCCsUl?: number;
 }
 
 export type BwClass = string;
