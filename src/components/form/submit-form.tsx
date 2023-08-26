@@ -46,6 +46,7 @@ export default component$(() => {
     { label: 'NR Cap Prune', value: 'CNR' },
     { label: '28874 nvitem binary', value: 'E' },
     { label: '0xB0CD (LTE RRC Supported CA Combos)', value: 'Q' },
+    { label: '0xB0CD (LTE RRC Supported CA Combos) hexdump', value: 'QLTE' },
     { label: '0xB826 (NR5G RRC Supported CA Combos) hexdump', value: 'QNR' },
     { label: 'Mediatek CA_COMB_INFO as text', value: 'M' },
     { label: 'Osix UE Capability Information', value: 'O' },
@@ -174,6 +175,8 @@ export default component$(() => {
                   return 'Attach an NVItem 28874';
                 case 'Q':
                   return 'Attach files containing 0xB0CD items as text';
+                case 'QLTE':
+                    return 'Attach files containing 0xB0CD hexdumps';
                 case 'QNR':
                   return 'Attach files containing 0xB826 hexdumps';
                 case 'M':
@@ -195,6 +198,7 @@ export default component$(() => {
                 case 'CNR':
                 case 'Q':
                 case 'QNR':
+                case 'QLTE':
                 case 'M':
                   return 'Or paste them below';
                 case 'E':
