@@ -40,7 +40,7 @@
     "tailwindcss": "^3.1.8",
     "typescript": "^5.2.2",
     "undici": "^5.22.1",
-    "vite": "^4.3.9",
+    "vite": "^4.4.9",
     "vite-tsconfig-paths": "^4.2.0"
   }
 }
