@@ -81,7 +81,7 @@ export default component$(() => {
               const type = formData.get('type') as string;
               const inputTextBase64 = await textToBase64(
                 type,
-                formData.get('inputText') as string
+                formData.get('inputText') as string,
               );
 
               const attachedFiles = formData.getAll('inputFile') as File[];
@@ -89,10 +89,10 @@ export default component$(() => {
               if (attachedFiles.length > 1) {
                 // Combine files as text
                 const inputFilesBase64 = await Promise.all(
-                  attachedFiles.map(async (file) => await file.text())
+                  attachedFiles.map(async (file) => await file.text()),
                 );
                 inputFileBase64 = encode(
-                  inputFilesBase64.reduce((prev, curr) => prev + '\n\n' + curr)
+                  inputFilesBase64.reduce((prev, curr) => prev + '\n\n' + curr),
                 );
               } else if (attachedFiles.length != 0) {
                 // Single file as binary
@@ -106,17 +106,17 @@ export default component$(() => {
               let inputNr = '';
               if (type == 'H') {
                 const endcBase64 = encode(
-                  formData.get('inputENDCText') as string
+                  formData.get('inputENDCText') as string,
                 );
                 const endcFileBase64 = await fileToBase64(
-                  formData.get('inputENDCFile') as File
+                  formData.get('inputENDCFile') as File,
                 );
                 inputEnDc =
                   endcFileBase64.length > 0 ? endcFileBase64 : endcBase64;
 
                 const nrBase64 = encode(formData.get('inputNRText') as string);
                 const nrFileBase64 = await fileToBase64(
-                  formData.get('inputNRFile') as File
+                  formData.get('inputNRFile') as File,
                 );
                 inputNr = nrFileBase64.length > 0 ? nrFileBase64 : nrBase64;
               }
@@ -137,7 +137,7 @@ export default component$(() => {
                   () => {
                     resultData.value = undefined;
                   },
-                  { once: true }
+                  { once: true },
                 );
               }
               submitting.value = false;

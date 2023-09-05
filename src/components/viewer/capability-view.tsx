@@ -35,7 +35,7 @@ export default component$(({ capabilities, hidden, inputs }: Props) => {
         const base64 = reader.result as string;
         const anchor = document.createElementNS(
           'http://www.w3.org/1999/xhtml',
-          'a'
+          'a',
         ) as HTMLAnchorElement;
         anchor.download = name;
         anchor.href = base64;

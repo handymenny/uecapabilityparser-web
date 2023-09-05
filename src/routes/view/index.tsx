@@ -32,7 +32,7 @@ export default component$(() => {
     getCapabilities(
       location.url.searchParams.get('id') ??
         new URLSearchParams(window?.location.search).get('id') ??
-        ''
+        '',
     );
   });
 

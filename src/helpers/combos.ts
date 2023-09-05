@@ -44,7 +44,7 @@ function equalsArray<T>(a: T[], b: T[]) {
 function multipleComponentsToStr(
   component: string,
   multiplier: number,
-  minMultiplier: number
+  minMultiplier: number,
 ) {
   const result: string[] = [];
   if (multiplier >= minMultiplier) {
@@ -63,7 +63,7 @@ function multipleComponentsToStr(
 function multipleFeaturesToStr(
   feature: featureWithMultiplier,
   multiplier: number,
-  minMultiplier: number
+  minMultiplier: number,
 ) {
   const nonMixedFeature = feature.basicFeature.length === 1;
   const basicString = feature.basicFeature.join('+');
@@ -210,7 +210,7 @@ function mimoToFeature(
   band: number,
   mimo?: Mimo,
   bwClass?: string,
-  nr: boolean = false
+  nr: boolean = false,
 ) {
   if (mimo === undefined || bwClass === undefined || mimo.type === 'empty') {
     return null;
@@ -251,7 +251,7 @@ function modToFeatures(
   band: number,
   mod?: Modulation,
   bwClass?: string,
-  nr: boolean = false
+  nr: boolean = false,
 ) {
   if (mod === undefined || bwClass === undefined || mod.type === 'empty') {
     return null;
@@ -434,35 +434,35 @@ function groupComponentsUl(components: Component[], nr?: boolean) {
 
 export function componentsDlToStr(
   components: Component[],
-  nr?: boolean
+  nr?: boolean,
 ): string {
   const result = groupComponentsDl(components, nr).flatMap((value) =>
     multipleComponentsToStr(
       componentToDlStr(value[0]),
       value.length,
-      minMultiplier
-    )
+      minMultiplier,
+    ),
   );
   return result.join(' + ');
 }
 
 export function componentsUlToStr(
   components: Component[],
-  nr?: boolean
+  nr?: boolean,
 ): string {
   const result = groupComponentsUl(components, nr).flatMap((value) =>
     multipleComponentsToStr(
       componentToUlStr(value[0]),
       value.length,
-      minMultiplier
-    )
+      minMultiplier,
+    ),
   );
   return result.join(' + ');
 }
 
 export function componentsMimoDlToStr(
   components: Component[],
-  nr: boolean = false
+  nr: boolean = false,
 ): string {
   const result: string[] = [];
   groupComponentsDl(components).flatMap((value) => {
@@ -471,11 +471,11 @@ export function componentsMimoDlToStr(
       component.band,
       component.mimoDl,
       component.bwClassDl,
-      nr
+      nr,
     );
     if (mimoFeature !== null) {
       result.push(
-        ...multipleFeaturesToStr(mimoFeature, value.length, minMultiplier)
+        ...multipleFeaturesToStr(mimoFeature, value.length, minMultiplier),
       );
     }
   });
@@ -484,7 +484,7 @@ export function componentsMimoDlToStr(
 
 export function componentsMimoUlToStr(
   components: Component[],
-  nr: boolean = false
+  nr: boolean = false,
 ): string {
   const result: string[] = [];
   groupComponentsUl(components).forEach((value) => {
@@ -493,11 +493,11 @@ export function componentsMimoUlToStr(
       component.band,
       component.mimoUl,
       component.bwClassUl,
-      nr
+      nr,
     );
     if (mimoStr !== null) {
       result.push(
-        ...multipleFeaturesToStr(mimoStr, value.length, minMultiplier)
+        ...multipleFeaturesToStr(mimoStr, value.length, minMultiplier),
       );
     }
   });
@@ -506,7 +506,7 @@ export function componentsMimoUlToStr(
 
 export function componentsModDlToStr(
   components: Component[],
-  nr: boolean = false
+  nr: boolean = false,
 ): string {
   const result: string[] = [];
   groupComponentsDl(components).forEach((value) => {
@@ -515,7 +515,7 @@ export function componentsModDlToStr(
       component.band,
       component.modulationDl,
       component.bwClassDl,
-      nr
+      nr,
     );
     if (modStr !== null) {
       if (modStr.basicFeature.length === 1) {
@@ -532,7 +532,7 @@ export function componentsModDlToStr(
 
 export function componentsModUlToStr(
   components: Component[],
-  nr: boolean = false
+  nr: boolean = false,
 ): string {
   const result: string[] = [];
   groupComponentsUl(components).forEach((value) => {
@@ -541,14 +541,14 @@ export function componentsModUlToStr(
       component.band,
       component.modulationUl,
       component.bwClassUl,
-      nr
+      nr,
     );
     if (modStr !== null) {
       if (modStr.basicFeature.length === 1) {
         result.push(modStr.basicFeature[0]);
       } else {
         result.push(
-          ...multipleFeaturesToStr(modStr, value.length, minMultiplier)
+          ...multipleFeaturesToStr(modStr, value.length, minMultiplier),
         );
       }
     }
@@ -565,11 +565,11 @@ export function componentsScsDlToStr(components: ComponentNr[]): string {
     const scsStr = scsToFeatures(
       component.band,
       component.maxScs,
-      component.bwClassDl
+      component.bwClassDl,
     );
     if (scsStr !== null) {
       result.push(
-        ...multipleFeaturesToStr(scsStr, value.length, minMultiplier)
+        ...multipleFeaturesToStr(scsStr, value.length, minMultiplier),
       );
     }
   });
@@ -583,11 +583,11 @@ export function componentsScsUlToStr(components: ComponentNr[]): string {
     const scsStr = scsToFeatures(
       component.band,
       component.maxScs,
-      component.bwClassUl
+      component.bwClassUl,
     );
     if (scsStr !== null) {
       result.push(
-        ...multipleFeaturesToStr(scsStr, value.length, minMultiplier)
+        ...multipleFeaturesToStr(scsStr, value.length, minMultiplier),
       );
     }
   });
@@ -605,13 +605,13 @@ export function componentsBwDlToStr(components: ComponentNr[]): string {
       bwStr = multiBwToFeatures(
         component.band,
         component.maxBwDl,
-        component.bwClassDl
+        component.bwClassDl,
       );
     } else {
       bwStr = singleBwToFeatures(
         component.band,
         component.maxBw,
-        component.bwClassDl
+        component.bwClassDl,
       );
     }
 
@@ -633,13 +633,13 @@ export function componentsBwUlToStr(components: ComponentNr[]): string {
       bwStr = multiBwToFeatures(
         component.band,
         component.maxBwUl,
-        component.bwClassUl
+        component.bwClassUl,
       );
     } else {
       bwStr = singleBwToFeatures(
         component.band,
         component.maxBw,
-        component.bwClassUl
+        component.bwClassUl,
       );
     }
     if (bwStr !== null) {

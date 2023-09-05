@@ -76,7 +76,7 @@ export default component$((props: Props) => {
       data[i++].push(bcsToStr(bcsEutra));
       data[i++].push(bcsToStr(bcsNr));
       data[i++].push(bcsToStr(bcsIntraEndc));
-    }
+    },
   );
 
   return (
