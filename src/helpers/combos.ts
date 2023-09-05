@@ -192,8 +192,6 @@ function nrFr2BwClassCCs(bwClass: string) {
 
 function modulationOrderToStr(modulationOrder: ModulationOrder) {
   switch (modulationOrder) {
-    case 'qpsk':
-      return 'QPSK';
     case 'qam16':
       return '16'; // QAM';
     case 'qam64':
