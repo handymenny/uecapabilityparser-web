@@ -176,7 +176,7 @@ export default component$(() => {
                 case 'Q':
                   return 'Attach files containing 0xB0CD items as text';
                 case 'QLTE':
-                    return 'Attach files containing 0xB0CD hexdumps';
+                  return 'Attach files containing 0xB0CD hexdumps';
                 case 'QNR':
                   return 'Attach files containing 0xB826 hexdumps';
                 case 'M':
