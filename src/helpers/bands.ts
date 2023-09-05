@@ -16,8 +16,6 @@ export function modulationToStr(modulation?: Modulation) {
     modOrder = modulation.value;
   }
   switch (modOrder) {
-    case 'qpsk':
-      return 'QPSK';
     case 'qam16':
       return '16 QAM';
     case 'qam64':

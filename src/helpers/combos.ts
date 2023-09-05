@@ -5,6 +5,7 @@ import type {
   BCS,
   Modulation,
   ModulationOrder,
+  Bandwidth,
 } from '~/@types/uecapabilityparser';
 
 type Component = ComponentLte | ComponentNr;
@@ -192,8 +193,6 @@ function nrFr2BwClassCCs(bwClass: string) {
 
 function modulationOrderToStr(modulationOrder: ModulationOrder) {
   switch (modulationOrder) {
-    case 'qpsk':
-      return 'QPSK';
     case 'qam16':
       return '16'; // QAM';
     case 'qam64':
@@ -291,7 +290,7 @@ function scsToFeatures(band: number, scs?: number, bwClass?: string) {
   return result;
 }
 
-function bwToFeatures(band: number, bw?: number, bwClass?: string) {
+function singleBwToFeatures(band: number, bw?: number, bwClass?: string) {
   if (bw === undefined || bwClass === undefined) {
     return null;
   }
@@ -300,6 +299,25 @@ function bwToFeatures(band: number, bw?: number, bwClass?: string) {
   const result: featureWithMultiplier = {
     basicFeature: [bw.toString()],
     multiplier: multiplier,
+  };
+
+  return result;
+}
+
+function multiBwToFeatures(band: number, bw?: Bandwidth, bwClass?: string) {
+  if (bw === undefined || bwClass === undefined || bw.type === 'empty') {
+    return null;
+  }
+
+  if (bw.type == 'single') {
+    return singleBwToFeatures(band, bw.value, bwClass);
+  }
+
+  const value = bw.value;
+  const feature = value.map((x) => x.toString());
+  const result: featureWithMultiplier = {
+    basicFeature: feature,
+    multiplier: 1,
   };
 
   return result;
@@ -580,11 +598,23 @@ export function componentsBwDlToStr(components: ComponentNr[]): string {
   const result: string[] = [];
   groupComponentsDl(components).forEach((value) => {
     const component = value[0] as ComponentNr;
-    const bwStr = bwToFeatures(
-      component.band,
-      component.maxBw,
-      component.bwClassDl
-    );
+    let bwStr = null;
+    // Prefer maxBwDl/maxBwUl to maxBw
+    // maxBw doesn't support mixed bw and ul bw
+    if (component.maxBwDl != null || component.maxBwUl != null) {
+      bwStr = multiBwToFeatures(
+        component.band,
+        component.maxBwDl,
+        component.bwClassDl
+      );
+    } else {
+      bwStr = singleBwToFeatures(
+        component.band,
+        component.maxBw,
+        component.bwClassDl
+      );
+    }
+
     if (bwStr !== null) {
       result.push(...multipleFeaturesToStr(bwStr, value.length, minMultiplier));
     }
@@ -596,11 +626,22 @@ export function componentsBwUlToStr(components: ComponentNr[]): string {
   const result: string[] = [];
   groupComponentsUl(components).forEach((value) => {
     const component = value[0] as ComponentNr;
-    const bwStr = bwToFeatures(
-      component.band,
-      component.maxBw,
-      component.bwClassUl
-    );
+    let bwStr = null;
+    // Prefer maxBwDl/maxBwUl to maxBw
+    // maxBw doesn't support mixed bw and ul bw
+    if (component.maxBwDl != null || component.maxBwUl != null) {
+      bwStr = multiBwToFeatures(
+        component.band,
+        component.maxBwUl,
+        component.bwClassUl
+      );
+    } else {
+      bwStr = singleBwToFeatures(
+        component.band,
+        component.maxBw,
+        component.bwClassUl
+      );
+    }
     if (bwStr !== null) {
       result.push(...multipleFeaturesToStr(bwStr, value.length, minMultiplier));
     }
