@@ -51,6 +51,7 @@ export default component$(() => {
     { label: 'Mediatek CA_COMB_INFO as text', value: 'M' },
     { label: 'Osix UE Capability Information', value: 'O' },
     { label: 'Qcat UE Capability Information', value: 'QC' },
+    { label: 'Qct Modem Capabilities', value: 'RF' },
   ];
 
   return (
@@ -183,6 +184,8 @@ export default component$(() => {
                   return 'Attach files containing CA_COMB_INFO logs as text';
                 case 'H':
                   return 'Attach a file containing the UE Capability Information or UE EUTRA Capability hexdump';
+                case 'RF':
+                  return 'Attach a file containing CA COMBOS from Qct Modem Capabilities';
                 default:
                   return 'Attach files representing a unique set of UE Capability Information';
               }
