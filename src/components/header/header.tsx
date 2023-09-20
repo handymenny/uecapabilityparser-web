@@ -46,6 +46,9 @@ export default component$(() => {
     version.value = await getVersion();
   });
 
+  const credit = import.meta.env.PUBLIC_CREDIT;
+  const creditUrl = import.meta.env.PUBLIC_CREDIT_URL;
+
   return (
     <header class="flex justify-between bg-black px-5 py-2">
       <div>
@@ -68,10 +71,10 @@ export default component$(() => {
       </div>
       <a
         class="text-xl text-white hover:underline active:underline"
-        href="https://github.com/HandyMenny"
+        href={creditUrl}
         target="_blank"
       >
-        by handymenny
+        {credit}
       </a>
     </header>
   );
