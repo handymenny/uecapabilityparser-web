@@ -8,6 +8,7 @@ export interface Capabilities {
   nrBands?: BandNrDetails[];
   lteCategoryDl?: number;
   lteCategoryUl?: number;
+  altTbsIndexes?: string[];
   endc?: ComboEnDc[];
   nrca?: ComboNr[];
   nrdc?: ComboNrDc[];
