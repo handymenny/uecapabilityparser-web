@@ -1,5 +1,6 @@
 import { $, component$, useVisibleTask$, useSignal } from '@builder.io/qwik';
 import axios from 'axios';
+import { Link } from '@builder.io/qwik-city';
 
 export default component$(() => {
   const getVersion = $(async () => {
@@ -48,13 +49,13 @@ export default component$(() => {
   return (
     <header class="flex justify-between bg-black px-5 py-2">
       <div>
-        <a
+        <Link
           class="text-xl text-white hover:underline active:underline"
           href="/"
           title="UE Capability Parser"
         >
           UE Capability Parser
-        </a>
+        </Link>
         {version.value !== undefined && (
           <a
             class="ml-0.5 align-[super] text-sm text-gray-300 hover:underline active:underline"
