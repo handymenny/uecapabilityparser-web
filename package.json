@@ -31,7 +31,7 @@
     "autoprefixer": "^10.4.15",
     "axios": "^1.5.0",
     "eslint": "^8.45.0",
-    "eslint-plugin-qwik": "^1.2.10",
+    "eslint-plugin-qwik": "^1.2.11",
     "js-base64": "^3.7.5",
     "postcss": "^8.4.29",
     "prettier": "^3.0.0",
