@@ -14,10 +14,11 @@ import ComboTable from '~/components/table/combo-table';
 interface Props {
   combos?: ComboLte[];
   title?: string;
+  noSpoiler?: boolean;
 }
 
 export default component$((props: Props) => {
-  const { combos, title } = props;
+  const { combos, title, noSpoiler } = props;
 
   if (combos === undefined || combos.length == 0) {
     return <></>;
@@ -50,6 +51,12 @@ export default component$((props: Props) => {
   });
 
   return (
-    <ComboTable title={title} hideEmpty={true} headers={headers} data={data} />
+    <ComboTable
+      title={title}
+      hideEmpty={true}
+      headers={headers}
+      data={data}
+      noSpoiler={noSpoiler}
+    />
   );
 });
