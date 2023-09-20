@@ -8,10 +8,10 @@ updates:
     groups:
       qwik:
         patterns:
-        - "*qwik*"
+          - '*qwik*'
       lint:
         patterns:
-        - "*lint*"
+          - '*lint*'
   - package-ecosystem: 'github-actions'
     directory: '/'
     schedule:

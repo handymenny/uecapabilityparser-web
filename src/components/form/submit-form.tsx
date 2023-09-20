@@ -157,7 +157,6 @@ export default component$(() => {
               } catch (err) {
                 console.error(err);
               }
-
             } catch (error) {
               console.error(error);
               submitting.value = false;
@@ -261,7 +260,8 @@ export default component$(() => {
           <Button type="submit" label="Submit" disabled={submitting.value} />
         </form>
         <CapabilityView
-          capabilities={resultData.value} inputs={inputData.value}
+          capabilities={resultData.value}
+          inputs={inputData.value}
           hidden={!submitting.value && resultData.value === undefined}
         />
       </div>
