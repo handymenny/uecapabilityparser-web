@@ -11,7 +11,13 @@ export default component$(({ cap, title }: Props) => {
     return <></>;
   }
 
-  const { lteCategoryDl, lteCategoryUl, nrNsaBandsEutra, nrSaBandsEutra } = cap;
+  const {
+    lteCategoryDl,
+    lteCategoryUl,
+    nrNsaBandsEutra,
+    nrSaBandsEutra,
+    altTbsIndexes,
+  } = cap;
 
   return (
     <details open={true}>
@@ -28,12 +34,20 @@ export default component$(({ cap, title }: Props) => {
           </tr>
           <tr>
             <th class="border-collapse border border-gray-500 p-1.5">
+              Alternative TBS Indexes
+            </th>
+            <td class="border-collapse border border-gray-500 p-1.5">
+              {altTbsIndexes
+                ?.map((index) => (index == '33b' ? index + '/256qam+' : index))
+                .join(', ') ?? 'None'}
+            </td>
+          </tr>
+          <tr>
+            <th class="border-collapse border border-gray-500 p-1.5">
               NR NSA Bands (from EUTRA)
             </th>
             <td class="border-collapse border border-gray-500 p-1.5">
-              {nrNsaBandsEutra !== undefined
-                ? nrNsaBandsEutra?.map((x) => x.band).join(', ')
-                : 'None'}
+              {nrNsaBandsEutra?.map((x) => x.band).join(', ') ?? 'None'}
             </td>
           </tr>
           <tr>
@@ -41,9 +55,7 @@ export default component$(({ cap, title }: Props) => {
               NR SA Bands (from EUTRA)
             </th>
             <td class="border-collapse border border-gray-500 p-1.5">
-              {nrSaBandsEutra !== undefined
-                ? nrSaBandsEutra?.map((x) => x.band).join(', ')
-                : 'None'}
+              {nrSaBandsEutra?.map((x) => x.band).join(', ') ?? 'None'}
             </td>
           </tr>
         </tbody>
