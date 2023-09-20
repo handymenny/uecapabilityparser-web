@@ -9,6 +9,9 @@ updates:
       qwik:
         patterns:
         - "*qwik*"
+      lint:
+        patterns:
+        - "*lint*"
   - package-ecosystem: 'github-actions'
     directory: '/'
     schedule:
