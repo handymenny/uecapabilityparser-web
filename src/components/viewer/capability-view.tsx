@@ -11,6 +11,7 @@ import { type Capabilities } from '~/@types/uecapabilityparser';
 import axios from 'axios';
 import CircleSpinner from '~/components/spinner/circle-spinner';
 import Filters from '../table/filters';
+import MetadataTable from '../table/metadata-table';
 
 interface Props {
   capabilities?: Capabilities;
@@ -113,6 +114,11 @@ export default component$(({ capabilities, hidden, inputs }: Props) => {
               }}
             />
           ))}
+        </div>
+        <div class="mx-auto w-full max-w-6xl overflow-x-auto">
+          <div class="w-full text-sm sm:w-fit sm:min-w-[32rem] md:min-w-[36rem]">
+            <MetadataTable cap={capabilities ?? undefined} title="Metadata" />
+          </div>
         </div>
         <div class="mx-auto w-full max-w-6xl overflow-x-auto">
           <div class="w-full text-sm sm:w-fit sm:min-w-[32rem] md:min-w-[36rem]">
