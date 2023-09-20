@@ -15,6 +15,7 @@ export default component$(() => {
   const resultData: { value?: Capabilities } = useStore({
     value: undefined,
   });
+  const inputData: { value: string[] } = useStore({ value: [] });
   const submitting = useSignal(false);
   const type = useSignal(defaultType);
   const hexToUint8Array = $((hex: string) => {
@@ -143,6 +144,20 @@ export default component$(() => {
               }
               submitting.value = false;
               resultData.value = result.data;
+
+              // Try getting input, won't work if store is disabled
+              try {
+                const itemUrl =
+                  import.meta.env.PUBLIC_STORE_ENDPOINT + 'getItem';
+                // Get input
+                const item = await axios.get(itemUrl, {
+                  params: { id: resultData.value?.id },
+                });
+                inputData.value = item.data.inputs;
+              } catch (err) {
+                console.error(err);
+              }
+
             } catch (error) {
               console.error(error);
               submitting.value = false;
@@ -246,7 +261,7 @@ export default component$(() => {
           <Button type="submit" label="Submit" disabled={submitting.value} />
         </form>
         <CapabilityView
-          capabilities={resultData.value}
+          capabilities={resultData.value} inputs={inputData.value}
           hidden={!submitting.value && resultData.value === undefined}
         />
       </div>
