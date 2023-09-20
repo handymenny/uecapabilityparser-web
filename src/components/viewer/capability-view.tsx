@@ -10,6 +10,7 @@ import Nrdc from '~/components/table/nrdc';
 import { type Capabilities } from '~/@types/uecapabilityparser';
 import axios from 'axios';
 import CircleSpinner from '~/components/spinner/circle-spinner';
+import Filters from '../table/filters';
 
 interface Props {
   capabilities?: Capabilities;
@@ -118,6 +119,14 @@ export default component$(({ capabilities, hidden, inputs }: Props) => {
             <Other
               cap={capabilities ?? undefined}
               title="Generic Capabilities"
+            />
+          </div>
+        </div>
+        <div class="mx-auto w-full max-w-6xl overflow-x-auto">
+          <div class="w-full text-sm sm:w-fit sm:min-w-[32rem] md:min-w-[36rem]">
+            <Filters
+              filters={capabilities?.ueCapFilters ?? undefined}
+              title="Filters"
             />
           </div>
         </div>
