@@ -10,7 +10,6 @@ export default component$(() => {
       return res.data.version as string;
     } catch (err) {
       console.error(err);
-      alert(err);
     }
     return undefined;
   });
