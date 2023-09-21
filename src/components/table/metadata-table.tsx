@@ -26,9 +26,10 @@ export default component$(({ cap, title }: Props) => {
   const processingTime = cap.metadata.processingTime;
   const data = [description, logType, timestamp, parserVersion, processingTime];
 
+  const exclude = ['description', 'processingTime', 'defaultNR']
   Object.keys(cap.metadata).forEach(function (key) {
     const value = cap.metadata[key];
-    if (key != 'description' && key != 'processingTime') {
+    if (key !in exclude) {
       header.push(keyTostring(key));
       data.push(value);
     }
