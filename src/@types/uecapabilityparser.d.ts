@@ -289,3 +289,17 @@ export namespace Bandwidth {
     value: number;
   }
 }
+
+export interface LibraryIndex {
+  items: IndexLine[];
+}
+
+export interface IndexLine {
+  id: string;
+  timestamp: number;
+  description: string;
+  inputs: string[];
+  compressed?: boolean;
+  defaultNR?: boolean;
+  parserVersion: string;
+}

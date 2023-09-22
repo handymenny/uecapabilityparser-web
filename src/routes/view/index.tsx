@@ -1,7 +1,7 @@
 import { $, component$, useStore, useVisibleTask$ } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
 import { useLocation } from '@builder.io/qwik-city';
-import { type Capabilities } from '~/@types/uecapabilityparser';
+import type { IndexLine, Capabilities } from '~/@types/uecapabilityparser';
 import axios from 'axios';
 import CapabilityView from '~/components/viewer/capability-view';
 
@@ -18,9 +18,10 @@ export default component$(() => {
     const outputUrl = url + 'getOutput';
     try {
       const item = await axios.get(itemUrl, { params: { id: id } });
-      const outputId = item.data.id;
+      const indexLine = item.data as IndexLine;
+      const outputId = indexLine.id;
       const result = await axios.get(outputUrl, { params: { id: outputId } });
-      inputData.value = item.data.inputs;
+      inputData.value = indexLine.inputs;
       resultData.value = result.data;
     } catch (err) {
       console.error(err);

@@ -3,9 +3,10 @@ import axios from 'axios';
 import Cell from '~/components/grid/cell';
 import { PlusCircleIcon } from 'qwik-feather-icons';
 import CircleSpinner from '~/components/spinner/circle-spinner';
+import type { IndexLine, LibraryIndex } from '~/@types/uecapabilityparser';
 
 export default component$(() => {
-  const resultData: { value: any[] | undefined } = useStore({
+  const resultData: { value: IndexLine[] | undefined } = useStore({
     value: undefined,
   });
 
@@ -14,7 +15,8 @@ export default component$(() => {
 
     try {
       const response = await axios.get(url);
-      resultData.value = response.data.items.reverse();
+      const library = response.data as LibraryIndex;
+      resultData.value = library.items.reverse();
     } catch (err) {
       resultData.value = [];
       console.error(err);
