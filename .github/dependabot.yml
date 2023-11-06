@@ -4,14 +4,19 @@ updates:
     directory: '/'
     schedule:
       interval: 'weekly'
-    open-pull-requests-limit: 15
+    open-pull-requests-limit: 20
     groups:
       qwik:
         patterns:
-          - '*qwik*'
+          - 'qwik*'
       lint:
         patterns:
-          - '*lint*'
+          - 'lint*'
+          - 'prettier'
+      css:
+        patterns:
+          - '*css*'
+          - 'autoprefixer'        
   - package-ecosystem: 'github-actions'
     directory: '/'
     schedule:
