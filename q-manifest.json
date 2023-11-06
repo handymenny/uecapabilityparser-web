@@ -1,5 +1,5 @@
 {
-  "manifestHash": "rhf6jy",
+  "manifestHash": "qfkypd",
   "symbols": {
     "s_02wMImzEAbk": {
       "origin": "../node_modules/@builder.io/qwik-city/index.qwik.mjs",
@@ -2955,7 +2955,7 @@
       "captures": false,
       "loc": [
         268,
-        2455
+        2465
       ]
     },
     "s_hBUQge2q0VY": {
