@@ -294,6 +294,7 @@ export namespace Bandwidth {
 
 export interface LibraryIndex {
   items: IndexLine[];
+  multiItems?: MultiIndexLine[];
 }
 
 export interface IndexLine {
@@ -304,4 +305,18 @@ export interface IndexLine {
   compressed?: boolean;
   defaultNR?: boolean;
   parserVersion: string;
+}
+
+export interface MultiIndexLine {
+  id: string;
+  timestamp: number;
+  description: string;
+  indexLineIds: string[];
+  compressed?: boolean;
+}
+
+export interface MultiCapabilities {
+  capabilitiesList?: Capabilities[];
+  description?: string;
+  id: string;
 }
