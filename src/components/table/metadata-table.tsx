@@ -35,6 +35,31 @@ export default component$(({ cap, title }: Props) => {
     }
   });
 
+  const ltecaLength = cap.lteca?.length ?? 0;
+  const endcLength = cap.endc?.length ?? 0;
+  const nrcaLength = cap.nrca?.length ?? 0;
+  const nrdcLength = cap.nrdc?.length ?? 0;
+
+  if (ltecaLength > 0) {
+    header.push('Total LTE CA Combos');
+    data.push(ltecaLength.toString());
+  }
+
+  if (endcLength > 0) {
+    header.push('Total ENDC Combos');
+    data.push(endcLength.toString());
+  }
+
+  if (nrcaLength > 0) {
+    header.push('Total NR CA Combos');
+    data.push(nrcaLength.toString());
+  }
+
+  if (nrdcLength > 0) {
+    header.push('Total NRDC Combos');
+    data.push(nrdcLength.toString());
+  }
+
   return (
     <details open={true}>
       <summary class="mt-10 text-xl font-bold">{title}</summary>
