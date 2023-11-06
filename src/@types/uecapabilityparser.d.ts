@@ -93,6 +93,7 @@ export namespace IUeCapabilityFilter {
     includeNeDc?: boolean;
     omitEnDc?: boolean;
     uplinkTxSwitchRequest?: boolean;
+    segAllowed?: boolean;
   }
 
   export interface UeCapabilityFilterNr {
@@ -105,6 +106,7 @@ export namespace IUeCapabilityFilter {
     includeNeDc?: boolean;
     omitEnDc?: boolean;
     uplinkTxSwitchRequest?: boolean;
+    segAllowed?: boolean;
   }
 }
 

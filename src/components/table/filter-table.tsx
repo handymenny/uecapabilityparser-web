@@ -30,6 +30,7 @@ export default component$(({ filter }: Props) => {
       'Include NE-DC',
       'Omit EN-DC',
       'Include UL Tx switching',
+      'Segmentation Allowed',
     ];
     data = [
       filter.lteBands?.map((x) => x.band).join(', '),
@@ -45,6 +46,7 @@ export default component$(({ filter }: Props) => {
       filter.includeNeDc ? 'True' : undefined,
       filter.omitEnDc ? 'True' : undefined,
       filter.uplinkTxSwitchRequest ? 'True' : undefined,
+      filter.segAllowed ? 'True' : undefined,
     ];
   } else {
     header = [
@@ -55,6 +57,7 @@ export default component$(({ filter }: Props) => {
       'Include NE-DC',
       'Omit EN-DC',
       'Include UL Tx switching',
+      'Segmentation Allowed',
     ];
     data = [
       filter.lteBands ? (
@@ -66,6 +69,7 @@ export default component$(({ filter }: Props) => {
       filter.includeNeDc ? 'True' : undefined,
       filter.omitEnDc ? 'True' : undefined,
       filter.uplinkTxSwitchRequest ? 'True' : undefined,
+      filter.segAllowed ? 'True' : undefined,
     ];
   }
 
