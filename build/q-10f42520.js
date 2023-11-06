@@ -1,1 +1,0 @@
-import{e as r}from"./q-8f3f0f08.js";const e=()=>r("div",null,{class:"h-64 w-64 animate-spin rounded-full border-[12px] border-solid border-gray-100 border-t-gray-800"},null,3,"p5_0");export{e as s_VvP6Pc6SDYs};
