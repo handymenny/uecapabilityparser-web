@@ -1,23 +1,18 @@
 import { $, component$, useSignal, useStore } from '@builder.io/qwik';
-import SelectInput from '~/components/inputs/select-input';
-import TextArea from '~/components/inputs/text-area';
 import Button from '~/components/inputs/button';
 import { encode, fromUint8Array } from 'js-base64';
 import axios from 'axios';
-import InputFile from '~/components/inputs/input-file';
 import type { Capabilities } from '~/@types/uecapabilityparser';
 import CapabilityView from '~/components/viewer/capability-view';
 import { isServer } from '@builder.io/qwik/build';
-import TextInput from '~/components/inputs/text-input';
+import FormInput from './form-input';
 
 export default component$(() => {
-  const defaultType = 'H';
   const resultData: { value?: Capabilities } = useStore({
     value: undefined,
   });
   const inputData: { value: string[] } = useStore({ value: [] });
   const submitting = useSignal(false);
-  const type = useSignal(defaultType);
   const hexToUint8Array = $((hex: string) => {
     const cleanString = hex.replace(/\s|0x|,|;/g, '').toUpperCase();
     const array = cleanString
@@ -38,22 +33,6 @@ export default component$(() => {
     const arrayBuffer = await data.arrayBuffer();
     return fromUint8Array(new Uint8Array(arrayBuffer));
   });
-
-  const options = [
-    { label: 'UE Capability Information Hex Dump', value: 'H' },
-    { label: 'Wireshark UE Capability Information', value: 'W' },
-    { label: 'NSG UE Capability Information', value: 'N' },
-    { label: 'LTE Carrier policy', value: 'C' },
-    { label: 'NR Cap Prune', value: 'CNR' },
-    { label: '28874 nvitem binary', value: 'E' },
-    { label: '0xB0CD (LTE RRC Supported CA Combos)', value: 'Q' },
-    { label: '0xB0CD (LTE RRC Supported CA Combos) hexdump', value: 'QLTE' },
-    { label: '0xB826 (NR5G RRC Supported CA Combos) hexdump', value: 'QNR' },
-    { label: 'Mediatek CA_COMB_INFO as text', value: 'M' },
-    { label: 'Osix UE Capability Information', value: 'O' },
-    { label: 'Qcat UE Capability Information', value: 'QC' },
-    { label: 'Qct Modem Capabilities', value: 'RF' },
-  ];
 
   return (
     <>
@@ -164,99 +143,7 @@ export default component$(() => {
             }
           }}
         >
-          <SelectInput
-            label="Log Type"
-            placeholder="log-type"
-            options={options}
-            name="type"
-            disabled={submitting.value}
-            onInput$={(value) => {
-              type.value = value;
-            }}
-          />
-          <TextInput
-            label="Description"
-            placeholder="Enter a description. The description will be saved if store is enabled"
-            name="description"
-          />
-          <InputFile
-            label={(() => {
-              switch (type.value) {
-                case 'C':
-                  return 'Attach files containing LTE carrier policy combos';
-                case 'CNR':
-                  return 'Attach files containing NR Cap prune combos';
-                case 'E':
-                  return 'Attach an NVItem 28874';
-                case 'Q':
-                  return 'Attach files containing 0xB0CD items as text';
-                case 'QLTE':
-                  return 'Attach files containing 0xB0CD hexdumps';
-                case 'QNR':
-                  return 'Attach files containing 0xB826 hexdumps';
-                case 'M':
-                  return 'Attach files containing CA_COMB_INFO logs as text';
-                case 'H':
-                  return 'Attach a file containing the UE Capability Information or UE EUTRA Capability hexdump';
-                case 'RF':
-                  return 'Attach a file containing CA COMBOS from Qct Modem Capabilities';
-                default:
-                  return 'Attach files representing a unique set of UE Capability Information';
-              }
-            })()}
-            name="inputFile"
-            multiple={type.value != 'E' && type.value != 'H'}
-            disabled={submitting.value}
-          />
-          <TextArea
-            label={(() => {
-              switch (type.value) {
-                case 'C':
-                case 'CNR':
-                case 'Q':
-                case 'QNR':
-                case 'QLTE':
-                case 'M':
-                  return 'Or paste them below';
-                case 'E':
-                  return 'Or paste its hexdump below';
-                default:
-                  return 'Or paste it below';
-              }
-            })()}
-            placeholder="Paste the log content"
-            name="inputText"
-            halfHeight={type.value == 'H'}
-            disabled={submitting.value}
-          />
-          <InputFile
-            label="Attach a file containing the UE MRDC Capability hexdump"
-            name="inputENDCFile"
-            disabled={submitting.value}
-            hidden={type.value != 'H'}
-          />
-          <TextArea
-            label="Or paste it below"
-            placeholder="Paste the log content"
-            name="inputENDCText"
-            disabled={submitting.value}
-            halfHeight={true}
-            hidden={type.value != 'H'}
-          />
-          <InputFile
-            label="Attach a file containing the UE NR Capability hexdump"
-            name="inputNRFile"
-            disabled={submitting.value}
-            hidden={type.value != 'H'}
-          />
-          <TextArea
-            label="Or paste it below"
-            placeholder="Paste the log content"
-            name="inputNRText"
-            disabled={submitting.value}
-            halfHeight={true}
-            hidden={type.value != 'H'}
-          />
+          <FormInput prefix="" submitting={submitting} />
           <Button type="submit" label="Submit" disabled={submitting.value} />
         </form>
         <CapabilityView
