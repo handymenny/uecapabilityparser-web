@@ -11,7 +11,7 @@ updates:
           - 'qwik*'
       lint:
         patterns:
-          - 'lint*'
+          - '*eslint*'
           - 'prettier'
       css:
         patterns:
