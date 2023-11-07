@@ -16,7 +16,7 @@ updates:
       css:
         patterns:
           - '*css*'
-          - 'autoprefixer'        
+          - 'autoprefixer'
   - package-ecosystem: 'github-actions'
     directory: '/'
     schedule:
