@@ -68,7 +68,7 @@ export default component$(({ cap, title }: Props) => {
           {data.map(
             (value, index) =>
               value != undefined && (
-                <tr key="index">
+                <tr key={index}>
                   <th class="border-collapse border border-gray-500 p-1.5">
                     {header[index]}
                   </th>
