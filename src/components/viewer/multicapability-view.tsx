@@ -62,7 +62,7 @@ export default component$(({ capabilitiesList, hidden }: Props) => {
       </h1>
       <div
         class={
-          'flex flex-col mb-4 ' +
+          'mb-4 flex flex-col ' +
           (hidden || capabilitiesSelector.length < 2 ? ' hidden' : '')
         }
       >
