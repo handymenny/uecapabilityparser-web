@@ -9,6 +9,7 @@ import type { IndexLine, Capabilities } from '~/@types/uecapabilityparser';
 import CapabilityView from './capability-view';
 import SelectInput from '../inputs/select-input';
 import axios from 'axios';
+import { logTypeToString } from '~/helpers/metadata';
 
 interface Props {
   capabilitiesList?: Capabilities[];
@@ -44,9 +45,23 @@ export default component$(({ capabilitiesList, hidden }: Props) => {
   });
 
   const capabilitiesSelector: any[] = [];
+
+  const descriptions =
+    capabilitiesList
+      ?.map((value) => value.metadata.description ?? '')
+      .filter((value) => value.length > 0) ?? [];
+  const descriptionsAlldifferent =
+    new Set(descriptions).size == capabilitiesList?.length;
+  const types = capabilitiesList?.map((values) => values.logType) ?? [];
+  const typesAlldifferent = new Set(types).size == types.length;
+
   capabilitiesList?.map((value, index) => {
     capabilitiesSelector.push({
-      label: value.id,
+      label: descriptionsAlldifferent
+        ? value.metadata.description
+        : typesAlldifferent
+        ? logTypeToString(value.logType)
+        : value.id,
       value: index,
     });
   });
