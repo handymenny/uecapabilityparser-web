@@ -11,7 +11,7 @@ interface Props {
 export default component$((props: Props) => {
   const { label, type, disabled, onClick$, hidden } = props;
   return (
-    <div class={'flex flex-grow flex-col' + (hidden ? ' hidden' : '')}>
+    <div class={'flex flex-grow basis-0 flex-col' + (hidden ? ' hidden' : '')}>
       <button
         type={type}
         class="my-2 w-full flex-grow bg-black p-2 text-lg text-white focus:outline-none focus:ring focus:ring-gray-400 disabled:bg-gray-300 disabled:text-gray-400 disabled:opacity-70"

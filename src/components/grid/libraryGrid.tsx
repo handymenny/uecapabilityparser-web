@@ -3,12 +3,17 @@ import axios from 'axios';
 import Cell from '~/components/grid/cell';
 import { PlusCircleIcon } from 'qwik-feather-icons';
 import CircleSpinner from '~/components/spinner/circle-spinner';
-import type { IndexLine, LibraryIndex } from '~/@types/uecapabilityparser';
+import type {
+  IndexLine,
+  LibraryIndex,
+  MultiIndexLine,
+} from '~/@types/uecapabilityparser';
 
 export default component$(() => {
-  const resultData: { value: IndexLine[] | undefined } = useStore({
-    value: undefined,
-  });
+  const resultData: { value: (IndexLine | MultiIndexLine)[] | undefined } =
+    useStore({
+      value: undefined,
+    });
 
   const getList = $(async () => {
     const url = import.meta.env.PUBLIC_STORE_ENDPOINT + 'list';
@@ -16,13 +21,35 @@ export default component$(() => {
     try {
       const response = await axios.get(url);
       const library = response.data as LibraryIndex;
-      resultData.value = library.items.reverse();
+      const items = library.items;
+      const multiItems = library.multiItems ?? [];
+
+      const multiItemsToShow = multiItems.filter(
+        (multiItem) => multiItem.indexLineIds.length > 1,
+      );
+      const idsToRemove = multiItemsToShow.flatMap(
+        (multiItem) => multiItem.indexLineIds,
+      );
+      const itemsToShow = items.filter(
+        (item) => !idsToRemove.includes(item.id),
+      );
+
+      const itemsMerged = [...itemsToShow, ...multiItemsToShow];
+      itemsMerged.sort((a, b) => b.timestamp - a.timestamp);
+
+      resultData.value = itemsMerged;
     } catch (err) {
       resultData.value = [];
       console.error(err);
       alert(err);
     }
   });
+
+  const getUrl = (item: MultiIndexLine | IndexLine) => {
+    const multi = (item as MultiIndexLine).indexLineIds != null;
+    const path = multi ? '/view/multi/' : '/view/';
+    return `${path}?id=${item.id}`;
+  };
 
   useVisibleTask$(() => {
     getList();
@@ -50,12 +77,12 @@ export default component$(() => {
             inverted={true}
           />
         )}
-        {resultData.value?.map(({ description, id, timestamp }) => (
+        {resultData.value?.map((item) => (
           <Cell
-            key={id}
-            multilineLabel={description}
-            label={new Date(timestamp).toLocaleString().replace(', ', ' ')}
-            url={'/view?id=' + id}
+            key={item.id}
+            multilineLabel={item.description}
+            label={new Date(item.timestamp).toLocaleString().replace(', ', ' ')}
+            url={getUrl(item)}
           />
         ))}
       </div>

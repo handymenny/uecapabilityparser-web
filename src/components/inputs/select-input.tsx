@@ -13,15 +13,17 @@ interface Props {
   onInput$?: PropFunction<(value: string) => void>;
   name?: string;
   disabled?: boolean;
+  hidden?: boolean;
 }
 
 export default component$((props: Props) => {
-  const { label, placeholder, options, onInput$, name, disabled } = props;
+  const { label, placeholder, options, onInput$, name, disabled, hidden } =
+    props;
   const randId = useId();
   const id = `text-input-${randId}`;
 
   return (
-    <div class="relative flex flex-col">
+    <div class={'relative flex flex-col' + (hidden ? ' hidden' : '')}>
       <label for={id} aria-label={label} class="my-2">
         {label}
       </label>
