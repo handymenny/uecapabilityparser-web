@@ -216,7 +216,7 @@ export default component$(() => {
             />
           ))}
 
-          <div class="flex gap-4">
+          <div class="flex gap-x-4 flex-wrap">
             <Button
               type="button"
               label="Remove"
@@ -237,8 +237,10 @@ export default component$(() => {
                 count.value++;
               }}
             />
+            <div class={count.value > 1 && "min-w-full" || "flex-1"}>
+            <Button type="submit" label="Submit" disabled={submitting.value} />
+            </div>
           </div>
-          <Button type="submit" label="Submit" disabled={submitting.value} />
         </form>
         <MulticapabilityView
           capabilitiesList={resultData.value}
