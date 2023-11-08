@@ -66,7 +66,7 @@ export default component$(({ capabilitiesList, hidden }: Props) => {
           (hidden || capabilitiesSelector.length < 2 ? ' hidden' : '')
         }
       >
-        <div class="mx-auto w-full max-w-6xl">
+        <div class="mx-auto w-full max-w-7xl">
           <SelectInput
             label="Select log"
             options={capabilitiesSelector}

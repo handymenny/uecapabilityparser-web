@@ -65,7 +65,7 @@ export default component$(() => {
       )}
       <div
         class={
-          'mx-auto grid w-full max-w-6xl grid-cols-2 gap-x-5 gap-y-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5' +
+          'mx-auto grid w-full max-w-7xl grid-cols-2 gap-x-5 gap-y-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5' +
           (resultData.value === undefined ? ' hidden' : '')
         }
       >

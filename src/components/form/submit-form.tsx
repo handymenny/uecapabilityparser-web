@@ -74,7 +74,7 @@ export default component$(() => {
       <div class="my-[-1rem] flex flex-1 flex-col">
         <form
           class={
-            'm-auto w-full max-w-xl' +
+            'm-auto w-full max-w-2xl' +
             (submitting.value || resultData.value !== undefined
               ? ' hidden'
               : '')
