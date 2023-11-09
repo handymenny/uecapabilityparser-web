@@ -1,7 +1,13 @@
-import { type Component, component$, useVisibleTask$ } from '@builder.io/qwik';
+import {
+  type Component,
+  component$,
+  useVisibleTask$,
+  useSignal,
+  useOnWindow,
+  $,
+} from '@builder.io/qwik';
 import { type IconProps } from 'qwik-feather-icons';
 import { useNavigate } from '@builder.io/qwik-city';
-import { isServer } from '@builder.io/qwik/build';
 
 interface Props {
   label?: string;
@@ -18,23 +24,46 @@ export default component$((props: Props) => {
     ? ' border-2 border-solid border-black bg-white text-black'
     : ' bg-black text-white';
 
-  useVisibleTask$(() => {
-    if (isServer) {
-      return;
-    }
-    const multi = document.querySelectorAll('.multiellipsis');
-    multi.forEach((el) => {
-      const span = el.querySelector('span');
-      if (span === null) {
+  const outputRef = useSignal<Element>();
+
+  const truncateIfNeeded = $((reset: boolean) => {
+    if (outputRef.value) {
+      const el = outputRef.value;
+      const span = el.firstChild as HTMLSpanElement;
+      if (span == null) return;
+
+      if (reset && span.textContent !== multilineLabel) {
+        span.textContent = multilineLabel ?? null;
+      }
+
+      const clientHeight = el.clientHeight;
+      if (el.scrollHeight == clientHeight || span.textContent == null) {
         return;
       }
-      const height = el.clientHeight;
-      while (span.offsetHeight + 50 > height) {
-        span.textContent =
-          span.textContent?.replace(/\W*\s(\S)*$/, '...') ?? null;
+      while (span.offsetHeight + 50 > clientHeight) {
+        const origLen = span.textContent.length;
+        const truncStr: string = span.textContent.replace(/[\W\s]*(\S)+$/, '');
+        const lenDiff = origLen - truncStr.length;
+        if (lenDiff == 0) break;
+        if (lenDiff > 3) {
+          span.textContent = truncStr + '…';
+        } else {
+          span.textContent = truncStr;
+        }
       }
-    });
+    }
   });
+
+  useVisibleTask$(() => {
+    truncateIfNeeded(false);
+  });
+
+  useOnWindow(
+    'resize',
+    $(() => {
+      truncateIfNeeded(true);
+    }),
+  );
 
   return (
     <button
@@ -42,6 +71,7 @@ export default component$((props: Props) => {
         'multiellipsis my-2 h-[150px] w-full overflow-hidden p-2 text-center text-lg focus:outline-none focus:ring focus:ring-gray-400' +
         invertedClass
       }
+      ref={outputRef}
       onClick$={() => nav(url)}
     >
       <span>{multilineLabel}</span>
