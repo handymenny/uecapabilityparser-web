@@ -1,16 +1,21 @@
-import { $, component$, useStore, useVisibleTask$ } from '@builder.io/qwik';
+import {
+  $,
+  Resource,
+  component$,
+  useResource$,
+  useSignal,
+  useVisibleTask$,
+} from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
 import { useLocation } from '@builder.io/qwik-city';
 import type { MultiCapabilities } from '~/@types/uecapabilityparser';
 import axios from 'axios';
 import MulticapabilityView from '~/components/viewer/multicapability-view';
-import { isServer } from '@builder.io/qwik/build';
+import CircleSpinner from '~/components/spinner/circle-spinner';
 
 export default component$(() => {
   const location = useLocation();
-  const resultData: { value?: MultiCapabilities } = useStore({
-    value: undefined,
-  });
+  const id = useSignal<string | undefined>(undefined);
 
   const getCapabilities = $(async (id: string) => {
     const url = import.meta.env.PUBLIC_STORE_ENDPOINT;
@@ -18,26 +23,61 @@ export default component$(() => {
     try {
       const result = await axios.get(outputUrl, { params: { id: id } });
       const multiCap = result.data as MultiCapabilities;
-      resultData.value = multiCap;
+      return multiCap;
     } catch (err) {
       console.error(err);
       alert(err);
+      throw err;
     }
   });
 
-  useVisibleTask$(() => {
-    if (isServer) return;
-    getCapabilities(
-      location.url.searchParams.get('id') ??
-        new URLSearchParams(window?.location.search).get('id') ??
-        '',
-    );
+  const resultData = useResource$(({ track }) => {
+    const capId = track(() => id.value);
+    if (capId == undefined) {
+      return undefined;
+    } else {
+      return getCapabilities(capId);
+    }
   });
 
+  useVisibleTask$(
+    () => {
+      id.value =
+        location.url.searchParams.get('id') ??
+        new URLSearchParams(window?.location.search).get('id') ??
+        '';
+    },
+    { strategy: 'document-ready' },
+  );
+
+  const spinner = (
+    <div class={'m-auto'}>
+      <CircleSpinner />
+    </div>
+  );
+
   return (
-    <MulticapabilityView
-      capabilitiesList={resultData.value?.capabilitiesList}
-    />
+    <>
+      <h1 class={'mb-2 text-center text-4xl font-semibold'}>View</h1>
+      <div class={'flex flex-1 flex-col'}>
+        <Resource
+          value={resultData}
+          onPending={() => spinner}
+          onResolved={(data) => {
+            if (data == null) {
+              return spinner;
+            } else {
+              return (
+                <MulticapabilityView
+                  capabilitiesList={data.capabilitiesList}
+                  hideTitle={true}
+                />
+              );
+            }
+          }}
+        />
+      </div>
+    </>
   );
 });
 
