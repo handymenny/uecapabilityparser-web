@@ -58,9 +58,13 @@ export default component$(() => {
     { strategy: 'document-ready' },
   );
 
-  if (!submitting.value && resultData.value == undefined) {
-    return (
-      <>
+  return (
+    <>
+      <div
+        class={
+          submitting.value || resultData.value !== undefined ? 'hidden' : ''
+        }
+      >
         <Title text="Parser" addClasses="mb-4" />
         <div class="my-[-1rem] flex flex-1 flex-col">
           <form
@@ -225,20 +229,18 @@ export default component$(() => {
             </div>
           </form>
         </div>
-      </>
-    );
-  } else if (resultData.value === undefined) {
-    return (
-      <div class="flex flex-1 flex-col">
-        <CircleSpinner centered={true} />
       </div>
-    );
-  } else {
-    return (
-      <>
-        <Title text="View" />
-        <MulticapabilityView capabilitiesList={resultData.value} />
-      </>
-    );
-  }
+      {resultData.value == undefined && submitting.value && (
+        <div class="flex flex-1 flex-col">
+          <CircleSpinner centered={true} />
+        </div>
+      )}
+      {resultData.value !== undefined && !submitting.value && (
+        <>
+          <Title text="View" />
+          <MulticapabilityView capabilitiesList={resultData.value} />
+        </>
+      )}
+    </>
+  );
 });
