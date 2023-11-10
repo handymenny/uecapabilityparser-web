@@ -49,9 +49,12 @@ export default component$(() => {
     }
   });
 
-  useVisibleTask$(() => {
-    checkMultiParse();
-  });
+  useVisibleTask$(
+    () => {
+      checkMultiParse();
+    },
+    { strategy: 'document-ready' },
+  );
 
   return (
     <>

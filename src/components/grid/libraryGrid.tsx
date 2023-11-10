@@ -49,9 +49,12 @@ export default component$(() => {
     return `${path}?id=${item.id}`;
   };
 
-  useVisibleTask$(() => {
-    getList();
-  });
+  useVisibleTask$(
+    () => {
+      getList();
+    },
+    { strategy: 'document-ready' },
+  );
 
   return (
     <div class="flex flex-1 flex-col">

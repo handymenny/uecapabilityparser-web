@@ -41,9 +41,12 @@ export default component$(() => {
 
   const version = useSignal<string | undefined>(undefined);
 
-  useVisibleTask$(async () => {
-    version.value = await getVersion();
-  });
+  useVisibleTask$(
+    async () => {
+      version.value = await getVersion();
+    },
+    { strategy: 'document-ready' },
+  );
 
   const credit = import.meta.env.PUBLIC_CREDIT;
   const creditUrl = import.meta.env.PUBLIC_CREDIT_URL;

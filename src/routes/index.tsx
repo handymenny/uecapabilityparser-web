@@ -23,9 +23,12 @@ export default component$(() => {
     }
   });
 
-  useVisibleTask$(() => {
-    getList();
-  });
+  useVisibleTask$(
+    () => {
+      getList();
+    },
+    { strategy: 'document-ready' },
+  );
 
   return (
     <>
