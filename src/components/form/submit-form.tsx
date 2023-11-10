@@ -149,15 +149,12 @@ export default component$(() => {
                   const result = await axios.post(url, requests[0]);
 
                   if (!isServer) {
-                    window.history.pushState(
-                      [],
-                      '',
-                      '/view/?id=' + result.data.id,
-                    );
+                    history.pushState({}, '', '/view/?id=' + result.data.id);
                     window.addEventListener(
                       'popstate',
                       () => {
                         resultData.value = undefined;
+                        submitting.value = false;
                       },
                       { once: true },
                     );
@@ -170,8 +167,8 @@ export default component$(() => {
                   const result = await axios.post(url, requests);
 
                   if (!isServer) {
-                    window.history.pushState(
-                      [],
+                    history.pushState(
+                      {},
                       '',
                       '/view/multi/?id=' + result.data.id,
                     );
@@ -179,6 +176,7 @@ export default component$(() => {
                       'popstate',
                       () => {
                         resultData.value = undefined;
+                        submitting.value = false;
                       },
                       { once: true },
                     );
