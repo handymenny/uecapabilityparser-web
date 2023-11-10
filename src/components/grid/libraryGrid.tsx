@@ -1,4 +1,4 @@
-import { $, component$, useStore, useVisibleTask$ } from '@builder.io/qwik';
+import { $, component$, useSignal, useVisibleTask$ } from '@builder.io/qwik';
 import axios from 'axios';
 import Cell from '~/components/grid/cell';
 import { PlusCircleIcon } from 'qwik-feather-icons';
@@ -11,9 +11,7 @@ import type {
 
 export default component$(() => {
   const resultData: { value: (IndexLine | MultiIndexLine)[] | undefined } =
-    useStore({
-      value: undefined,
-    });
+    useSignal(undefined);
 
   const getList = $(async () => {
     const url = import.meta.env.PUBLIC_STORE_ENDPOINT + 'list';

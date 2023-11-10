@@ -1,10 +1,4 @@
-import {
-  $,
-  component$,
-  useSignal,
-  useStore,
-  useVisibleTask$,
-} from '@builder.io/qwik';
+import { $, component$, useSignal, useVisibleTask$ } from '@builder.io/qwik';
 import Button from '~/components/inputs/button';
 import { encode, fromUint8Array } from 'js-base64';
 import axios from 'axios';
@@ -17,9 +11,7 @@ import FormInput from './form-input';
 import MulticapabilityView from '../viewer/multicapability-view';
 
 export default component$(() => {
-  const resultData: { value?: Capabilities[] } = useStore({
-    value: undefined,
-  });
+  const resultData = useSignal<Capabilities[] | undefined>(undefined);
   const submitting = useSignal(false);
   const hexToUint8Array = $((hex: string) => {
     const cleanString = hex.replace(/\s|0x|,|;/g, '').toUpperCase();

@@ -1,10 +1,4 @@
-import {
-  $,
-  component$,
-  useComputed$,
-  useSignal,
-  useStore,
-} from '@builder.io/qwik';
+import { $, component$, useComputed$, useSignal } from '@builder.io/qwik';
 import type { IndexLine, Capabilities } from '~/@types/uecapabilityparser';
 import CapabilityView from './capability-view';
 import SelectInput from '../inputs/select-input';
@@ -22,9 +16,7 @@ export default component$(({ capabilitiesList, hidden, hideTitle }: Props) => {
   const currentCapabilities = useComputed$(
     () => capabilitiesList?.[currentIndex.value],
   );
-  const items: { value: { [key: string]: IndexLine } } = useStore({
-    value: {},
-  });
+  const items = useSignal<{ [key: string]: IndexLine }>({});
 
   const downloadItem = $(async (id: string) => {
     try {
