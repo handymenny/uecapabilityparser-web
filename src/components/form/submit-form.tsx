@@ -173,7 +173,7 @@ export default component$(() => {
                     window.history.pushState(
                       [],
                       '',
-                      '/view/multi?id=' + result.data.id,
+                      '/view/multi/?id=' + result.data.id,
                     );
                     window.addEventListener(
                       'popstate',
