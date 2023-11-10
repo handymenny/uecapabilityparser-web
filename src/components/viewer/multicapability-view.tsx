@@ -6,12 +6,11 @@ import axios from 'axios';
 import { logTypeToString } from '~/helpers/metadata';
 
 interface Props {
-  capabilitiesList?: Capabilities[];
-  hidden?: boolean;
+  capabilitiesList: Capabilities[];
   hideTitle?: boolean;
 }
 
-export default component$(({ capabilitiesList, hidden, hideTitle }: Props) => {
+export default component$(({ capabilitiesList, hideTitle }: Props) => {
   const currentIndex = useSignal(0);
   const currentCapabilities = useComputed$(
     () => capabilitiesList?.[currentIndex.value],
@@ -62,19 +61,12 @@ export default component$(({ capabilitiesList, hidden, hideTitle }: Props) => {
   return (
     <>
       {!hideTitle && (
-        <h1
-          class={
-            'mb-2 text-center text-4xl font-semibold' +
-            (hidden ? ' hidden' : '')
-          }
-        >
-          View
-        </h1>
+        <h1 class={'mb-2 text-center text-4xl font-semibold'}>View</h1>
       )}
       <div
         class={
           'mb-4 flex flex-col ' +
-          (hidden || capabilitiesSelector.length < 2 ? ' hidden' : '')
+          (capabilitiesSelector.length < 2 ? ' hidden' : '')
         }
       >
         <div class="mx-auto w-full max-w-7xl">
@@ -91,7 +83,6 @@ export default component$(({ capabilitiesList, hidden, hideTitle }: Props) => {
       <CapabilityView
         capabilities={currentCapabilities.value}
         inputs={inputs.value}
-        hidden={hidden}
       />
     </>
   );

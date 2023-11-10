@@ -65,7 +65,7 @@ export default component$(() => {
             } else {
               return (
                 <MulticapabilityView
-                  capabilitiesList={data.capabilitiesList}
+                  capabilitiesList={data.capabilitiesList ?? []}
                   hideTitle={true}
                 />
               );

@@ -9,17 +9,15 @@ import Nrca from '~/components/table/nrca';
 import Nrdc from '~/components/table/nrdc';
 import { type Capabilities } from '~/@types/uecapabilityparser';
 import axios from 'axios';
-import CircleSpinner from '~/components/spinner/circle-spinner';
 import Filters from '../table/filters';
 import MetadataTable from '../table/metadata-table';
 
 interface Props {
-  capabilities?: Capabilities;
+  capabilities: Capabilities;
   inputs?: string[];
-  hidden?: boolean;
 }
 
-export default component$(({ capabilities, hidden, inputs }: Props) => {
+export default component$(({ capabilities, inputs }: Props) => {
   const csvButtons: {
     label: string;
     type: 'lteca' | 'endc' | 'nrca' | 'nrdc';
@@ -72,14 +70,10 @@ export default component$(({ capabilities, hidden, inputs }: Props) => {
   });
 
   return (
-    <div class={'flex flex-1 flex-col' + (hidden ? ' hidden' : '')}>
-      <div class={'m-auto' + (capabilities !== undefined ? ' hidden' : '')}>
-        <CircleSpinner />
-      </div>
+    <div class={'flex flex-1 flex-col'}>
       <div
         class={
-          'mx-auto grid w-full max-w-7xl grid-cols-3 gap-x-5 gap-y-3 sm:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7' +
-          (capabilities === undefined ? ' hidden' : '')
+          'mx-auto grid w-full max-w-7xl grid-cols-3 gap-x-5 gap-y-3 sm:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7'
         }
       >
         {csvButtons.map(({ label, type }) => (
