@@ -8,10 +8,13 @@ interface Props {
 }
 
 export default component$((props: Props) => {
+  const getEmptyColumns = () => {
+    return data.map((col) =>
+      col.every((cell) => cell === '' || cell === undefined),
+    );
+  };
   const { title, headers, data, hideEmpty, noSpoiler } = props;
-  const emptyColumns = data.map((column) => {
-    return column.every((cell) => cell === '' || cell === undefined);
-  });
+  const emptyColumns = hideEmpty ? getEmptyColumns() : [];
 
   const table = (
     <table class="w-full table-auto border-collapse border border-gray-500 text-left">
@@ -19,7 +22,7 @@ export default component$((props: Props) => {
         <tr>
           {headers.map((header, columnIndex) => (
             <>
-              {!(hideEmpty && emptyColumns[columnIndex]) && (
+              {!emptyColumns[columnIndex] && (
                 <th
                   class="min-w-[5rem] border-collapse border border-gray-500 p-1.5"
                   key={columnIndex}
@@ -36,7 +39,7 @@ export default component$((props: Props) => {
           <tr key={rowIndex}>
             {data.map((column, columnIndex) => (
               <>
-                {!(hideEmpty && emptyColumns[columnIndex]) && (
+                {!emptyColumns[columnIndex] && (
                   <td
                     class="border-collapse border border-gray-500 p-1.5"
                     key={rowIndex + columnIndex}
