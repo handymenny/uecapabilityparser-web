@@ -32,11 +32,11 @@ export default component$(() => {
 
   return (
     <>
-      <h1 class="mb-4 text-center text-4xl font-semibold opacity-0">
+      <h1 class={'mb-2 text-center text-4xl font-semibold opacity-0'}>
         Loading...
       </h1>
-      <div class="flex flex-1 flex-col items-center justify-center">
-        <CircleSpinner />
+      <div class={'flex flex-1 flex-col'}>
+        <CircleSpinner centered={true} />
       </div>
     </>
   );

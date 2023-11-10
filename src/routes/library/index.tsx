@@ -46,12 +46,6 @@ export default component$(() => {
     }
   });
 
-  const spinner = (
-    <div class={'m-auto'}>
-      <CircleSpinner />
-    </div>
-  );
-
   const resultData = useResource$(({ track }) => {
     track(() => {
       documentReady.value;
@@ -66,6 +60,8 @@ export default component$(() => {
     },
     { strategy: 'document-ready' },
   );
+
+  const spinner = <CircleSpinner centered={true} />;
 
   return (
     <>
