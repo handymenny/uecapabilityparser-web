@@ -20,35 +20,33 @@ export default component$((props: Props) => {
     <table class="w-full table-auto border-collapse border border-gray-500 text-left">
       <thead>
         <tr>
-          {headers.map((header, columnIndex) => (
-            <>
-              {!emptyColumns[columnIndex] && (
+          {headers.map(
+            (header, columnIndex) =>
+              !emptyColumns[columnIndex] && (
                 <th
                   class="min-w-[5rem] border-collapse border border-gray-500 p-1.5"
                   key={columnIndex}
                 >
                   {header}
                 </th>
-              )}
-            </>
-          ))}
+              ),
+          )}
         </tr>
       </thead>
       <tbody class="whitespace-pre align-text-top">
         {data[0].map((_, rowIndex) => (
           <tr key={rowIndex}>
-            {data.map((column, columnIndex) => (
-              <>
-                {!emptyColumns[columnIndex] && (
+            {data.map(
+              (column, columnIndex) =>
+                !emptyColumns[columnIndex] && (
                   <td
                     class="border-collapse border border-gray-500 p-1.5"
                     key={rowIndex + columnIndex}
                   >
                     {column[rowIndex]}
                   </td>
-                )}
-              </>
-            ))}
+                ),
+            )}
           </tr>
         ))}
       </tbody>
