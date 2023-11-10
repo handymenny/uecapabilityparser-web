@@ -95,7 +95,6 @@ export default component$(({ capabilitiesList, hidden }: Props) => {
       <CapabilityView
         capabilities={currentCapabilities.value}
         inputs={inputs.value}
-        hideTitle={true}
         hidden={hidden}
       />
     </>
