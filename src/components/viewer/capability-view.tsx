@@ -17,7 +17,7 @@ interface Props {
   inputs?: string[];
 }
 
-type CombosTypes = 'lteca' | 'endc' | 'nrca' | 'nrdc'
+type CombosTypes = 'lteca' | 'endc' | 'nrca' | 'nrdc';
 
 export default component$(({ capabilities, inputs }: Props) => {
   const csvButtons: {
