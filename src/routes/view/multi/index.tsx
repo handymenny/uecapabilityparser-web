@@ -12,6 +12,7 @@ import type { MultiCapabilities } from '~/@types/uecapabilityparser';
 import axios from 'axios';
 import MulticapabilityView from '~/components/viewer/multicapability-view';
 import CircleSpinner from '~/components/spinner/circle-spinner';
+import Title from '~/components/header/title';
 
 export default component$(() => {
   const location = useLocation();
@@ -54,7 +55,7 @@ export default component$(() => {
 
   return (
     <>
-      <h1 class={'mb-2 text-center text-4xl font-semibold'}>View</h1>
+      <Title text="View" />
       <div class={'flex flex-1 flex-col'}>
         <Resource
           value={resultData}
@@ -66,7 +67,6 @@ export default component$(() => {
               return (
                 <MulticapabilityView
                   capabilitiesList={data.capabilitiesList ?? []}
-                  hideTitle={true}
                 />
               );
             }

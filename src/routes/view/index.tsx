@@ -12,6 +12,7 @@ import type { Capabilities } from '~/@types/uecapabilityparser';
 import axios from 'axios';
 import MulticapabilityView from '~/components/viewer/multicapability-view';
 import CircleSpinner from '~/components/spinner/circle-spinner';
+import Title from '~/components/header/title';
 
 export default component$(() => {
   const location = useLocation();
@@ -49,15 +50,11 @@ export default component$(() => {
     { strategy: 'document-ready' },
   );
 
-  const spinner = (
-    <div class={'m-auto'}>
-      <CircleSpinner />
-    </div>
-  );
+  const spinner = <CircleSpinner centered={true} />;
 
   return (
     <>
-      <h1 class={'mb-2 text-center text-4xl font-semibold'}>View</h1>
+      <Title text="View" />
       <div class={'flex flex-1 flex-col'}>
         <Resource
           value={resultData}
@@ -66,12 +63,7 @@ export default component$(() => {
             if (data == null) {
               return spinner;
             } else {
-              return (
-                <MulticapabilityView
-                  capabilitiesList={[data]}
-                  hideTitle={true}
-                />
-              );
+              return <MulticapabilityView capabilitiesList={[data]} />;
             }
           }}
         />

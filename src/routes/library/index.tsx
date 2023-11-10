@@ -11,6 +11,7 @@ import { isServer } from '@builder.io/qwik/build';
 import axios from 'axios';
 import type { LibraryIndex } from '~/@types/uecapabilityparser';
 import LibraryGrid from '~/components/grid/libraryGrid';
+import Title from '~/components/header/title';
 import CircleSpinner from '~/components/spinner/circle-spinner';
 
 export default component$(() => {
@@ -65,7 +66,7 @@ export default component$(() => {
 
   return (
     <>
-      <h1 class={'mb-2 text-center text-4xl font-semibold'}>Library</h1>
+      <Title text="Library" />
       <div class={'flex flex-1 flex-col'}>
         <Resource
           value={resultData}

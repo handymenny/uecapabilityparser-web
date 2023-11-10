@@ -7,10 +7,9 @@ import { logTypeToString } from '~/helpers/metadata';
 
 interface Props {
   capabilitiesList: Capabilities[];
-  hideTitle?: boolean;
 }
 
-export default component$(({ capabilitiesList, hideTitle }: Props) => {
+export default component$(({ capabilitiesList }: Props) => {
   const currentIndex = useSignal(0);
   const currentCapabilities = useComputed$(
     () => capabilitiesList?.[currentIndex.value],
@@ -60,9 +59,6 @@ export default component$(({ capabilitiesList, hideTitle }: Props) => {
 
   return (
     <>
-      {!hideTitle && (
-        <h1 class={'mb-2 text-center text-4xl font-semibold'}>View</h1>
-      )}
       <div
         class={
           'mb-4 flex flex-col ' +

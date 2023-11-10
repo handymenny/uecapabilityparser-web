@@ -10,6 +10,7 @@ import { isServer } from '@builder.io/qwik/build';
 import FormInput from './form-input';
 import MulticapabilityView from '../viewer/multicapability-view';
 import CircleSpinner from '../spinner/circle-spinner';
+import Title from '../header/title';
 
 export default component$(() => {
   const resultData = useSignal<Capabilities[] | undefined>(undefined);
@@ -60,7 +61,7 @@ export default component$(() => {
   if (!submitting.value && resultData.value == undefined) {
     return (
       <>
-        <h1 class={'mb-4 text-center text-4xl font-semibold'}>Parser</h1>
+        <Title text="Parser" addClasses="mb-4" />
         <div class="my-[-1rem] flex flex-1 flex-col">
           <form
             class={'m-auto w-full max-w-2xl'}
@@ -235,6 +236,11 @@ export default component$(() => {
       </div>
     );
   } else {
-    return <MulticapabilityView capabilitiesList={resultData.value} />;
+    return (
+      <>
+        <Title text="View" />
+        <MulticapabilityView capabilitiesList={resultData.value} />
+      </>
+    );
   }
 });
