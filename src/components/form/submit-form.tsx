@@ -15,6 +15,9 @@ import Title from '../header/title';
 export default component$(() => {
   const resultData = useSignal<Capabilities[] | undefined>(undefined);
   const submitting = useSignal(false);
+  const count = useSignal(1);
+  const multiParseSupported = useSignal(false);
+
   const hexToUint8Array = $((hex: string) => {
     const cleanString = hex.replace(/\s|0x|,|;/g, '').toUpperCase();
     const array = cleanString
@@ -36,12 +39,122 @@ export default component$(() => {
     return fromUint8Array(new Uint8Array(arrayBuffer));
   });
 
-  const count = useSignal(1);
-  const multiParseSupported = useSignal(false);
+  const submitFun = $(async (_: any, currentTarget: HTMLFormElement) => {
+    resultData.value = undefined;
+    submitting.value = true;
+    try {
+      const formData = new FormData(currentTarget);
+      const capSize = count.value;
+      const requests: any[] = [];
+      for (let index = 0; index < capSize; index++) {
+        const type = formData.get(`${index}-type`) as string;
+        const inputTextBase64 = await textToBase64(
+          type,
+          formData.get(`${index}-inputText`) as string,
+        );
+
+        const attachedFiles = formData.getAll(`${index}-inputFile`) as File[];
+        let inputFileBase64 = '';
+        if (attachedFiles.length > 1) {
+          // Combine files as text
+          const inputFilesBase64 = await Promise.all(
+            attachedFiles.map(async (file) => await file.text()),
+          );
+          inputFileBase64 = encode(
+            inputFilesBase64.reduce((prev, curr) => prev + '\n\n' + curr),
+          );
+        } else if (attachedFiles.length != 0) {
+          // Single file as binary
+          inputFileBase64 = await fileToBase64(attachedFiles[0]);
+        }
+
+        const input =
+          inputFileBase64.length > 0 ? inputFileBase64 : inputTextBase64;
+
+        let inputEnDc = '';
+        let inputNr = '';
+        if (type == 'H') {
+          const endcBase64 = encode(
+            formData.get(`${index}-inputENDCText`) as string,
+          );
+          const endcFileBase64 = await fileToBase64(
+            formData.get(`${index}-inputENDCFile`) as File,
+          );
+          inputEnDc = endcFileBase64.length > 0 ? endcFileBase64 : endcBase64;
+
+          const nrBase64 = encode(
+            formData.get(`${index}-inputNRText`) as string,
+          );
+          const nrFileBase64 = await fileToBase64(
+            formData.get(`${index}-inputNRFile`) as File,
+          );
+          inputNr = nrFileBase64.length > 0 ? nrFileBase64 : nrBase64;
+        }
+        const description = formData.get(`${index}-description`);
+        if (!multiParseSupported) {
+          requests.push({
+            type: type,
+            input: input,
+            inputENDC: inputEnDc,
+            inputNR: inputNr,
+            multiple0xB826: true,
+            description: description,
+          });
+        } else {
+          requests.push({
+            type: type,
+            inputs: [input, inputEnDc, inputNr],
+            subTypes: ['LTE', 'ENDC', 'NR'],
+            description: description,
+          });
+        }
+      }
+      if (!multiParseSupported) {
+        const url = import.meta.env.PUBLIC_PARSE_ENDPOINT;
+        const result = await axios.post(url, requests[0]);
+
+        if (!isServer) {
+          history.pushState({}, '', '/view/?id=' + result.data.id);
+          window.addEventListener(
+            'popstate',
+            () => {
+              resultData.value = undefined;
+              submitting.value = false;
+            },
+            { once: true },
+          );
+        }
+        const cap = result.data as Capabilities;
+        submitting.value = false;
+        resultData.value = [cap];
+      } else {
+        const url = import.meta.env.PUBLIC_PARSEMULTI_ENDPOINT;
+        const result = await axios.post(url, requests);
+
+        if (!isServer) {
+          history.pushState({}, '', '/view/multi/?id=' + result.data.id);
+          window.addEventListener(
+            'popstate',
+            () => {
+              resultData.value = undefined;
+              submitting.value = false;
+            },
+            { once: true },
+          );
+        }
+        const multi = result.data as MultiCapabilities;
+        submitting.value = false;
+        resultData.value = multi.capabilitiesList;
+      }
+    } catch (error) {
+      console.error(error);
+      submitting.value = false;
+      alert(error);
+    }
+  });
 
   const checkMultiParse = $(async () => {
     const url = import.meta.env.PUBLIC_PARSEMULTI_ENDPOINT;
-    console.log(url);
     try {
       const response = await axios.get(url, { validateStatus: () => true });
       multiParseSupported.value =
@@ -71,130 +184,7 @@ export default component$(() => {
             class={'m-auto w-full max-w-2xl'}
             autoComplete="off"
             preventdefault:submit
-            onSubmit$={async (_, currentTarget) => {
-              resultData.value = undefined;
-              submitting.value = true;
-              try {
-                const formData = new FormData(currentTarget);
-                const capSize = count.value;
-                const requests: any[] = [];
-                for (let index = 0; index < capSize; index++) {
-                  const type = formData.get(`${index}-type`) as string;
-                  const inputTextBase64 = await textToBase64(
-                    type,
-                    formData.get(`${index}-inputText`) as string,
-                  );
-
-                  const attachedFiles = formData.getAll(
-                    `${index}-inputFile`,
-                  ) as File[];
-                  let inputFileBase64 = '';
-                  if (attachedFiles.length > 1) {
-                    // Combine files as text
-                    const inputFilesBase64 = await Promise.all(
-                      attachedFiles.map(async (file) => await file.text()),
-                    );
-                    inputFileBase64 = encode(
-                      inputFilesBase64.reduce(
-                        (prev, curr) => prev + '\n\n' + curr,
-                      ),
-                    );
-                  } else if (attachedFiles.length != 0) {
-                    // Single file as binary
-                    inputFileBase64 = await fileToBase64(attachedFiles[0]);
-                  }
-
-                  const input =
-                    inputFileBase64.length > 0
-                      ? inputFileBase64
-                      : inputTextBase64;
-
-                  let inputEnDc = '';
-                  let inputNr = '';
-                  if (type == 'H') {
-                    const endcBase64 = encode(
-                      formData.get(`${index}-inputENDCText`) as string,
-                    );
-                    const endcFileBase64 = await fileToBase64(
-                      formData.get(`${index}-inputENDCFile`) as File,
-                    );
-                    inputEnDc =
-                      endcFileBase64.length > 0 ? endcFileBase64 : endcBase64;
-
-                    const nrBase64 = encode(
-                      formData.get(`${index}-inputNRText`) as string,
-                    );
-                    const nrFileBase64 = await fileToBase64(
-                      formData.get(`${index}-inputNRFile`) as File,
-                    );
-                    inputNr = nrFileBase64.length > 0 ? nrFileBase64 : nrBase64;
-                  }
-                  const description = formData.get(`${index}-description`);
-                  if (!multiParseSupported) {
-                    requests.push({
-                      type: type,
-                      input: input,
-                      inputENDC: inputEnDc,
-                      inputNR: inputNr,
-                      multiple0xB826: true,
-                      description: description,
-                    });
-                  } else {
-                    requests.push({
-                      type: type,
-                      inputs: [input, inputEnDc, inputNr],
-                      subTypes: ['LTE', 'ENDC', 'NR'],
-                      description: description,
-                    });
-                  }
-                }
-                if (!multiParseSupported) {
-                  const url = import.meta.env.PUBLIC_PARSE_ENDPOINT;
-                  const result = await axios.post(url, requests[0]);
-
-                  if (!isServer) {
-                    history.pushState({}, '', '/view/?id=' + result.data.id);
-                    window.addEventListener(
-                      'popstate',
-                      () => {
-                        resultData.value = undefined;
-                        submitting.value = false;
-                      },
-                      { once: true },
-                    );
-                  }
-                  const cap = result.data as Capabilities;
-                  submitting.value = false;
-                  resultData.value = [cap];
-                } else {
-                  const url = import.meta.env.PUBLIC_PARSEMULTI_ENDPOINT;
-                  const result = await axios.post(url, requests);
-
-                  if (!isServer) {
-                    history.pushState(
-                      {},
-                      '',
-                      '/view/multi/?id=' + result.data.id,
-                    );
-                    window.addEventListener(
-                      'popstate',
-                      () => {
-                        resultData.value = undefined;
-                        submitting.value = false;
-                      },
-                      { once: true },
-                    );
-                  }
-                  const multi = result.data as MultiCapabilities;
-                  submitting.value = false;
-                  resultData.value = multi.capabilitiesList;
-                }
-              } catch (error) {
-                console.error(error);
-                submitting.value = false;
-                alert(error);
-              }
-            }}
+            onSubmit$={submitFun}
           >
             {[...Array(count.value).keys()].map((value) => (
               <FormInput
