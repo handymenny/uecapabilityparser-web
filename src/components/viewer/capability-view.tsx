@@ -17,10 +17,12 @@ interface Props {
   inputs?: string[];
 }
 
+type CombosTypes = 'lteca' | 'endc' | 'nrca' | 'nrdc'
+
 export default component$(({ capabilities, inputs }: Props) => {
   const csvButtons: {
     label: string;
-    type: 'lteca' | 'endc' | 'nrca' | 'nrdc';
+    type: CombosTypes;
   }[] = [
     { label: 'Download LTE CA CSV', type: 'lteca' },
     { label: 'Download EN DC CSV', type: 'endc' },
@@ -49,8 +51,8 @@ export default component$(({ capabilities, inputs }: Props) => {
     });
   });
 
-  const downloadCsv = $(async (type: string, input: any) => {
-    const data = { type: type, input: input };
+  const downloadCsv = $(async (type: CombosTypes) => {
+    const data = { type: type, input: capabilities?.[type] };
     const url = import.meta.env.PUBLIC_CSV_ENDPOINT;
     try {
       const response = await axios.post(url, data, { responseType: 'blob' });
@@ -83,7 +85,7 @@ export default component$(({ capabilities, inputs }: Props) => {
             label={label}
             hidden={capabilities?.[type] == null}
             onClick$={async () => {
-              await downloadCsv(type, capabilities?.[type]);
+              await downloadCsv(type);
             }}
           />
         ))}
