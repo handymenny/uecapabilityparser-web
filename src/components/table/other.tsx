@@ -20,7 +20,7 @@ export default component$(({ cap, title }: Props) => {
   } = cap;
 
   return (
-    <details open={true}>
+    <details open={false}>
       <summary class="mt-10 text-xl font-bold">{title}</summary>
       <table class="w-full table-auto border-collapse border border-gray-500 text-left">
         <tbody class="whitespace-pre align-text-top">

@@ -13,7 +13,7 @@ export default component$(({ filters, title }: Props) => {
   }
 
   return (
-    <details open={true}>
+    <details open={false}>
       <summary class="mt-10 text-xl font-bold">{title}</summary>
 
       {filters.map((filter, index) => (
