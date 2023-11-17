@@ -26,6 +26,8 @@ export function logTypeToString(type: string) {
       return 'QCAT UE Capability';
     case 'RF':
       return 'QCT Modem Capabilities';
+    case 'SHNR':
+      return 'Shannon NR UE cap config';
   }
   return 'Unknown';
 }
