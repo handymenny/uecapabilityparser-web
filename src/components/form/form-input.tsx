@@ -30,6 +30,7 @@ export default component$((props: Props) => {
     { label: 'Qcat UE Capability Information', value: 'QC' },
     { label: 'Qct Modem Capabilities', value: 'RF' },
     { label: 'Shannon NR UE cap config', value: 'SHNR' },
+    { label: 'PCAP', value: 'P' },
   ];
 
   return (
@@ -72,12 +73,14 @@ export default component$((props: Props) => {
               return 'Attach a file containing CA COMBOS from Qct Modem Capabilities';
             case 'SHNR':
               return 'Attach a Shannon NR UE cap config protobuf (.binarypb)';
+            case 'P':
+                return 'Attach a PCAP file (.pcap)';
             default:
               return 'Attach files representing a unique set of UE Capability Information';
           }
         })()}
         name={`${prefix}inputFile`}
-        multiple={!['E', 'H', 'SHNR'].includes(type.value)}
+        multiple={!['E', 'H', 'SHNR', 'P'].includes(type.value)}
         disabled={submitting.value}
       />
       <TextArea
@@ -92,6 +95,7 @@ export default component$((props: Props) => {
               return 'Or paste them below';
             case 'E':
             case 'SHNR':
+            case 'P':
               return 'Or paste its hexdump below';
             default:
               return 'Or paste it below';

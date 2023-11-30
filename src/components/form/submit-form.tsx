@@ -27,7 +27,7 @@ export default component$(() => {
   });
 
   const textToBase64 = $(async (type: string, data: string) => {
-    if (type == 'E' || type == 'SHNR') {
+    if (type == 'E' || type == 'SHNR' || type == 'P') {
       return fromUint8Array(await hexToUint8Array(data));
     } else {
       return encode(data);
