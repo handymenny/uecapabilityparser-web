@@ -29,7 +29,7 @@ export function logTypeToString(type: string) {
     case 'SHNR':
       return 'Shannon NR UE cap config';
     case 'P':
-        return 'PCAP';
+      return 'PCAP';
   }
   return 'Unknown';
 }

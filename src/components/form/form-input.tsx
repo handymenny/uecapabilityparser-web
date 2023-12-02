@@ -74,7 +74,7 @@ export default component$((props: Props) => {
             case 'SHNR':
               return 'Attach a Shannon NR UE cap config protobuf (.binarypb)';
             case 'P':
-                return 'Attach a PCAP file (.pcap)';
+              return 'Attach a PCAP file (.pcap)';
             default:
               return 'Attach files representing a unique set of UE Capability Information';
           }
