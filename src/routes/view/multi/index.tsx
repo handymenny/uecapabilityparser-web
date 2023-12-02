@@ -67,6 +67,7 @@ export default component$(() => {
               return (
                 <MulticapabilityView
                   capabilitiesList={data.capabilitiesList ?? []}
+                  groupDescription={data.description}
                 />
               );
             }

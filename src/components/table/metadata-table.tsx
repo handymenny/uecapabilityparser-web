@@ -13,6 +13,7 @@ export default component$(({ cap, title }: Props) => {
   }
 
   const header = [
+    'Group Description',
     'Description',
     'Log Type',
     'Upload Date',
@@ -24,7 +25,15 @@ export default component$(({ cap, title }: Props) => {
   const timestamp = new Date(cap.timestamp).toLocaleString().replace(', ', ' ');
   const description = cap.metadata.description;
   const processingTime = cap.metadata.processingTime;
-  const data = [description, logType, timestamp, parserVersion, processingTime];
+  const groupDescription = cap.metadata.groupDescription;
+  const data = [
+    groupDescription,
+    description,
+    logType,
+    timestamp,
+    parserVersion,
+    processingTime,
+  ];
 
   const exclude = ['description', 'processingTime', 'defaultNR'];
   Object.keys(cap.metadata).forEach(function (key) {
@@ -67,7 +76,8 @@ export default component$(({ cap, title }: Props) => {
         <tbody class="whitespace-pre align-text-top">
           {data.map(
             (value, index) =>
-              value != undefined && (
+              value != undefined &&
+              value.length > 0 && (
                 <tr key={index}>
                   <th class="border-collapse border border-gray-500 p-1.5">
                     {header[index]}

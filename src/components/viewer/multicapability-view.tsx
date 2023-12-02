@@ -7,9 +7,10 @@ import { logTypeToString } from '~/helpers/metadata';
 
 interface Props {
   capabilitiesList: Capabilities[];
+  groupDescription?: string;
 }
 
-export default component$(({ capabilitiesList }: Props) => {
+export default component$(({ capabilitiesList, groupDescription }: Props) => {
   const currentIndex = useSignal(0);
   const currentCapabilities = useComputed$(
     () => capabilitiesList?.[currentIndex.value],
@@ -56,6 +57,11 @@ export default component$(({ capabilitiesList }: Props) => {
       value: index,
     });
   });
+
+  // set group Description
+  capabilitiesList?.forEach(
+    (cap) => (cap.metadata.groupDescription = groupDescription ?? ''),
+  );
 
   return (
     <>
