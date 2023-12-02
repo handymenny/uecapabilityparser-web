@@ -14,6 +14,7 @@ import Title from '../header/title';
 
 export default component$(() => {
   const resultData = useSignal<Capabilities[] | undefined>(undefined);
+  const resultGroupDescription = useSignal<string | undefined>(undefined);
   const submitting = useSignal(false);
   const count = useSignal(1);
   const multiParseSupported = useSignal(false);
@@ -119,6 +120,7 @@ export default component$(() => {
             'popstate',
             () => {
               resultData.value = undefined;
+              resultGroupDescription.value = undefined;
               submitting.value = false;
             },
             { once: true },
@@ -127,6 +129,7 @@ export default component$(() => {
         const cap = result.data as Capabilities;
         submitting.value = false;
         resultData.value = [cap];
+        resultGroupDescription.value = undefined;
       } else {
         const url = import.meta.env.PUBLIC_PARSEMULTI_ENDPOINT;
         const result = await axios.post(url, requests);
@@ -137,6 +140,7 @@ export default component$(() => {
             'popstate',
             () => {
               resultData.value = undefined;
+              resultGroupDescription.value = undefined;
               submitting.value = false;
             },
             { once: true },
@@ -145,6 +149,7 @@ export default component$(() => {
         const multi = result.data as MultiCapabilities;
         submitting.value = false;
         resultData.value = multi.capabilitiesList;
+        resultGroupDescription.value = multi.description;
       }
     } catch (error) {
       console.error(error);
@@ -228,7 +233,10 @@ export default component$(() => {
       {resultData.value !== undefined && !submitting.value && (
         <>
           <Title text="View" />
-          <MulticapabilityView capabilitiesList={resultData.value} />
+          <MulticapabilityView
+            capabilitiesList={resultData.value}
+            groupDescription={resultGroupDescription.value}
+          />
         </>
       )}
     </>
