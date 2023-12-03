@@ -8,6 +8,7 @@ import type { Signal } from '@builder.io/qwik';
 interface Props {
   submitting: Signal<boolean>;
   prefix: string;
+  multiparse?: boolean;
 }
 
 export default component$((props: Props) => {
@@ -30,8 +31,11 @@ export default component$((props: Props) => {
     { label: 'Qcat UE Capability Information', value: 'QC' },
     { label: 'Qct Modem Capabilities', value: 'RF' },
     { label: 'Shannon NR UE cap config', value: 'SHNR' },
-    { label: 'PCAP', value: 'P' },
   ];
+
+  if (props.multiparse) {
+    options.push({ label: 'PCAP', value: 'P' });
+  }
 
   return (
     <>

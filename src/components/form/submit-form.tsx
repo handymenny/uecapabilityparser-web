@@ -201,6 +201,7 @@ export default component$(() => {
                 key={value}
                 prefix={`${value}-`}
                 submitting={submitting}
+                multiparse={multiParseSupported.value}
               />
             ))}
 
