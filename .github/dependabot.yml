@@ -8,7 +8,7 @@ updates:
     groups:
       qwik:
         patterns:
-          - 'qwik*'
+          - '@builder.io*'
       lint:
         patterns:
           - '*eslint*'
