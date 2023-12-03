@@ -134,6 +134,12 @@ export default component$(() => {
         const url = import.meta.env.PUBLIC_PARSEMULTI_ENDPOINT;
         const result = await axios.post(url, requests);
 
+        const multi = result.data as MultiCapabilities;
+
+        if (multi.capabilitiesList == undefined) {
+          throw "Parsing failed. The input is invalid or doesn't contain valid data.";
+        }
+
         if (!isServer) {
           history.pushState({}, '', '/view/multi/?id=' + result.data.id);
           window.addEventListener(
@@ -146,7 +152,6 @@ export default component$(() => {
             { once: true },
           );
         }
-        const multi = result.data as MultiCapabilities;
         submitting.value = false;
         resultData.value = multi.capabilitiesList;
         resultGroupDescription.value = multi.description;
