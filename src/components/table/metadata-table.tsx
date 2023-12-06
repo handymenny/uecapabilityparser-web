@@ -27,7 +27,8 @@ export default component$(({ cap, title }: Props) => {
   const processingTime = cap.metadata.processingTime;
   const groupDescription = cap.metadata.groupDescription;
   const data = [
-    groupDescription,
+    // don't show same description two times
+    description == groupDescription ? undefined : groupDescription,
     description,
     logType,
     timestamp,
