@@ -35,7 +35,12 @@ export default component$(({ cap, title }: Props) => {
     processingTime,
   ];
 
-  const exclude = ['description', 'processingTime', 'defaultNR'];
+  const exclude = [
+    'description',
+    'processingTime',
+    'defaultNR',
+    'groupDescription',
+  ];
   Object.keys(cap.metadata).forEach(function (key) {
     const value = cap.metadata[key];
     if (!exclude.includes(key)) {
