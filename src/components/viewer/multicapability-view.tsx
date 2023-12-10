@@ -52,8 +52,8 @@ export default component$(({ capabilitiesList, groupDescription }: Props) => {
       label: descriptionsAlldifferent
         ? value.metadata.description
         : typesAlldifferent
-        ? logTypeToString(value.logType)
-        : value.id,
+          ? logTypeToString(value.logType)
+          : value.id,
       value: index,
     });
   });
