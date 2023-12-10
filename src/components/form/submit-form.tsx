@@ -72,6 +72,10 @@ export default component$(() => {
         const input =
           inputFileBase64.length > 0 ? inputFileBase64 : inputTextBase64;
 
+        if (type == 'P' && input.startsWith("Cg0NC") && input[5] > 'f' &&  input[5] < 'w') {
+          throw "PcapNg isn't supported, please convert this file to PCAP before submitting."
+        }
+
         let inputEnDc = '';
         let inputNr = '';
         if (type == 'H') {
