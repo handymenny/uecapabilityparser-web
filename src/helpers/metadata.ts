@@ -30,6 +30,11 @@ export function logTypeToString(type: string) {
       return 'Shannon NR UE cap config';
     case 'P':
       return 'PCAP';
+    case 'DLF':
+    case 'QMDL':
+    case 'HDF':
+    case 'SDM':
+      'Diag log';
   }
   return 'Unknown';
 }

@@ -28,7 +28,15 @@ export default component$(() => {
   });
 
   const textToBase64 = $(async (type: string, data: string) => {
-    if (type == 'E' || type == 'SHNR' || type == 'P') {
+    if (
+      type == 'E' ||
+      type == 'SHNR' ||
+      type == 'P' ||
+      type == 'DLF' ||
+      type == 'QMDL' ||
+      type == 'HDF' ||
+      type == 'SDM'
+    ) {
       return fromUint8Array(await hexToUint8Array(data));
     } else {
       return encode(data);
@@ -72,8 +80,13 @@ export default component$(() => {
         const input =
           inputFileBase64.length > 0 ? inputFileBase64 : inputTextBase64;
 
-        if (type == 'P' && input.startsWith("Cg0NC") && input[5] > 'f' &&  input[5] < 'w') {
-          throw "PcapNg isn't supported, please convert this file to PCAP before submitting."
+        if (
+          type == 'P' &&
+          input.startsWith('Cg0NC') &&
+          input[5] > 'f' &&
+          input[5] < 'w'
+        ) {
+          throw "PcapNg isn't supported, please convert this file to PCAP before submitting.";
         }
 
         let inputEnDc = '';

@@ -35,6 +35,10 @@ export default component$((props: Props) => {
 
   if (props.multiparse) {
     options.push({ label: 'PCAP', value: 'P' });
+    options.push({ label: 'DLF', value: 'DLF' });
+    options.push({ label: 'QMDL', value: 'QMDL' });
+    options.push({ label: 'HDF', value: 'HDF' });
+    options.push({ label: 'SDM', value: 'SDM' });
   }
 
   return (
@@ -79,12 +83,21 @@ export default component$((props: Props) => {
               return 'Attach a Shannon NR UE cap config protobuf (.binarypb)';
             case 'P':
               return 'Attach a PCAP file (.pcap)';
+            case 'DLF':
+            case 'QMDL':
+            case 'HDF':
+            case 'SDM':
+              return 'Attach a diag log';
             default:
               return 'Attach files representing a unique set of UE Capability Information';
           }
         })()}
         name={`${prefix}inputFile`}
-        multiple={!['E', 'H', 'SHNR', 'P'].includes(type.value)}
+        multiple={
+          !['E', 'H', 'SHNR', 'P', 'DLF', 'QMDL', 'HDF', 'SDM'].includes(
+            type.value,
+          )
+        }
         disabled={submitting.value}
       />
       <TextArea
@@ -100,6 +113,10 @@ export default component$((props: Props) => {
             case 'E':
             case 'SHNR':
             case 'P':
+            case 'DLF':
+            case 'QMDL':
+            case 'HDF':
+            case 'SDM':
               return 'Or paste its hexdump below';
             default:
               return 'Or paste it below';
