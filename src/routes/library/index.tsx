@@ -26,9 +26,13 @@ export default component$(() => {
       const items = library.items;
       const multiItems = library.multiItems ?? [];
 
-      const multiItemsToShow = multiItems.filter(
-        (multiItem) => multiItem.indexLineIds.length > 0,
-      );
+      const multiItemsToShow = multiItems.filter((multiItem) => {
+        const idsFound = multiItem.indexLineIds.filter((id) => {
+          return items.find((it) => it.id == id);
+        });
+        return idsFound.length > 0;
+      });
+
       const idsToRemove = multiItemsToShow.flatMap(
         (multiItem) => multiItem.indexLineIds,
       );
