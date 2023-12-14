@@ -23,6 +23,7 @@ export default component$(() => {
     }
   });
 
+  // eslint-disable-next-line qwik/no-use-visible-task
   useVisibleTask$(
     () => {
       getList();

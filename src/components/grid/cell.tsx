@@ -54,6 +54,7 @@ export default component$((props: Props) => {
     }
   });
 
+  // eslint-disable-next-line qwik/no-use-visible-task
   useVisibleTask$(() => {
     truncateIfNeeded(false);
   });

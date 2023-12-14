@@ -41,6 +41,7 @@ export default component$(() => {
 
   const version = useSignal<string | undefined>(undefined);
 
+  // eslint-disable-next-line qwik/no-use-visible-task
   useVisibleTask$(
     async () => {
       version.value = await getVersion();
