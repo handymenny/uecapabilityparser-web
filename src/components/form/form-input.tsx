@@ -45,7 +45,6 @@ export default component$((props: Props) => {
     <>
       <SelectInput
         label="Log Type"
-        placeholder="log-type"
         options={options}
         name={`${prefix}type`}
         disabled={submitting.value}
