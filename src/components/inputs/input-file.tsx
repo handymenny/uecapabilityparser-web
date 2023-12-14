@@ -38,6 +38,7 @@ export default component$((props: Props) => {
         placeholder={placeholder}
         value={value}
         oninput$={(_, currentTarget) => {
+          // eslint-disable-next-line qwik/valid-lexical-scope
           onInput$ && onInput$(currentTarget.value);
         }}
         class={`appearance-none border-2 border-solid border-gray-500 bg-white p-2 file:mr-4 file:w-1/3 file:border-solid file:border-gray-400 file:p-2 file:text-sm file:font-semibold file:text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring

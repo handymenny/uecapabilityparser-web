@@ -8,7 +8,6 @@ interface Option {
 }
 interface Props {
   label?: string;
-  placeholder?: string;
   options: Option[];
   onInput$?: PropFunction<(value: string) => void>;
   name?: string;
@@ -17,8 +16,7 @@ interface Props {
 }
 
 export default component$((props: Props) => {
-  const { label, placeholder, options, onInput$, name, disabled, hidden } =
-    props;
+  const { label, options, onInput$, name, disabled, hidden } = props;
   const randId = useId();
   const id = `text-input-${randId}`;
 
@@ -29,8 +27,8 @@ export default component$((props: Props) => {
       </label>
       <select
         id={id}
-        placeholder={placeholder}
         onInput$={(_, currentTarget) => {
+          // eslint-disable-next-line qwik/valid-lexical-scope
           onInput$ && onInput$(currentTarget.value);
         }}
         class="appearance-none border-2 border-solid border-gray-500 bg-white p-2 px-2.5 focus:outline-none focus:ring focus:ring-gray-400 disabled:border-gray-500 disabled:bg-gray-300"

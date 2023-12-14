@@ -5,7 +5,7 @@ interface Props {
   type: 'submit' | 'button' | 'reset';
   disabled?: boolean;
   hidden?: boolean;
-  onClick$?: PropFunction<any>;
+  onClick$?: PropFunction<() => void>;
 }
 
 export default component$((props: Props) => {
@@ -16,6 +16,7 @@ export default component$((props: Props) => {
         type={type}
         class="my-2 w-full flex-grow bg-black p-2 text-lg text-white focus:outline-none focus:ring focus:ring-gray-400 disabled:bg-gray-300 disabled:text-gray-400 disabled:opacity-70"
         disabled={disabled}
+        // eslint-disable-next-line qwik/valid-lexical-scope
         onClick$={onClick$}
         preventdefault:click={onClick$ != null}
       >

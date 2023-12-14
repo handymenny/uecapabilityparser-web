@@ -209,7 +209,7 @@ export default component$(() => {
         <div class="my-[-1rem] flex flex-1 flex-col">
           <form
             class={'m-auto w-full max-w-2xl'}
-            autoComplete="off"
+            autocomplete="off"
             preventdefault:submit
             onSubmit$={submitFun}
           >
