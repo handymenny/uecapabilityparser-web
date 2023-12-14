@@ -38,7 +38,7 @@
     "prettier-plugin-tailwindcss": "^0.5.9",
     "qwik-feather-icons": "^1.2.1",
     "tailwindcss": "^3.3.6",
-    "typescript": "^5.3.2",
+    "typescript": "^5.3.3",
     "undici": "^5.28.2",
     "vite": "^5.0.7",
     "vite-tsconfig-paths": "^4.2.1"
