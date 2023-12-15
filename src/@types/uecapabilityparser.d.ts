@@ -12,12 +12,35 @@ export interface Capabilities {
   endc?: ComboEnDc[];
   nrca?: ComboNr[];
   nrdc?: ComboNrDc[];
-  logType: string;
+  logType: LogType;
   ueCapFilters?: IUeCapabilityFilter[];
-  parserVersion: string;
-  timestamp: number;
   metadata: { [key: string]: string };
   id?: string;
+  parserVersion: string;
+  timestamp: number;
+}
+
+export enum LogType {
+  INVALID = '',
+  H = 'H',
+  W = 'W',
+  N = 'N',
+  C = 'C',
+  CNR = 'CNR',
+  E = 'E',
+  Q = 'Q',
+  QLTE = 'QLTE',
+  QNR = 'QNR',
+  M = 'M',
+  O = 'O',
+  QC = 'QC',
+  RF = 'RF',
+  SHNR = 'SHNR',
+  P = 'P',
+  DLF = 'DLF',
+  QMDL = 'QMDL',
+  HDF = 'HDF',
+  SDM = 'SDM',
 }
 
 export interface ComboLte {
@@ -319,4 +342,62 @@ export interface MultiCapabilities {
   capabilitiesList?: Capabilities[];
   description?: string;
   id: string;
+}
+
+export interface ServerStatus {
+  version: string;
+  endpoints: string[];
+  logTypes: LogType[];
+  maxRequestSize: number;
+}
+
+export type RequestCsv =
+  | RequestCsv.endc
+  | RequestCsv.lteca
+  | RequestCsv.nrca
+  | RequestCsv.nrdc;
+
+export namespace RequestCsv {
+  export enum Type {
+    endc = 'endc',
+    lteca = 'lteca',
+    nrca = 'nrca',
+    nrdc = 'nrdc',
+  }
+
+  export interface endc {
+    type: RequestCsv.Type.endc;
+    input: ComboEnDc[];
+  }
+
+  export interface lteca {
+    type: RequestCsv.Type.lteca;
+    input: ComboLte[];
+  }
+
+  export interface nrca {
+    type: RequestCsv.Type.nrca;
+    input: ComboNr[];
+  }
+
+  export interface nrdc {
+    type: RequestCsv.Type.nrdc;
+    input: ComboNrDc[];
+  }
+}
+
+export interface RequestParse {
+  input?: string | null;
+  inputNR?: string | null;
+  inputENDC?: string | null;
+  defaultNR?: boolean;
+  type: LogType;
+  description?: string;
+}
+
+export interface RequestMultiParse {
+  inputs: string[];
+  type: LogType;
+  subTypes?: string[];
+  description?: string;
 }
