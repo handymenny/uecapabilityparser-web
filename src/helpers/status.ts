@@ -1,12 +1,29 @@
-import axios from 'axios';
+import { type CacheRequestConfig, setupCache } from 'axios-cache-interceptor';
 import type { ServerStatus } from '~/@types/uecapabilityparser';
 import { Endpoints } from './endpoints';
+import Axios from 'axios';
+
+const instance = Axios.create();
+const axios = setupCache(instance);
+
+const cacheOptions: CacheRequestConfig<any, any> = {
+  cache: {
+    ttl: import.meta.env.PUBLIC_STATUS_CACHE_TTL as number,
+    interpretHeader: false,
+    staleIfError: false,
+  },
+};
 
 const getStatus = async () => {
   const url = Endpoints.STATUS;
   try {
-    const res = await axios.get(url);
-    return res.data as ServerStatus;
+    const res = await axios.get(url, {
+      ...cacheOptions,
+      validateStatus: () => true,
+    });
+    if (res.status == 200) {
+      return res.data as ServerStatus;
+    }
   } catch (err) {
     console.error(err);
   }
@@ -16,7 +33,7 @@ const getStatus = async () => {
 const getVersionLegacy = async () => {
   const url = Endpoints.VERSION;
   try {
-    const res = await axios.get(url);
+    const res = await axios.get(url, cacheOptions);
     return res.data.version as string;
   } catch (err) {
     console.error(err);
@@ -27,7 +44,7 @@ const getVersionLegacy = async () => {
 const getStoreLegacy = async () => {
   const url = Endpoints.STORE + 'status';
   try {
-    const res = await axios.get(url);
+    const res = await axios.get(url, cacheOptions);
     return res.data.enabled == true;
   } catch (err) {
     console.error(err);
@@ -38,7 +55,10 @@ const getStoreLegacy = async () => {
 const getMultiParseLegacy = async () => {
   const url = Endpoints.PARSEMULTI;
   try {
-    const response = await axios.get(url, { validateStatus: () => true });
+    const response = await axios.get(url, {
+      ...cacheOptions,
+      validateStatus: () => true,
+    });
     return response.status !== 404 && response.status < 500;
   } catch (ignored) {
     return false;
