@@ -1,18 +1,16 @@
 import { $, component$, useVisibleTask$ } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
 import CircleSpinner from '~/components/spinner/circle-spinner';
-import axios from 'axios';
 import { useNavigate } from '@builder.io/qwik-city';
+import { StatusHelper } from '~/helpers/status';
 
 export default component$(() => {
   const nav = useNavigate();
 
   const getList = $(async () => {
-    const url = import.meta.env.PUBLIC_STORE_ENDPOINT + 'status';
-
     try {
-      const response = await axios.get(url);
-      if (response.data.enabled) {
+      const storeSupported = await StatusHelper.isStoreSuported();
+      if (storeSupported) {
         nav('/library');
       } else {
         nav('/parser');

@@ -1,19 +1,8 @@
-import { $, component$, useVisibleTask$, useSignal } from '@builder.io/qwik';
-import axios from 'axios';
+import { component$, useVisibleTask$, useSignal } from '@builder.io/qwik';
 import { Link } from '@builder.io/qwik-city';
+import { StatusHelper } from '~/helpers/status';
 
 export default component$(() => {
-  const getVersion = $(async () => {
-    const url = import.meta.env.PUBLIC_VERSION_ENDPOINT;
-    try {
-      const res = await axios.get(url);
-      return res.data.version as string;
-    } catch (err) {
-      console.error(err);
-    }
-    return undefined;
-  });
-
   const getUrlFromVersion = (version: string) => {
     const url = import.meta.env.PUBLIC_REPO_URL;
     if (version.startsWith('nightly-')) {
@@ -44,7 +33,7 @@ export default component$(() => {
   // eslint-disable-next-line qwik/no-use-visible-task
   useVisibleTask$(
     async () => {
-      version.value = await getVersion();
+      version.value = await StatusHelper.getVersion();
     },
     { strategy: 'document-ready' },
   );

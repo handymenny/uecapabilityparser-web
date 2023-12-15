@@ -11,6 +11,7 @@ import FormInput from './form-input';
 import MulticapabilityView from '../viewer/multicapability-view';
 import CircleSpinner from '../spinner/circle-spinner';
 import Title from '../header/title';
+import { StatusHelper } from '~/helpers/status';
 
 export default component$(() => {
   const resultData = useSignal<Capabilities[] | undefined>(undefined);
@@ -180,21 +181,10 @@ export default component$(() => {
     }
   });
 
-  const checkMultiParse = $(async () => {
-    const url = import.meta.env.PUBLIC_PARSEMULTI_ENDPOINT;
-    try {
-      const response = await axios.get(url, { validateStatus: () => true });
-      multiParseSupported.value =
-        response.status !== 404 && response.status < 500;
-    } catch (ignored) {
-      multiParseSupported.value = false;
-    }
-  });
-
   // eslint-disable-next-line qwik/no-use-visible-task
   useVisibleTask$(
-    () => {
-      checkMultiParse();
+    async () => {
+      multiParseSupported.value = await StatusHelper.isMultiSupported();
     },
     { strategy: 'document-ready' },
   );
