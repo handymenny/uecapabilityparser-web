@@ -11,6 +11,7 @@ import { type Capabilities } from '~/@types/uecapabilityparser';
 import axios from 'axios';
 import Filters from '../table/filters';
 import MetadataTable from '../table/metadata-table';
+import { Endpoints } from '~/helpers/endpoints';
 
 interface Props {
   capabilities: Capabilities;
@@ -53,7 +54,7 @@ export default component$(({ capabilities, inputs }: Props) => {
 
   const downloadCsv = $(async (type: CombosTypes) => {
     const data = { type: type, input: capabilities?.[type] };
-    const url = import.meta.env.PUBLIC_CSV_ENDPOINT;
+    const url = Endpoints.CSV;
     try {
       const response = await axios.post(url, data, { responseType: 'blob' });
 
@@ -67,7 +68,7 @@ export default component$(({ capabilities, inputs }: Props) => {
   });
 
   const downloadInput = $((item: string) => {
-    const url = import.meta.env.PUBLIC_STORE_ENDPOINT + 'getInput';
+    const url = Endpoints.STORE + 'getInput';
     location.href = `${url}/?id=${item}`;
   });
 

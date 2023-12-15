@@ -13,13 +13,14 @@ import axios from 'axios';
 import MulticapabilityView from '~/components/viewer/multicapability-view';
 import CircleSpinner from '~/components/spinner/circle-spinner';
 import Title from '~/components/header/title';
+import { Endpoints } from '~/helpers/endpoints';
 
 export default component$(() => {
   const location = useLocation();
   const id = useSignal<string | undefined>(undefined);
 
   const getCapabilities = $(async (id: string) => {
-    const url = import.meta.env.PUBLIC_STORE_ENDPOINT;
+    const url = Endpoints.STORE;
     const outputUrl = url + 'getOutput';
     try {
       const result = await axios.get(outputUrl, { params: { id: id } });

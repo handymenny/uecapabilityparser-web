@@ -4,6 +4,7 @@ import CapabilityView from './capability-view';
 import SelectInput from '../inputs/select-input';
 import axios from 'axios';
 import { logTypeToString } from '~/helpers/metadata';
+import { Endpoints } from '~/helpers/endpoints';
 
 interface Props {
   capabilitiesList: Capabilities[];
@@ -19,7 +20,7 @@ export default component$(({ capabilitiesList, groupDescription }: Props) => {
 
   const downloadItem = $(async (id: string) => {
     try {
-      const itemUrl = import.meta.env.PUBLIC_STORE_ENDPOINT + 'getItem';
+      const itemUrl = Endpoints.STORE + 'getItem';
       const result = await axios.get(itemUrl, { params: { id: id } });
       const indexLine = result.data as IndexLine;
       items.value[id] = indexLine;

@@ -12,6 +12,7 @@ import MulticapabilityView from '../viewer/multicapability-view';
 import CircleSpinner from '../spinner/circle-spinner';
 import Title from '../header/title';
 import { StatusHelper } from '~/helpers/status';
+import { Endpoints } from '~/helpers/endpoints';
 
 export default component$(() => {
   const resultData = useSignal<Capabilities[] | undefined>(undefined);
@@ -129,7 +130,7 @@ export default component$(() => {
         }
       }
       if (!multiParseSupported) {
-        const url = import.meta.env.PUBLIC_PARSE_ENDPOINT;
+        const url = Endpoints.PARSE;
         const result = await axios.post(url, requests[0]);
 
         if (!isServer) {
@@ -149,7 +150,7 @@ export default component$(() => {
         resultData.value = [cap];
         resultGroupDescription.value = undefined;
       } else {
-        const url = import.meta.env.PUBLIC_PARSEMULTI_ENDPOINT;
+        const url = Endpoints.PARSEMULTI;
         const result = await axios.post(url, requests);
 
         const multi = result.data as MultiCapabilities;

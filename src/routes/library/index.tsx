@@ -13,12 +13,13 @@ import type { LibraryIndex } from '~/@types/uecapabilityparser';
 import LibraryGrid from '~/components/grid/libraryGrid';
 import Title from '~/components/header/title';
 import CircleSpinner from '~/components/spinner/circle-spinner';
+import { Endpoints } from '~/helpers/endpoints';
 
 export default component$(() => {
   const documentReady = useSignal(false);
 
   const getList = $(async () => {
-    const url = import.meta.env.PUBLIC_STORE_ENDPOINT + 'list';
+    const url = Endpoints.STORE + 'list';
 
     try {
       const response = await axios.get(url);

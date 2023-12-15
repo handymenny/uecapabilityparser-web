@@ -1,8 +1,9 @@
 import axios from 'axios';
 import type { ServerStatus } from '~/@types/uecapabilityparser';
+import { Endpoints } from './endpoints';
 
 const getStatus = async () => {
-  const url = import.meta.env.PUBLIC_STATUS_ENDPOINT;
+  const url = Endpoints.STATUS;
   try {
     const res = await axios.get(url);
     return res.data as ServerStatus;
@@ -13,7 +14,7 @@ const getStatus = async () => {
 };
 
 const getVersionLegacy = async () => {
-  const url = import.meta.env.PUBLIC_VERSION_ENDPOINT;
+  const url = Endpoints.VERSION;
   try {
     const res = await axios.get(url);
     return res.data.version as string;
@@ -24,7 +25,7 @@ const getVersionLegacy = async () => {
 };
 
 const getStoreLegacy = async () => {
-  const url = import.meta.env.PUBLIC_STORE_ENDPOINT + 'status';
+  const url = Endpoints.STORE + 'status';
   try {
     const res = await axios.get(url);
     return res.data.enabled == true;
@@ -35,7 +36,7 @@ const getStoreLegacy = async () => {
 };
 
 const getMultiParseLegacy = async () => {
-  const url = import.meta.env.PUBLIC_PARSEMULTI_ENDPOINT;
+  const url = Endpoints.PARSEMULTI;
   try {
     const response = await axios.get(url, { validateStatus: () => true });
     return response.status !== 404 && response.status < 500;
