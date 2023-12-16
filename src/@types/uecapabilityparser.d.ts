@@ -393,10 +393,19 @@ export interface RequestParse {
   defaultNR?: boolean;
   type: LogType;
   description?: string;
+  // used by old uecapabilityparser
+  multiple0xB826?: boolean;
 }
 
 export interface RequestMultiParse {
   inputs: string[];
+  type: LogType;
+  subTypes?: string[];
+  description?: string;
+}
+
+export interface RequestMultiPart {
+  inputIndexes: number[];
   type: LogType;
   subTypes?: string[];
   description?: string;
