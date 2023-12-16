@@ -77,12 +77,26 @@ const getInputFiles = (
   const attachedFiles = formData.getAll(filekey) as File[];
   const inputFiles = attachedFiles.filter((it) => it.size > 0);
   if (inputFiles.length > 0) {
-    return inputFiles
+    return inputFiles;
   }
   if (inputText.size > 0) {
-    return [inputText]
+    return [inputText];
   }
-  return []
+  return [];
+};
+
+const isPcapNg = (magic: any, base64: boolean) => {
+  if (base64) {
+    return magic.startsWith('Cg0NC');
+  } else {
+    return magic[0] == 10 && magic[1] == 13 && magic[2] == 13 && magic[3] == 10;
+  }
+};
+
+export const getFileHeader = async (file: File) => {
+  const headerBytes = file.slice(0, 4); // Read the first 4 bytes of the file
+  const arrayBuff = await headerBytes.arrayBuffer();
+  return new Uint8Array(arrayBuff);
 };
 
 export const submitLegacy = async (currentTarget: HTMLFormElement) => {
@@ -128,8 +142,8 @@ export const submitMultiLegacy = async (
   const formData = new FormData(form);
   const requests: RequestMultiParse[] = [];
   for (let index = 0; index < capSize; index++) {
-    const type = form.get(`${index}-type`) as LogType;
-    const description = form.get(`${index}-description`) as string;
+    const type = formData.get(`${index}-type`) as LogType;
+    const description = formData.get(`${index}-description`) as string;
     const input = await getInputBase64(
       formData,
       type,
@@ -137,7 +151,7 @@ export const submitMultiLegacy = async (
       `${index}-inputFile`,
     );
 
-    if (type == 'P' && input.startsWith('Cg0NC')) {
+    if (type == 'P' && isPcapNg(input, true)) {
       throw "PcapNg isn't supported, please convert this file to PCAP before submitting.";
     }
 
@@ -196,6 +210,17 @@ export const submitMultiPart = async (
     );
 
     let inputs = [...input];
+
+    if (type == 'P') {
+      const firstInput = inputs[0];
+      if (firstInput != null) {
+        const magic = await getFileHeader(firstInput);
+        if (isPcapNg(magic, false)) {
+          throw "PcapNg isn't supported, please convert this file to PCAP before submitting.";
+        }
+      }
+    }
+
     let inputEnDc: File | null | undefined = null;
     let inputNr: File | null | undefined = null;
     if (type == 'H') {
@@ -219,7 +244,6 @@ export const submitMultiPart = async (
     let fileIndex = files.length;
     inputs.forEach((it) => {
       if (it == null) return;
-      console.log(it)
       if (type == 'H') {
         if (it == inputEnDc) {
           subTypes.push('ENDC');
