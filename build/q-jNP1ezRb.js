@@ -1,7 +1,0 @@
-import{u as h,a as _,j as b,M as P,J as u,L as k,y as f,_ as v}from"./q-OyUNoDim.js";import{u as y,a as A,g,b as L}from"./q-pubr2hWm.js";const C=async(a,e)=>{const[t,o,s,n]=h();e.hasAttribute("preventdefault:click")&&(e.hasAttribute("q:nbs")?await t(location.href,{type:"popstate"}):e.href&&(e.setAttribute("aria-pressed","true"),await t(e.href,{forceReload:o,replaceState:s,scroll:n}),e.removeAttribute("aria-pressed")))},D=a=>{const e=y(),t=A(),{onClick$:o,reload:s,replaceState:n,scroll:d,...r}=a,i=_(()=>g({...r,reload:s},t)),l=_(()=>L(a,i,t));r["preventdefault:click"]=!!i,r.href=i||a.href;const c=l!=null?u(f(()=>v(()=>import("./q-oCBUT_Ug.js"),__vite__mapDeps([])),"s_eBQ0vFsFKsk")):void 0,p=u(f(()=>v(()=>Promise.resolve().then(()=>M),void 0),"s_i1Cv0pYJNR0",[e,s,n,d]));return b("a",{...r,children:P(k,null,3,"AD_0"),"data-prefetch":l,onClick$:[o,p],onFocus$:c,onMouseOver$:c,onQVisible$:c},null,0,"AD_1")},M=Object.freeze(Object.defineProperty({__proto__:null,s_8gdLBszqbaM:D,s_i1Cv0pYJNR0:C},Symbol.toStringTag,{value:"Module"}));export{D as s_8gdLBszqbaM,C as s_i1Cv0pYJNR0};
-function __vite__mapDeps(indexes) {
-  if (!__vite__mapDeps.viteFileDeps) {
-    __vite__mapDeps.viteFileDeps = []
-  }
-  return indexes.map((i) => __vite__mapDeps.viteFileDeps[i])
-}
