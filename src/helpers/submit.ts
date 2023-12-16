@@ -93,7 +93,7 @@ const isPcapNg = (magic: any, base64: boolean) => {
   }
 };
 
-export const getFileHeader = async (file: File) => {
+const getFileHeader = async (file: File) => {
   const headerBytes = file.slice(0, 4); // Read the first 4 bytes of the file
   const arrayBuff = await headerBytes.arrayBuffer();
   return new Uint8Array(arrayBuff);
