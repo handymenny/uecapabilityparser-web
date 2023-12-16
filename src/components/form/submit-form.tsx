@@ -7,7 +7,11 @@ import MulticapabilityView from '../viewer/multicapability-view';
 import CircleSpinner from '../spinner/circle-spinner';
 import Title from '../header/title';
 import { StatusHelper } from '~/helpers/status';
-import { submitLegacy, submitMultiLegacy } from '~/helpers/submit';
+import {
+  submitLegacy,
+  submitMultiLegacy,
+  submitMultiPart,
+} from '~/helpers/submit';
 
 export default component$(() => {
   const resultData = useSignal<Capabilities[] | undefined>(undefined);
@@ -27,17 +31,20 @@ export default component$(() => {
 
       if (multiParseSupported.value) {
         url = '/view/multi/?id=';
-        const result = await submitMultiLegacy(currentTarget, count.value);
+        let result;
+        if (await StatusHelper.isMultiPartSupported()) {
+          result = await submitMultiPart(currentTarget, count.value);
+        } else {
+          result = await submitMultiLegacy(currentTarget, count.value);
+        }
         id = result.id;
         capList = result.capabilitiesList ?? [];
         groupDescription = result.description;
-        console.log(url);
       } else {
         url = '/view/?id=';
         const result = await submitLegacy(currentTarget);
         id = result.id;
         capList = [result];
-        console.log(url);
       }
       if (!isServer && id != null) {
         history.pushState({}, '', url + id);

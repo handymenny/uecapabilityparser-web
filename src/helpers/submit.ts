@@ -3,6 +3,7 @@ import type {
   LogType,
   MultiCapabilities,
   RequestMultiParse,
+  RequestMultiPart,
   RequestParse,
 } from '~/@types/uecapabilityparser';
 import { encode, fromUint8Array } from 'js-base64';
@@ -14,6 +15,14 @@ const fileToBase64 = async (data: File) => {
   return fromUint8Array(new Uint8Array(arrayBuffer));
 };
 
+const hexToUint8Array = (hex: string) => {
+  const cleanString = hex.replace(/\s|0x|,|;/g, '').toUpperCase();
+  const array = cleanString
+    .match(/[0-9A-Fa-f]{1,2}/g)
+    ?.map((byte) => parseInt(byte, 16));
+  return Uint8Array.from(array ?? []);
+};
+
 const textToBase64 = async (type: LogType, data: string) => {
   const binaryTypes = ['E', 'SHNR', 'P', 'DLF', 'QMDL', 'HDF', 'SDM'];
   if (type in binaryTypes) {
@@ -23,12 +32,14 @@ const textToBase64 = async (type: LogType, data: string) => {
   }
 };
 
-const hexToUint8Array = (hex: string) => {
-  const cleanString = hex.replace(/\s|0x|,|;/g, '').toUpperCase();
-  const array = cleanString
-    .match(/[0-9A-Fa-f]{1,2}/g)
-    ?.map((byte) => parseInt(byte, 16));
-  return Uint8Array.from(array ?? []);
+const textToFile = (type: string, data: string) => {
+  const binaryTypes = ['E', 'SHNR', 'P', 'DLF', 'QMDL', 'HDF', 'SDM'];
+  if (type in binaryTypes) {
+    const uint8 = hexToUint8Array(data);
+    return new File([uint8], '');
+  } else {
+    return new File([data], '');
+  }
 };
 
 const getInputBase64 = async (
@@ -53,6 +64,25 @@ const getInputBase64 = async (
   }
 
   return inputFileBase64.length > 0 ? inputFileBase64 : inputTextBase64;
+};
+
+const getInputFiles = (
+  formData: FormData,
+  type: LogType,
+  textKey: string,
+  filekey: string,
+) => {
+  const text = formData.get(textKey) as string;
+  const inputText = textToFile(type, text);
+  const attachedFiles = formData.getAll(filekey) as File[];
+  const inputFiles = attachedFiles.filter((it) => it.size > 0);
+  if (inputFiles.length > 0) {
+    return inputFiles
+  }
+  if (inputText.size > 0) {
+    return [inputText]
+  }
+  return []
 };
 
 export const submitLegacy = async (currentTarget: HTMLFormElement) => {
@@ -145,5 +175,83 @@ export const submitMultiLegacy = async (
     throw "Parsing failed. The input is invalid or doesn't contain valid data.";
   }
 
+  return multi;
+};
+
+export const submitMultiPart = async (
+  form: HTMLFormElement,
+  capSize: number,
+) => {
+  const formData = new FormData(form);
+  const requests: RequestMultiPart[] = [];
+  const files: File[] = [];
+  for (let index = 0; index < capSize; index++) {
+    const type = formData.get(`${index}-type`) as LogType;
+    const description = formData.get(`${index}-description`) as string;
+    const input = getInputFiles(
+      formData,
+      type,
+      `${index}-inputText`,
+      `${index}-inputFile`,
+    );
+
+    let inputs = [...input];
+    let inputEnDc: File | null | undefined = null;
+    let inputNr: File | null | undefined = null;
+    if (type == 'H') {
+      inputEnDc = getInputFiles(
+        formData,
+        type,
+        `${index}-inputENDCText`,
+        `${index}-inputENDCFile`,
+      )[0];
+      inputNr = getInputFiles(
+        formData,
+        type,
+        `${index}-inputNRText`,
+        `${index}-inputNRFile`,
+      )[0];
+      inputs = [...input, inputEnDc, inputNr];
+    }
+
+    const subTypes: string[] = [];
+    const inputIndexes: number[] = [];
+    let fileIndex = files.length;
+    inputs.forEach((it) => {
+      if (it == null) return;
+      console.log(it)
+      if (type == 'H') {
+        if (it == inputEnDc) {
+          subTypes.push('ENDC');
+        } else if (it == inputNr) {
+          subTypes.push('NR');
+        } else {
+          subTypes.push('LTE');
+        }
+      }
+      files.push(it);
+      inputIndexes.push(fileIndex);
+      fileIndex++;
+    });
+
+    requests.push({
+      type: type,
+      inputIndexes: inputIndexes,
+      subTypes: subTypes,
+      description: description,
+    });
+  }
+
+  const url = Endpoints.PARSEMULTIPART;
+  const result = await axios.postForm(url, {
+    requests: JSON.stringify(requests),
+    file: files,
+  });
+
+  const multi = result.data as MultiCapabilities;
+
+  if (multi.capabilitiesList == undefined) {
+    throw "Parsing failed. The input is invalid or doesn't contain valid data.";
+  }
   return multi;
 };
