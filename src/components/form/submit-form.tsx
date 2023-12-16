@@ -1,18 +1,13 @@
 import { $, component$, useSignal, useVisibleTask$ } from '@builder.io/qwik';
 import Button from '~/components/inputs/button';
-import { encode, fromUint8Array } from 'js-base64';
-import axios from 'axios';
-import type {
-  Capabilities,
-  MultiCapabilities,
-} from '~/@types/uecapabilityparser';
+import type { Capabilities } from '~/@types/uecapabilityparser';
 import { isServer } from '@builder.io/qwik/build';
 import FormInput from './form-input';
 import MulticapabilityView from '../viewer/multicapability-view';
 import CircleSpinner from '../spinner/circle-spinner';
 import Title from '../header/title';
 import { StatusHelper } from '~/helpers/status';
-import { Endpoints } from '~/helpers/endpoints';
+import { submitLegacy, submitMultiLegacy } from '~/helpers/submit';
 
 export default component$(() => {
   const resultData = useSignal<Capabilities[] | undefined>(undefined);
@@ -21,160 +16,45 @@ export default component$(() => {
   const count = useSignal(1);
   const multiParseSupported = useSignal(false);
 
-  const hexToUint8Array = $((hex: string) => {
-    const cleanString = hex.replace(/\s|0x|,|;/g, '').toUpperCase();
-    const array = cleanString
-      .match(/[0-9A-Fa-f]{1,2}/g)
-      ?.map((byte) => parseInt(byte, 16));
-    return Uint8Array.from(array ?? []);
-  });
-
-  const textToBase64 = $(async (type: string, data: string) => {
-    if (
-      type == 'E' ||
-      type == 'SHNR' ||
-      type == 'P' ||
-      type == 'DLF' ||
-      type == 'QMDL' ||
-      type == 'HDF' ||
-      type == 'SDM'
-    ) {
-      return fromUint8Array(await hexToUint8Array(data));
-    } else {
-      return encode(data);
-    }
-  });
-
-  const fileToBase64 = $(async (data: File) => {
-    const arrayBuffer = await data.arrayBuffer();
-    return fromUint8Array(new Uint8Array(arrayBuffer));
-  });
-
   const submitFun = $(async (_: any, currentTarget: HTMLFormElement) => {
     resultData.value = undefined;
     submitting.value = true;
     try {
-      const formData = new FormData(currentTarget);
-      const capSize = count.value;
-      const requests: any[] = [];
-      for (let index = 0; index < capSize; index++) {
-        const type = formData.get(`${index}-type`) as string;
-        const inputTextBase64 = await textToBase64(
-          type,
-          formData.get(`${index}-inputText`) as string,
-        );
+      let capList: Capabilities[];
+      let url: string;
+      let id: string | undefined;
+      let groupDescription: string | undefined = undefined;
 
-        const attachedFiles = formData.getAll(`${index}-inputFile`) as File[];
-        let inputFileBase64 = '';
-        if (attachedFiles.length > 1) {
-          // Combine files as text
-          const inputFilesBase64 = await Promise.all(
-            attachedFiles.map(async (file) => await file.text()),
-          );
-          inputFileBase64 = encode(
-            inputFilesBase64.reduce((prev, curr) => prev + '\n\n' + curr),
-          );
-        } else if (attachedFiles.length != 0) {
-          // Single file as binary
-          inputFileBase64 = await fileToBase64(attachedFiles[0]);
-        }
-
-        const input =
-          inputFileBase64.length > 0 ? inputFileBase64 : inputTextBase64;
-
-        if (
-          type == 'P' &&
-          input.startsWith('Cg0NC') &&
-          input[5] > 'f' &&
-          input[5] < 'w'
-        ) {
-          throw "PcapNg isn't supported, please convert this file to PCAP before submitting.";
-        }
-
-        let inputEnDc = '';
-        let inputNr = '';
-        if (type == 'H') {
-          const endcBase64 = encode(
-            formData.get(`${index}-inputENDCText`) as string,
-          );
-          const endcFileBase64 = await fileToBase64(
-            formData.get(`${index}-inputENDCFile`) as File,
-          );
-          inputEnDc = endcFileBase64.length > 0 ? endcFileBase64 : endcBase64;
-
-          const nrBase64 = encode(
-            formData.get(`${index}-inputNRText`) as string,
-          );
-          const nrFileBase64 = await fileToBase64(
-            formData.get(`${index}-inputNRFile`) as File,
-          );
-          inputNr = nrFileBase64.length > 0 ? nrFileBase64 : nrBase64;
-        }
-        const description = formData.get(`${index}-description`);
-        if (!multiParseSupported) {
-          requests.push({
-            type: type,
-            input: input,
-            inputENDC: inputEnDc,
-            inputNR: inputNr,
-            multiple0xB826: true,
-            description: description,
-          });
-        } else {
-          requests.push({
-            type: type,
-            inputs: [input, inputEnDc, inputNr],
-            subTypes: ['LTE', 'ENDC', 'NR'],
-            description: description,
-          });
-        }
-      }
-      if (!multiParseSupported) {
-        const url = Endpoints.PARSE;
-        const result = await axios.post(url, requests[0]);
-
-        if (!isServer) {
-          history.pushState({}, '', '/view/?id=' + result.data.id);
-          window.addEventListener(
-            'popstate',
-            () => {
-              resultData.value = undefined;
-              resultGroupDescription.value = undefined;
-              submitting.value = false;
-            },
-            { once: true },
-          );
-        }
-        const cap = result.data as Capabilities;
-        submitting.value = false;
-        resultData.value = [cap];
-        resultGroupDescription.value = undefined;
+      if (multiParseSupported.value) {
+        url = '/view/multi/?id=';
+        const result = await submitMultiLegacy(currentTarget, count.value);
+        id = result.id;
+        capList = result.capabilitiesList ?? [];
+        groupDescription = result.description;
+        console.log(url);
       } else {
-        const url = Endpoints.PARSEMULTI;
-        const result = await axios.post(url, requests);
-
-        const multi = result.data as MultiCapabilities;
-
-        if (multi.capabilitiesList == undefined) {
-          throw "Parsing failed. The input is invalid or doesn't contain valid data.";
-        }
-
-        if (!isServer) {
-          history.pushState({}, '', '/view/multi/?id=' + result.data.id);
-          window.addEventListener(
-            'popstate',
-            () => {
-              resultData.value = undefined;
-              resultGroupDescription.value = undefined;
-              submitting.value = false;
-            },
-            { once: true },
-          );
-        }
-        submitting.value = false;
-        resultData.value = multi.capabilitiesList;
-        resultGroupDescription.value = multi.description;
+        url = '/view/?id=';
+        const result = await submitLegacy(currentTarget);
+        id = result.id;
+        capList = [result];
+        console.log(url);
       }
+      if (!isServer && id != null) {
+        history.pushState({}, '', url + id);
+        window.addEventListener(
+          'popstate',
+          () => {
+            resultData.value = undefined;
+            resultGroupDescription.value = undefined;
+            submitting.value = false;
+          },
+          { once: true },
+        );
+      }
+
+      submitting.value = false;
+      resultData.value = capList;
+      resultGroupDescription.value = groupDescription;
     } catch (error) {
       console.error(error);
       submitting.value = false;
