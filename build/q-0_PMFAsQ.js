@@ -1,7 +1,0 @@
-import{V as c,g as r,_ as a,l as m,o as _,x as f,h as i,P as t,C as h,K as l,N as p,f as d,v}from"./q-OIKTu0zg.js";import{A as x,m as g}from"./q-hejy-FsA.js";const y=c(r(()=>a(()=>import("./q-e2EH7NM0.js"),__vite__mapDeps([])),"s_PqBGYTpWr3Q")),E=c(r(()=>a(()=>import("./q-X6gHDh9T.js"),__vite__mapDeps([])),"s_ceU05TscGYE")),P=()=>{m();const e=_(!1),s=_();return f("unhandledrejection",r(()=>a(()=>Promise.resolve().then(()=>T),void 0),"s_GUi083oyr6Y",[s,e])),i("div",null,{class:"flex min-h-screen flex-col bg-gray-100"},[t(E,null,3,"XF_0"),i("main",null,{class:"flex flex-1 flex-col justify-center px-10 py-4 sm:px-12"},[t(p,null,3,"XF_1"),e&&t(y,{children:h(o=>o.value,[s]),show:e,title:"Error",[l]:{show:l,title:l}},3,"XF_2")],1,null)],1,"XF_3")},A=e=>{const[s,o]=d(),n=e.reason;if(n instanceof x){const u=n.message;s.value=g(u),o.value=!0}},T=Object.freeze(Object.defineProperty({__proto__:null,_hW:v,s_GUi083oyr6Y:A,s_VkLNXphUh5s:P},Symbol.toStringTag,{value:"Module"}));export{v as _hW,A as s_GUi083oyr6Y,P as s_VkLNXphUh5s};
-function __vite__mapDeps(indexes) {
-  if (!__vite__mapDeps.viteFileDeps) {
-    __vite__mapDeps.viteFileDeps = []
-  }
-  return indexes.map((i) => __vite__mapDeps.viteFileDeps[i])
-}
