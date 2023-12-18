@@ -9,9 +9,13 @@ import type {
 import { encode, fromUint8Array } from 'js-base64';
 import axios from 'axios';
 import { Endpoints } from '~/helpers/endpoints';
+import { StatusHelper } from './status';
 
+const preprocessorUrl = "[prepocessor](https://github.com/HandyMenny/uecapabilityparser-prepocessor)"
 const pcapNgError =
-  "PcapNg isn't supported, please convert this file to PCAP before submitting.<br>You can use [prepocessor](https://github.com/HandyMenny/uecapabilityparser-prepocessor) to do that.";
+  `PcapNg isn't supported, please convert this file to PCAP before submitting.<br>You can use ${preprocessorUrl} to do that.`
+const tooBigError =
+     `Input data too big for this instance.<br> You can use ${preprocessorUrl} to reduce its size.<br>Alternatively, you can run you own instance or use cli.`
 
 const fileToBase64 = async (data: File) => {
   const arrayBuffer = await data.arrayBuffer();
@@ -267,6 +271,14 @@ export const submitMultiPart = async (
       subTypes: subTypes,
       description: description,
     });
+  }
+
+  const maxRequestSize = await StatusHelper.getMaxRequestSize();
+  const sizes = files.map((it) => it.size);
+  const fullSize = sizes.reduce((acc, current) => acc + current);
+
+  if (fullSize >= maxRequestSize - 1000) {
+    throw tooBigError;
   }
 
   const url = Endpoints.PARSEMULTIPART;

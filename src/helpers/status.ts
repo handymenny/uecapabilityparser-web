@@ -101,4 +101,13 @@ export namespace StatusHelper {
       return false;
     }
   };
+
+  export const getMaxRequestSize = async () => {
+    const status = await getStatus();
+    if (status != null) {
+      return status.maxRequestSize;
+    } else {
+      return Number.MAX_SAFE_INTEGER;
+    }
+  };
 }
