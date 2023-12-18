@@ -23,11 +23,9 @@ export default component$(() => {
       <Header />
       <main class="flex flex-1 flex-col justify-center px-10 py-4 sm:px-12">
         <Slot />
-        {showAlert.value && (
-          <Alert title="Error" show={showAlert}>
-            <p dangerouslySetInnerHTML={alertMessage.value} />
-          </Alert>
-        )}
+        <Alert title="Error" show={showAlert}>
+          <p dangerouslySetInnerHTML={alertMessage.value} />
+        </Alert>
       </main>
     </div>
   );
