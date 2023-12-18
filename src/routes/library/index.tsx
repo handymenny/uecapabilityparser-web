@@ -5,6 +5,7 @@ import {
   useResource$,
   useSignal,
   useVisibleTask$,
+  type JSXChildren,
 } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
 import { isServer } from '@builder.io/qwik/build';
@@ -12,10 +13,20 @@ import axios from 'axios';
 import type { LibraryIndex } from '~/@types/uecapabilityparser';
 import LibraryGrid from '~/components/grid/libraryGrid';
 import Title from '~/components/header/title';
+import Alert from '~/components/modal/alert';
 import CircleSpinner from '~/components/spinner/circle-spinner';
 import { Endpoints } from '~/helpers/endpoints';
 
 export default component$(() => {
+  const showAlert = useSignal<boolean>(false);
+  const alertMessage = useSignal<JSXChildren>();
+
+  const alertModal = $((message: any) => {
+    // eslint-disable-next-line qwik/valid-lexical-scope
+    alertMessage.value = <p>{message}</p>;
+    showAlert.value = true;
+  });
+
   const documentReady = useSignal(false);
 
   const getList = $(async () => {
@@ -47,7 +58,7 @@ export default component$(() => {
       return itemsMerged;
     } catch (err) {
       console.error(err);
-      alert(err);
+      alertModal(err);
       throw err;
     }
   });
@@ -86,6 +97,11 @@ export default component$(() => {
           }}
         />
       </div>
+      {showAlert && (
+        <Alert title="Error" show={showAlert}>
+          {alertMessage.value}
+        </Alert>
+      )}
     </>
   );
 });

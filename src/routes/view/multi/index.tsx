@@ -5,6 +5,7 @@ import {
   useResource$,
   useSignal,
   useVisibleTask$,
+  type JSXChildren,
 } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
 import { useLocation } from '@builder.io/qwik-city';
@@ -14,8 +15,19 @@ import MulticapabilityView from '~/components/viewer/multicapability-view';
 import CircleSpinner from '~/components/spinner/circle-spinner';
 import Title from '~/components/header/title';
 import { Endpoints } from '~/helpers/endpoints';
+import Alert from '~/components/modal/alert';
+import { markdownToHtml } from '~/helpers/alert';
 
 export default component$(() => {
+  const showAlert = useSignal<boolean>(false);
+  const alertMessage = useSignal<JSXChildren>();
+
+  const alertModal = $((message: any) => {
+    // eslint-disable-next-line qwik/valid-lexical-scope
+    alertMessage.value = markdownToHtml(message);
+    showAlert.value = true;
+  });
+
   const location = useLocation();
   const id = useSignal<string | undefined>(undefined);
 
@@ -28,7 +40,7 @@ export default component$(() => {
       return multiCap;
     } catch (err) {
       console.error(err);
-      alert(err);
+      alertModal(err);
       throw err;
     }
   });
@@ -76,6 +88,11 @@ export default component$(() => {
           }}
         />
       </div>
+      {showAlert && (
+        <Alert title="Error" show={showAlert}>
+          {alertMessage.value}
+        </Alert>
+      )}
     </>
   );
 });
