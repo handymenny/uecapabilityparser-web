@@ -1,1 +1,0 @@
-import{d as a,q as l}from"./q-OyUNoDim.js";const d=t=>{const s=t.addClasses??"";return a("h1",{class:"mb-2 text-center text-4xl font-semibold "+s},null,l(e=>e.text,[t]),3,"je_0")};export{d as s_P0Kj9G6vpFg};
