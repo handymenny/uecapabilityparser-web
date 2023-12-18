@@ -10,6 +10,9 @@ import { encode, fromUint8Array } from 'js-base64';
 import axios from 'axios';
 import { Endpoints } from '~/helpers/endpoints';
 
+const pcapNgError =
+  "PcapNg isn't supported, please convert this file to PCAP before submitting.<br>You can use [prepocessor](https://github.com/HandyMenny/uecapabilityparser-prepocessor) to do that.";
+
 const fileToBase64 = async (data: File) => {
   const arrayBuffer = await data.arrayBuffer();
   return fromUint8Array(new Uint8Array(arrayBuffer));
@@ -152,7 +155,7 @@ export const submitMultiLegacy = async (
     );
 
     if (type == 'P' && isPcapNg(input, true)) {
-      throw "PcapNg isn't supported, please convert this file to PCAP before submitting.";
+      throw pcapNgError;
     }
 
     let inputs = [input];
@@ -216,7 +219,7 @@ export const submitMultiPart = async (
       if (firstInput != null) {
         const magic = await getFileHeader(firstInput);
         if (isPcapNg(magic, false)) {
-          throw "PcapNg isn't supported, please convert this file to PCAP before submitting.";
+          throw pcapNgError;
         }
       }
     }
