@@ -1,7 +1,0 @@
-import{V as c,g as n,_ as a,l as m,o as i,x as f,h as o,P as t,C as p,K as r,N as d,f as h,v}from"./q-OIKTu0zg.js";import{A as g,m as x}from"./q-VKuMynVY.js";const y=c(n(()=>a(()=>import("./q-e2EH7NM0.js"),__vite__mapDeps([])),"s_PqBGYTpWr3Q")),E=c(n(()=>a(()=>import("./q-z4h1J0Fb.js"),__vite__mapDeps([])),"s_ceU05TscGYE")),P=()=>{m();const e=i(!1),s=i("");return f("unhandledrejection",n(()=>a(()=>Promise.resolve().then(()=>T),void 0),"s_GUi083oyr6Y",[s,e])),o("div",null,{class:"flex min-h-screen flex-col bg-gray-100"},[t(E,null,3,"XF_0"),o("main",null,{class:"flex flex-1 flex-col justify-center px-10 py-4 sm:px-12"},[t(d,null,3,"XF_1"),e.value&&t(y,{children:o("p",null,{dangerouslySetInnerHTML:p(l=>l.value,[s])},null,3,null),show:e,title:"Error",[r]:{show:r,title:r}},3,"XF_2")],1,null)],1,"XF_3")},A=e=>{const[s,l]=h(),_=e.reason;if(_ instanceof g){const u=_.message;s.value=x(u),l.value=!0}},T=Object.freeze(Object.defineProperty({__proto__:null,_hW:v,s_GUi083oyr6Y:A,s_VkLNXphUh5s:P},Symbol.toStringTag,{value:"Module"}));export{v as _hW,A as s_GUi083oyr6Y,P as s_VkLNXphUh5s};
-function __vite__mapDeps(indexes) {
-  if (!__vite__mapDeps.viteFileDeps) {
-    __vite__mapDeps.viteFileDeps = []
-  }
-  return indexes.map((i) => __vite__mapDeps.viteFileDeps[i])
-}
