@@ -1,10 +1,4 @@
-import {
-  $,
-  component$,
-  useSignal,
-  useVisibleTask$,
-  type JSXChildren,
-} from '@builder.io/qwik';
+import { $, component$, useSignal, useVisibleTask$ } from '@builder.io/qwik';
 import Button from '~/components/inputs/button';
 import type { Capabilities } from '~/@types/uecapabilityparser';
 import { isServer } from '@builder.io/qwik/build';
@@ -18,8 +12,7 @@ import {
   submitMultiLegacy,
   submitMultiPart,
 } from '~/helpers/submit';
-import Alert from '../modal/alert';
-import { markdownToHtml } from '~/helpers/alert';
+import { AlertException } from '~/helpers/alert';
 
 export default component$(() => {
   const resultData = useSignal<Capabilities[] | undefined>(undefined);
@@ -27,14 +20,6 @@ export default component$(() => {
   const submitting = useSignal(false);
   const count = useSignal(1);
   const multiParseSupported = useSignal(false);
-  const showAlert = useSignal<boolean>(false);
-  const alertMessage = useSignal<JSXChildren>();
-
-  const alertModal = $((message: any) => {
-    // eslint-disable-next-line qwik/valid-lexical-scope
-    alertMessage.value = markdownToHtml(message);
-    showAlert.value = true;
-  });
 
   const submitFun = $(async (_: any, currentTarget: HTMLFormElement) => {
     resultData.value = undefined;
@@ -78,10 +63,9 @@ export default component$(() => {
       submitting.value = false;
       resultData.value = capList;
       resultGroupDescription.value = groupDescription;
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
       submitting.value = false;
-      alertModal(error);
+      throw new AlertException(error);
     }
   });
 
@@ -143,11 +127,6 @@ export default component$(() => {
           </form>
         </div>
       </div>
-      {showAlert && (
-        <Alert title="Error" show={showAlert}>
-          {alertMessage.value}
-        </Alert>
-      )}
       {resultData.value == undefined && submitting.value && (
         <div class="flex flex-1 flex-col">
           <CircleSpinner centered={true} />

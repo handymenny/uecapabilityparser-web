@@ -12,3 +12,10 @@ export const markdownToHtml = (message: string) => {
 
   return <p dangerouslySetInnerHTML={content}></p>;
 };
+
+export class AlertException extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = this.constructor.name;
+  }
+}

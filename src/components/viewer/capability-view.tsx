@@ -1,4 +1,4 @@
-import { $, component$, useSignal, type JSXChildren } from '@builder.io/qwik';
+import { $, component$ } from '@builder.io/qwik';
 import Button from '~/components/inputs/button';
 import Other from '~/components/table/other';
 import LteBands from '~/components/table/lte-bands';
@@ -12,7 +12,7 @@ import axios from 'axios';
 import Filters from '../table/filters';
 import MetadataTable from '../table/metadata-table';
 import { Endpoints } from '~/helpers/endpoints';
-import Alert from '../modal/alert';
+import { AlertException } from '~/helpers/alert';
 
 interface Props {
   capabilities: Capabilities;
@@ -22,15 +22,6 @@ interface Props {
 type CombosTypes = 'lteca' | 'endc' | 'nrca' | 'nrdc';
 
 export default component$(({ capabilities, inputs }: Props) => {
-  const showAlert = useSignal<boolean>(false);
-  const alertMessage = useSignal<JSXChildren>();
-
-  const alertModal = $((message: any) => {
-    // eslint-disable-next-line qwik/valid-lexical-scope
-    alertMessage.value = <p>{message}</p>;
-    showAlert.value = true;
-  });
-
   const csvButtons: {
     label: string;
     type: CombosTypes;
@@ -71,9 +62,8 @@ export default component$(({ capabilities, inputs }: Props) => {
       const headers = response.headers;
       const fileName = headers['content-disposition']?.split('filename=')[1];
       await saveAs(response.data, fileName ?? 'unknown');
-    } catch (err) {
-      console.error(err);
-      alertModal(err);
+    } catch (err: any) {
+      throw new AlertException(err);
     }
   });
 
@@ -166,11 +156,6 @@ export default component$(({ capabilities, inputs }: Props) => {
           </div>
         </div>
       </div>
-      {showAlert && (
-        <Alert title="Error" show={showAlert}>
-          {alertMessage.value}
-        </Alert>
-      )}
     </>
   );
 });
