@@ -10,7 +10,7 @@ export const markdownToHtml = (message: string) => {
     "<a class='underline' href='$2'>$1</a>",
   );
 
-  return <p dangerouslySetInnerHTML={content}></p>;
+  return content;
 };
 
 export class AlertException extends Error {
