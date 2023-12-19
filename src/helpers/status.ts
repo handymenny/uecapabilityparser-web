@@ -113,4 +113,13 @@ export namespace StatusHelper {
       return Number.MAX_SAFE_INTEGER;
     }
   };
+
+  export const getSupportedLogs = async () => {
+    const status = await getStatus();
+    if (status != null) {
+      return status.logTypes;
+    } else {
+      return [];
+    }
+  };
 }

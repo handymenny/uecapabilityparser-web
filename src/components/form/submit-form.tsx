@@ -1,6 +1,6 @@
 import { $, component$, useSignal, useVisibleTask$ } from '@builder.io/qwik';
 import Button from '~/components/inputs/button';
-import type { Capabilities } from '~/@types/uecapabilityparser';
+import type { LogType, Capabilities } from '~/@types/uecapabilityparser';
 import { isServer } from '@builder.io/qwik/build';
 import FormInput from './form-input';
 import MulticapabilityView from '../viewer/multicapability-view';
@@ -20,6 +20,7 @@ export default component$(() => {
   const submitting = useSignal(false);
   const count = useSignal(1);
   const multiParseSupported = useSignal(false);
+  const supportedLogTypes = useSignal<LogType[]>([]);
 
   const submitFun = $(async (_: any, currentTarget: HTMLFormElement) => {
     resultData.value = undefined;
@@ -73,6 +74,7 @@ export default component$(() => {
   useVisibleTask$(
     async () => {
       multiParseSupported.value = await StatusHelper.isMultiSupported();
+      supportedLogTypes.value = await StatusHelper.getSupportedLogs();
     },
     { strategy: 'document-ready' },
   );
@@ -98,6 +100,7 @@ export default component$(() => {
                 prefix={`${value}-`}
                 submitting={submitting}
                 multiparse={multiParseSupported.value}
+                supportedLogs={supportedLogTypes.value}
               />
             ))}
 

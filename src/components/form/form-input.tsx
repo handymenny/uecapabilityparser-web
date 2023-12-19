@@ -4,11 +4,13 @@ import TextArea from '~/components/inputs/text-area';
 import InputFile from '~/components/inputs/input-file';
 import TextInput from '~/components/inputs/text-input';
 import type { Signal } from '@builder.io/qwik';
+import { type LogType } from '~/@types/uecapabilityparser';
 
 interface Props {
   submitting: Signal<boolean>;
   prefix: string;
   multiparse?: boolean;
+  supportedLogs?: LogType[];
 }
 
 export default component$((props: Props) => {
@@ -16,7 +18,7 @@ export default component$((props: Props) => {
   const submitting = props.submitting;
   const defaultType = 'H';
   const type = useSignal(defaultType);
-  const options = [
+  let options = [
     { label: 'UE Capability Information Hex Dump', value: 'H' },
     { label: 'Wireshark UE Capability Information', value: 'W' },
     { label: 'NSG UE Capability Information', value: 'N' },
@@ -31,14 +33,21 @@ export default component$((props: Props) => {
     { label: 'Qcat UE Capability Information', value: 'QC' },
     { label: 'Qct Modem Capabilities', value: 'RF' },
     { label: 'Shannon NR UE cap config', value: 'SHNR' },
+    { label: 'PCAP', value: 'P' },
+    { label: 'DLF Baseband Log', value: 'DLF' },
+    { label: 'QMDL Baseband Log', value: 'QMDL' },
+    { label: 'HDF Baseband Log', value: 'HDF' },
+    { label: 'SDM Baseband Log', value: 'SDM' },
   ];
 
-  if (props.multiparse) {
-    options.push({ label: 'PCAP', value: 'P' });
-    options.push({ label: 'DLF', value: 'DLF' });
-    options.push({ label: 'QMDL', value: 'QMDL' });
-    options.push({ label: 'HDF', value: 'HDF' });
-    options.push({ label: 'SDM', value: 'SDM' });
+  const supLogs = props.supportedLogs ?? [];
+  if (supLogs.length > 0) {
+    options = options.filter((it) => supLogs.includes(it.value as LogType));
+  } else {
+    const unsupLogs = props.multiparse
+      ? ['DLF', 'QMDL', 'HDF', 'SDM']
+      : ['SHNR', 'P', 'DLF', 'QMDL', 'HDF', 'SDM'];
+    options = options.filter((it) => !unsupLogs.includes(it.value as LogType));
   }
 
   return (
