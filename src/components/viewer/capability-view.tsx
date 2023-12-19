@@ -54,7 +54,11 @@ export default component$(({ capabilities, inputs }: Props) => {
   });
 
   const downloadCsv = $(async (type: CombosTypes) => {
-    const data = { type: type, input: capabilities?.[type] };
+    const data = {
+      type: type,
+      input: capabilities?.[type],
+      newCsvFormat: true,
+    };
     const url = Endpoints.CSV;
     try {
       const response = await axios.post(url, data, { responseType: 'blob' });
