@@ -374,6 +374,7 @@ export namespace RequestCsv {
   export interface lteca {
     type: RequestCsv.Type.lteca;
     input: ComboLte[];
+    newCsvFormat?: boolean;
   }
 
   export interface nrca {
