@@ -87,7 +87,10 @@ export namespace StatusHelper {
   export const isMultiSupported = async () => {
     const status = await getStatus();
     if (status != null) {
-      return status.endpoints.includes('/parse/multi');
+      return (
+        status.endpoints.includes('/parse/multi') ||
+        status.endpoints.includes('/parse/multiPart')
+      );
     } else {
       return await getMultiParseLegacy();
     }
