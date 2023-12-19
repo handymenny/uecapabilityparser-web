@@ -272,6 +272,7 @@ export interface ComponentNr {
   maxScs?: number;
   maxBwDl?: Bandwidth;
   maxBwUl?: Bandwidth;
+  // used by old uecapabilityparser
   maxBw?: number;
 }
 
@@ -397,6 +398,7 @@ export interface RequestParse {
   multiple0xB826?: boolean;
 }
 
+// used by old uecapabilityparser
 export interface RequestMultiParse {
   inputs: string[];
   type: LogType;
