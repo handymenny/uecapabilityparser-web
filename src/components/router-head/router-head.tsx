@@ -8,6 +8,9 @@ export const RouterHead = component$(() => {
   const head = useDocumentHead();
   const loc = useLocation();
 
+  const customcss = import.meta.env.PUBLIC_CUSTOM_CSS_PATH as string;
+  const customjs = import.meta.env.PUBLIC_CUSTOM_JS_PATH as string;
+
   return (
     <>
       <meta charSet="utf-8" />
@@ -27,6 +30,10 @@ export const RouterHead = component$(() => {
       {head.styles.map((s) => (
         <style key={s.key} {...s.props} dangerouslySetInnerHTML={s.style} />
       ))}
+
+      {customcss.length > 0 && <link rel="stylesheet" href={customcss} />}
+
+      {customjs.length > 0 && <script src={customjs} />}
     </>
   );
 });
