@@ -80,7 +80,7 @@ export default component$(() => {
             if (data == null) {
               return spinner;
             } else {
-              return <LibraryGrid data={data} />;
+              return <LibraryGrid data={data} searchId="library" />;
             }
           }}
         />
