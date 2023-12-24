@@ -22,11 +22,11 @@ export default component$((props: Props) => {
   if (fuzzy) initializeFuzzySearcher(fuzzy.id, fuzzy.keys, fuzzy.data);
 
   return (
-    <div class="relative flex flex-col">
+    <div class="relative flex flex-col my-2">
       <label
         for={id}
         aria-label={label}
-        class={`my-2 ${hiddenCssClass}`}
+        class={`${hiddenCssClass}`}
       ></label>
       <input
         type="text"
