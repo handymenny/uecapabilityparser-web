@@ -14,7 +14,7 @@ export default component$(({ data, searchId }: Props) => {
   const getUrl = (item: MultiIndexLine | IndexLine) => {
     const multi = (item as MultiIndexLine).indexLineIds != null;
     const path = multi ? '/view/multi/' : '/view/';
-    return `${path}?id=${item}`;
+    return `${path}?id=${item.id}`;
   };
 
   const filteredData = useSignal<(IndexLine | MultiIndexLine)[]>(data);
