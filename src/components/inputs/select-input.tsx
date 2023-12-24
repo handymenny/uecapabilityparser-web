@@ -31,7 +31,7 @@ export default component$((props: Props) => {
           // eslint-disable-next-line qwik/valid-lexical-scope
           onInput$ && onInput$(currentTarget.value);
         }}
-        class="appearance-none border-2 border-solid border-gray-500 bg-white p-2 px-2.5 focus:outline-none focus:ring focus:ring-gray-400 disabled:border-gray-500 disabled:bg-gray-300"
+        class="appearance-none border-2 border-solid border-gray-500 bg-white p-2 px-2.5 pr-[40px] focus:outline-none focus:ring focus:ring-gray-400 disabled:border-gray-500 disabled:bg-gray-300"
         name={name}
         disabled={disabled}
       >
