@@ -1,4 +1,11 @@
-import { $, component$, useSignal, useOnDocument } from '@builder.io/qwik';
+import {
+  $,
+  component$,
+  useSignal,
+  useOnDocument,
+  useOnWindow,
+  useVisibleTask$,
+} from '@builder.io/qwik';
 import Cell from '~/components/grid/cell';
 import { PlusCircleIcon } from 'qwik-feather-icons';
 import type { IndexLine, MultiIndexLine } from '~/@types/uecapabilityparser';
@@ -20,19 +27,49 @@ export default component$(({ data, searchId }: Props) => {
   const filteredData = useSignal<(IndexLine | MultiIndexLine)[]>(data);
   const total = data.length;
   const count = useSignal<number>(Math.min(total, 60));
-  const scrollHeight = useSignal<number>();
+  const scrollData = useSignal<{
+    scrollHeigth: number;
+    clientHeigth: number;
+    clientWidth: number;
+  }>();
+
+  const bumpCount = $((doc: Document) => {
+    const el = doc.scrollingElement;
+    if (el == null) return;
+
+    const newScrollData = {
+      scrollHeigth: el.scrollHeight,
+      clientHeigth: el.clientHeight,
+      clientWidth: el.clientWidth,
+    };
+
+    if (newScrollData == scrollData.value) return;
+
+    const scrollAbs = el.clientHeight + el.scrollTop;
+    const scrollRel = scrollAbs / el.scrollHeight;
+    if (scrollRel > 0.85) {
+      scrollData.value = newScrollData;
+      count.value = Math.min(total, count.value + 60);
+    }
+  });
+
   useOnDocument(
     'scroll',
     $((e) => {
-      const el = (e.target as Document)?.scrollingElement;
-      if (el == null || scrollHeight.value == el.scrollHeight) return;
+      const doc = e.target as Document;
+      bumpCount(doc);
+    }),
+  );
 
-      const scrollAbs = el.clientHeight + el.scrollTop;
-      const scrollRel = scrollAbs / el.scrollHeight;
-      if (scrollRel > 0.85) {
-        scrollHeight.value = el.scrollHeight;
-        count.value = Math.min(total, count.value + 60);
-      }
+  // eslint-disable-next-line qwik/no-use-visible-task
+  useVisibleTask$(() => {
+    bumpCount(document);
+  });
+
+  useOnWindow(
+    'resize',
+    $(() => {
+      bumpCount(document);
     }),
   );
 
