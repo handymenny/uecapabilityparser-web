@@ -15,7 +15,6 @@ interface Props {
   url?: string;
   Icon?: Component<IconProps>;
   inverted?: boolean;
-  hidden?: boolean;
 }
 
 export default component$((props: Props) => {
@@ -24,7 +23,6 @@ export default component$((props: Props) => {
   const invertedClass = inverted
     ? ' border-2 border-solid border-black bg-white text-black'
     : ' bg-black text-white';
-  const hiddenCssClass = props.hidden ? ' hidden' : '';
 
   const outputRef = useSignal<Element>();
 
@@ -72,8 +70,7 @@ export default component$((props: Props) => {
     <button
       class={
         'multiellipsis my-2 h-[150px] w-full overflow-hidden p-2 text-center text-lg focus:outline-none focus:ring focus:ring-gray-400' +
-        invertedClass +
-        hiddenCssClass
+        invertedClass
       }
       ref={outputRef}
       onClick$={() => nav(url)}

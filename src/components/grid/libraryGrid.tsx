@@ -17,8 +17,7 @@ export default component$(({ data, searchId }: Props) => {
     return `${path}?id=${item.id}`;
   };
 
-  const filteredData = useSignal<string[]>(data.map((x) => x.id));
-  const inFilter = (id: string) => filteredData.value.includes(id);
+  const filteredData = useSignal<(IndexLine | MultiIndexLine)[]>(data);
 
   return (
     <div class={'mx-auto w-full max-w-7xl'}>
@@ -28,11 +27,11 @@ export default component$(({ data, searchId }: Props) => {
         disabled={false}
         fuzzy={{ id: searchId, keys: ['description', 'timestamp'], data: data }}
         onKeyUp$={(value: string) => {
-          let res = null;
-          if (value.trim().length != 0) {
-            res = searchFuzzyLibrary(searchId, value);
+          if (value.trim().length == 0) {
+            filteredData.value = data;
+          } else {
+            filteredData.value = searchFuzzyLibrary(searchId, value) ?? data;
           }
-          filteredData.value = res ?? data.map((x) => x.id);
         }}
       />
       <div
@@ -46,13 +45,12 @@ export default component$(({ data, searchId }: Props) => {
           Icon={PlusCircleIcon}
           inverted={true}
         />
-        {data?.map((item) => (
+        {filteredData.value?.map((item) => (
           <Cell
             key={item.id}
             multilineLabel={item.description}
             label={new Date(item.timestamp).toLocaleString().replace(', ', ' ')}
             url={getUrl(item)}
-            hidden={!inFilter(item.id)}
           />
         ))}
       </div>
