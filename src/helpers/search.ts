@@ -23,5 +23,5 @@ export const initializeFuzzySearcher = (
 };
 
 export const searchFuzzyLibrary = (id: string, value: string) => {
-  return libraryFuzzer[id]?.(value).map((it) => it.item) ?? [];
+  return libraryFuzzer[id]?.(value).map((it) => it.item.id) ?? [];
 };
