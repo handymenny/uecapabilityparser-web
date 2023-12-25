@@ -7,7 +7,7 @@ import {
   $,
 } from '@builder.io/qwik';
 import { type IconProps } from 'qwik-feather-icons';
-import { useNavigate } from '@builder.io/qwik-city';
+import { Link } from '@builder.io/qwik-city';
 
 interface Props {
   label?: string;
@@ -19,7 +19,6 @@ interface Props {
 
 export default component$((props: Props) => {
   const { label, multilineLabel, url, Icon, inverted } = props;
-  const nav = useNavigate();
   const invertedClass = inverted
     ? ' border-2 border-solid border-black bg-white text-black'
     : ' bg-black text-white';
@@ -29,7 +28,7 @@ export default component$((props: Props) => {
   const truncateIfNeeded = $((reset: boolean) => {
     if (outputRef.value) {
       const el = outputRef.value;
-      const span = el.firstChild as HTMLSpanElement;
+      const span = el.querySelector('span') as HTMLSpanElement;
       if (span == null) return;
 
       if (reset && span.textContent !== multilineLabel) {
@@ -67,18 +66,20 @@ export default component$((props: Props) => {
   );
 
   return (
-    <button
+    <Link
       class={
-        'multiellipsis my-2 h-[150px] w-full overflow-hidden p-2 text-center text-lg focus:outline-none focus:ring focus:ring-gray-400' +
+        'multiellipsis my-2 flex h-[150px] w-full overflow-hidden p-2 text-center text-lg focus:outline-none focus:ring focus:ring-gray-400' +
         invertedClass
       }
       ref={outputRef}
-      onClick$={() => nav(url)}
+      href={url}
     >
-      <span>{multilineLabel}</span>
-      {multilineLabel && label && <br />}
-      <span>{label}</span>
-      {Icon !== undefined && <Icon class={'m-auto'} />}
-    </button>
+      <div class={'m-auto break-words'}>
+        <span>{multilineLabel}</span>
+        {multilineLabel && label && <br />}
+        <span>{label}</span>
+        {Icon !== undefined && <Icon class={'m-auto'} />}
+      </div>
+    </Link>
   );
 });

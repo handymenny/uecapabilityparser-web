@@ -10,3 +10,7 @@
   transition-duration: 300ms;
   scroll-behavior: smooth;
 }
+
+.break-words {
+  word-break: break-word;
+}
