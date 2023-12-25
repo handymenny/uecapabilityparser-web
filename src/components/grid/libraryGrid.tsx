@@ -11,6 +11,7 @@ import { PlusCircleIcon } from 'qwik-feather-icons';
 import type { IndexLine, MultiIndexLine } from '~/@types/uecapabilityparser';
 import Search from '../search/search';
 import { searchFuzzyLibrary } from '~/helpers/search';
+import { sleep } from '~/helpers/sleep';
 
 interface Props {
   data: (IndexLine | MultiIndexLine)[];
@@ -35,7 +36,7 @@ export default component$(({ data, searchId }: Props) => {
 
   const bumpCount = $((doc: Document) => {
     const el = doc.scrollingElement;
-    if (el == null) return;
+    if (el == null) return false;
 
     const newScrollData = {
       scrollHeigth: el.scrollHeight,
@@ -43,14 +44,16 @@ export default component$(({ data, searchId }: Props) => {
       clientWidth: el.clientWidth,
     };
 
-    if (newScrollData == scrollData.value) return;
+    if (newScrollData == scrollData.value) return false;
 
     const scrollAbs = el.clientHeight + el.scrollTop;
     const scrollRel = scrollAbs / el.scrollHeight;
-    if (scrollRel > 0.85) {
+    if (scrollRel > 0.85 && count.value < total) {
       scrollData.value = newScrollData;
       count.value = Math.min(total, count.value + 60);
+      return true;
     }
+    return false;
   });
 
   useOnDocument(
@@ -62,14 +65,18 @@ export default component$(({ data, searchId }: Props) => {
   );
 
   // eslint-disable-next-line qwik/no-use-visible-task
-  useVisibleTask$(() => {
-    bumpCount(document);
+  useVisibleTask$(async () => {
+    while (await bumpCount(document)) {
+      await sleep(200);
+    }
   });
 
   useOnWindow(
     'resize',
-    $(() => {
-      bumpCount(document);
+    $(async () => {
+      while (await bumpCount(document)) {
+        await sleep(200);
+      }
     }),
   );
 
