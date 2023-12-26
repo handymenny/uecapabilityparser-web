@@ -63,7 +63,7 @@ export default component$(
             totalPages={totalPages.value}
             siblingCount={1}
             // eslint-disable-next-line qwik/valid-lexical-scope
-            onPageChange$={(page: number) => {
+            onPageChange$={(page: any) => {
               onPageChange$(page);
               (document.activeElement as HTMLElement)?.blur();
             }}
