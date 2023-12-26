@@ -16,6 +16,7 @@ interface Props {
   selectedValue?: string;
   class?: string;
   selectClass?: string;
+  labelClass?: string;
 }
 
 export default component$((props: Props) => {
@@ -31,8 +32,14 @@ export default component$((props: Props) => {
         (hidden ? ' hidden' : '') +
         (props.class ? ` ${props.class}` : '')
       }
+      aria-hidden={hidden}
     >
-      <label for={id} aria-label={label} class="my-2">
+      <label
+        for={id}
+        aria-label={label}
+        aria-hidden={hidden}
+        class={'my-2' + props.labelClass ? ` ${props.labelClass}` : ''}
+      >
         {label}
       </label>
       <select

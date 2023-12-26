@@ -109,12 +109,12 @@ export default component$(({ capabilities, inputs }: Props) => {
           ))}
         </div>
         <div class="mx-auto w-full max-w-7xl overflow-x-auto">
-          <div class="w-full text-sm sm:w-fit sm:min-w-[32rem] md:min-w-[36rem]">
+          <div class="w-full text-sm sm:w-fit sm:min-w-[32rem] sm:max-w-full md:min-w-[36rem]">
             <MetadataTable cap={capabilities ?? undefined} title="Metadata" />
           </div>
         </div>
         <div class="mx-auto w-full max-w-7xl overflow-x-auto">
-          <div class="w-full text-sm sm:w-fit sm:min-w-[32rem] md:min-w-[36rem]">
+          <div class="w-full text-sm sm:w-fit sm:min-w-[32rem] sm:max-w-full md:min-w-[36rem]">
             <Other
               cap={capabilities ?? undefined}
               title="Generic Capabilities"
@@ -122,7 +122,7 @@ export default component$(({ capabilities, inputs }: Props) => {
           </div>
         </div>
         <div class="mx-auto w-full max-w-7xl overflow-x-auto">
-          <div class="w-full text-sm sm:w-fit sm:min-w-[32rem] md:min-w-[36rem]">
+          <div class="w-full text-sm sm:w-fit sm:min-w-[32rem] sm:max-w-full md:min-w-[36rem]">
             <Filters
               filters={capabilities?.ueCapFilters ?? undefined}
               title="Filters"
@@ -130,32 +130,32 @@ export default component$(({ capabilities, inputs }: Props) => {
           </div>
         </div>
         <div class="mx-auto w-full max-w-7xl overflow-x-auto">
-          <div class="w-full text-sm sm:w-fit sm:min-w-[32rem] md:min-w-[36rem]">
+          <div class="w-full text-sm sm:w-fit sm:min-w-[32rem] sm:max-w-full md:min-w-[36rem]">
             <LteBands bands={capabilities?.lteBands} title="LTE Bands" />
           </div>
         </div>
         <div class="mx-auto w-full max-w-7xl overflow-x-auto">
-          <div class="w-full text-sm sm:w-fit sm:min-w-[32rem] md:min-w-[36rem]">
+          <div class="w-full text-sm sm:w-fit sm:min-w-[32rem] sm:max-w-full md:min-w-[36rem]">
             <NrBands bands={capabilities?.nrBands} title="NR Bands" />
           </div>
         </div>
         <div class="mx-auto w-full max-w-7xl overflow-x-auto">
-          <div class="w-full text-sm sm:w-fit sm:min-w-[32rem] md:min-w-[36rem]">
+          <div class="w-full text-sm sm:w-fit sm:min-w-[32rem] sm:max-w-full md:min-w-[36rem]">
             <Lteca combos={capabilities?.lteca} title="LTE CA Combos" />
           </div>
         </div>
         <div class="mx-auto w-full max-w-7xl overflow-x-auto">
-          <div class="w-full text-sm sm:w-fit sm:min-w-[32rem] md:min-w-[36rem]">
+          <div class="w-full text-sm sm:w-fit sm:min-w-[32rem] sm:max-w-full md:min-w-[36rem]">
             <Endc combos={capabilities?.endc} title="EN-DC Combos" />
           </div>
         </div>
         <div class="mx-auto w-full max-w-7xl overflow-x-auto">
-          <div class="w-full text-sm sm:w-fit sm:min-w-[32rem] md:min-w-[36rem]">
+          <div class="w-full text-sm sm:w-fit sm:min-w-[32rem] sm:max-w-full md:min-w-[36rem]">
             <Nrca combos={capabilities?.nrca} title="NR CA Combos" />
           </div>
         </div>
         <div class="mx-auto w-full max-w-7xl overflow-x-auto">
-          <div class="w-full text-sm sm:w-fit sm:min-w-[32rem] md:min-w-[36rem]">
+          <div class="w-full text-sm sm:w-fit sm:min-w-[32rem] sm:max-w-full md:min-w-[36rem]">
             <Nrdc combos={capabilities?.nrdc} title="NR DC Combos" />
           </div>
         </div>

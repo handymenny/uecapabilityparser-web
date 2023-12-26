@@ -1,4 +1,5 @@
-import { component$ } from '@builder.io/qwik';
+import { component$, useSignal, useComputed$ } from '@builder.io/qwik';
+import Pagination from './pagination';
 interface Props {
   title?: string;
   headers: string[];
@@ -15,42 +16,73 @@ export default component$((props: Props) => {
   };
   const { title, headers, data, hideEmpty, noSpoiler } = props;
   const emptyColumns = hideEmpty ? getEmptyColumns() : [];
+  const combosPerPage = useSignal<number>(50);
+  const selectedPage = useSignal<number>(1);
+  const totalCombos = data[0].length;
+  const totalPages = useComputed$(() =>
+    Math.ceil(totalCombos / combosPerPage.value),
+  );
+
+  const range = useComputed$(() => {
+    const selPage = selectedPage.value;
+    const combPage = combosPerPage.value;
+    return {
+      start: (selPage - 1) * combPage,
+      end: Math.min(totalCombos, selPage * combPage),
+    };
+  });
 
   const table = (
-    <table class="w-full table-auto border-collapse border border-gray-500 text-left">
-      <thead>
-        <tr>
-          {headers.map(
-            (header, columnIndex) =>
-              !emptyColumns[columnIndex] && (
-                <th
-                  class="min-w-[5rem] border-collapse border border-gray-500 p-1.5"
-                  key={columnIndex}
-                >
-                  {header}
-                </th>
-              ),
-          )}
-        </tr>
-      </thead>
-      <tbody class="whitespace-pre align-text-top">
-        {data[0].map((_, rowIndex) => (
-          <tr key={rowIndex}>
-            {data.map(
-              (column, columnIndex) =>
+    <>
+      <Pagination
+        totalPages={totalPages}
+        selectedPage={selectedPage}
+        combosPerPage={combosPerPage}
+        onPageChange$={(page: number) => {
+          selectedPage.value = page;
+        }}
+        onCombosPerPageChange$={(combos: number) => {
+          combosPerPage.value = combos == -1 ? totalCombos : combos;
+          selectedPage.value = 1;
+        }}
+      />
+      <table class="w-full table-auto border-collapse border border-gray-500 text-left">
+        <thead>
+          <tr>
+            {headers.map(
+              (header, columnIndex) =>
                 !emptyColumns[columnIndex] && (
-                  <td
-                    class="border-collapse border border-gray-500 p-1.5"
-                    key={rowIndex + columnIndex}
+                  <th
+                    class="min-w-[5rem] border-collapse border border-gray-500 p-1.5"
+                    key={columnIndex}
                   >
-                    {column[rowIndex]}
-                  </td>
+                    {header}
+                  </th>
                 ),
             )}
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody class="whitespace-pre align-text-top">
+          {[...Array(range.value.end - range.value.start).keys()].map(
+            (rowIndex) => (
+              <tr key={rowIndex + range.value.start}>
+                {data.map(
+                  (column, columnIndex) =>
+                    !emptyColumns[columnIndex] && (
+                      <td
+                        class="border-collapse border border-gray-500 p-1.5"
+                        key={rowIndex + range.value.start + '-' + columnIndex}
+                      >
+                        {column[rowIndex + range.value.start]}
+                      </td>
+                    ),
+                )}
+              </tr>
+            ),
+          )}
+        </tbody>
+      </table>
+    </>
   );
 
   if (noSpoiler) {
