@@ -1,1 +1,0 @@
-import{h as a,C as l}from"./q-IyuWTi_T.js";const o=t=>{const s=t.addClasses??"";return a("h1",{class:"mb-2 text-center text-4xl font-semibold "+s},null,l(e=>e.text,[t]),3,"je_0")};export{o as s_P0Kj9G6vpFg};
