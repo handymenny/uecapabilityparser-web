@@ -13,15 +13,25 @@ interface Props {
   name?: string;
   disabled?: boolean;
   hidden?: boolean;
+  selectedValue?: string;
+  class?: string;
+  selectClass?: string;
 }
 
 export default component$((props: Props) => {
-  const { label, options, onInput$, name, disabled, hidden } = props;
+  const { label, options, onInput$, name, disabled, hidden, selectedValue } =
+    props;
   const randId = useId();
   const id = `text-input-${randId}`;
 
   return (
-    <div class={'relative flex flex-col' + (hidden ? ' hidden' : '')}>
+    <div
+      class={
+        'relative flex flex-col' +
+        (hidden ? ' hidden' : '') +
+        (props.class ? ` ${props.class}` : '')
+      }
+    >
       <label for={id} aria-label={label} class="my-2">
         {label}
       </label>
@@ -31,12 +41,19 @@ export default component$((props: Props) => {
           // eslint-disable-next-line qwik/valid-lexical-scope
           onInput$ && onInput$(currentTarget.value);
         }}
-        class="appearance-none border-2 border-solid border-gray-500 bg-white p-2 px-2.5 pr-[40px] focus:outline-none focus:ring focus:ring-gray-400 disabled:border-gray-500 disabled:bg-gray-300"
+        class={
+          'appearance-none border-2 border-solid border-gray-500 bg-white p-2 px-2.5 pr-[40px] focus:outline-none focus:ring focus:ring-gray-400 disabled:border-gray-500 disabled:bg-gray-300' +
+          (props.selectClass ? ` ${props.selectClass}` : '')
+        }
         name={name}
         disabled={disabled}
       >
         {options.map((option) => (
-          <option key={option.value} value={option.value}>
+          <option
+            key={option.value}
+            value={option.value}
+            selected={selectedValue == option.value ? true : undefined}
+          >
             {option.label}
           </option>
         ))}
@@ -45,7 +62,7 @@ export default component$((props: Props) => {
         size={28}
         strokeWidth={1.3}
         color={disabled ? 'rgb(106, 112, 129)' : undefined}
-        class="absolute bottom-[0.4em] right-[0.5em]"
+        class="pointer-events-none absolute bottom-[0.4em] right-[0.5em]"
       />
     </div>
   );
