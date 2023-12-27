@@ -15,10 +15,11 @@ interface Props {
   combos?: ComboLte[];
   title?: string;
   noSpoiler?: boolean;
+  noPagination?: boolean;
 }
 
 export default component$((props: Props) => {
-  const { combos, title, noSpoiler } = props;
+  const { combos, title, noSpoiler, noPagination } = props;
 
   if (combos === undefined || combos.length == 0) {
     return <></>;
@@ -57,7 +58,7 @@ export default component$((props: Props) => {
       headers={headers}
       data={data}
       noSpoiler={noSpoiler}
-      pagination={combos && combos.length > 25}
+      pagination={!noPagination && combos && combos.length > 25}
     />
   );
 });

@@ -38,7 +38,11 @@ export default component$(({ filter }: Props) => {
       filter.reducedIntNonContComb ? 'True' : undefined,
       filter.skipFallbackCombRequested ? 'True' : undefined,
       filter.diffFallbackCombList ? (
-        <Lteca noSpoiler={true} combos={filter.diffFallbackCombList} />
+        <Lteca
+          noPagination={true}
+          noSpoiler={true}
+          combos={filter.diffFallbackCombList}
+        />
       ) : undefined,
       filter.maxCCsDl?.toString(),
       filter.maxCCsUl?.toString(),
