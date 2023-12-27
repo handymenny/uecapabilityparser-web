@@ -324,9 +324,9 @@ function multiBwToFeatures(band: number, bw?: Bandwidth, bwClass?: string) {
 }
 
 const componentToDlStr = (component: Component) =>
-  `${component.band}${component.bwClassDl}`;
+  `<span class="font-semibold B${component.band}">${component.band}${component.bwClassDl}</span>`;
 const componentToUlStr = (component: Component) =>
-  `${component.band}${component.bwClassUl}`;
+  `<span class="font-semibold B${component.band}">${component.band}${component.bwClassUl}</span>`;
 
 function dlEquals(a: Component, b: Component, nr?: boolean) {
   return (

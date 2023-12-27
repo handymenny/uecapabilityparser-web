@@ -89,9 +89,10 @@ export default component$((props: Props) => {
                       <td
                         class="border-collapse border border-gray-500 p-1.5"
                         key={rowIndex + range.value.start + '-' + columnIndex}
-                      >
-                        {column[rowIndex + range.value.start]}
-                      </td>
+                        dangerouslySetInnerHTML={
+                          column[rowIndex + range.value.start]
+                        }
+                      />
                     ),
                 )}
               </tr>
