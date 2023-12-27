@@ -41,7 +41,7 @@ export default component$(({ filter }: Props) => {
         <Lteca
           noPagination={true}
           noSpoiler={true}
-          monochrome={true}
+          noSearch={true}
           combos={filter.diffFallbackCombList}
         />
       ) : undefined,

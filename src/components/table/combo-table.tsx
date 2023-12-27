@@ -1,4 +1,9 @@
-import { component$, useSignal, useComputed$ } from '@builder.io/qwik';
+import {
+  component$,
+  useSignal,
+  useComputed$,
+  useStore,
+} from '@builder.io/qwik';
 import Pagination from './pagination';
 import Button from '../inputs/button';
 interface Props {
@@ -9,6 +14,7 @@ interface Props {
   noSpoiler?: boolean;
   pagination?: boolean;
   coloredBands?: boolean;
+  noSearch?: boolean;
 }
 
 export default component$((props: Props) => {
@@ -17,7 +23,8 @@ export default component$((props: Props) => {
       col.every((cell) => cell === '' || cell === undefined),
     );
   };
-  const { title, headers, data, hideEmpty, noSpoiler, pagination } = props;
+  const { title, headers, data, hideEmpty, noSpoiler, pagination, noSearch } =
+    props;
   const emptyColumns = hideEmpty ? getEmptyColumns() : [];
   const combosPerPage = useSignal<number>(50);
   const selectedPage = useSignal<number>(1);
@@ -47,6 +54,28 @@ export default component$((props: Props) => {
 
   const monoChrome = useSignal<boolean>(props.coloredBands == false);
   const monoChromeCss = monoChrome.value ? ' monochrome-bands' : '';
+  const columnsIds = [...data.keys()];
+  const filters = useStore<string[]>(columnsIds.map(() => ''));
+
+  const validIds = useComputed$(() => {
+    const filterArray = filters;
+    const validIds = [...data[0].keys()].map((rowId) => {
+      const res = columnsIds.every((colId) => {
+        const valueToSearch = filterArray[colId];
+        if (valueToSearch == '') {
+          return true;
+        } else {
+          const value = data[colId][rowId].replace(
+            /(?:<span .*?>)|(?:<\/span>)|\s/g,
+            '',
+          );
+          return value.includes(valueToSearch);
+        }
+      });
+      if (res) return rowId;
+    });
+    return validIds.filter((it) => it !== undefined) as number[];
+  });
 
   const table = (
     <>
@@ -93,34 +122,43 @@ export default component$((props: Props) => {
               (header, columnIndex) =>
                 !emptyColumns[columnIndex] && (
                   <th
-                    class="min-w-[5rem] border-collapse border border-gray-500 p-1.5"
+                    class="min-w-[5rem] border-collapse border border-gray-500 p-1.5 align-bottom"
                     key={columnIndex}
                   >
                     {header}
+                    {!noSearch && (
+                      <input
+                        onKeyUp$={(_, ex) => {
+                          filters[columnIndex] = ex.value
+                            .replace(/\s/g, '')
+                            .toUpperCase()
+                            .trim();
+                        }}
+                        class="float-bottom mt-1 w-full appearance-none border border-solid border-gray-500 bg-white font-normal placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400"
+                      />
+                    )}
                   </th>
                 ),
             )}
           </tr>
         </thead>
         <tbody class="whitespace-pre align-text-top">
-          {[...Array(range.value.end - range.value.start).keys()].map(
-            (rowIndex) => (
-              <tr key={rowIndex + range.value.start}>
+          {validIds.value
+            .slice(range.value.start, range.value.end)
+            .map((rowIndex) => (
+              <tr key={rowIndex}>
                 {data.map(
                   (column, columnIndex) =>
                     !emptyColumns[columnIndex] && (
                       <td
                         class="border-collapse border border-gray-500 p-1.5"
-                        key={rowIndex + range.value.start + '-' + columnIndex}
-                        dangerouslySetInnerHTML={
-                          column[rowIndex + range.value.start]
-                        }
+                        key={rowIndex + '-' + columnIndex}
+                        dangerouslySetInnerHTML={column[rowIndex]}
                       />
                     ),
                 )}
               </tr>
-            ),
-          )}
+            ))}
         </tbody>
       </table>
     </>
