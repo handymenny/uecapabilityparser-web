@@ -16,12 +16,14 @@ export default component$((props: Props) => {
   };
   const { title, headers, data, hideEmpty, noSpoiler } = props;
   const emptyColumns = hideEmpty ? getEmptyColumns() : [];
-  const totalCombos = useComputed$(() => data[0].length);
   const combosPerPage = useSignal<number>(50);
   const selectedPage = useSignal<number>(1);
-  const totalPages = useComputed$(() =>
-    Math.max(1, Math.ceil(totalCombos.value / combosPerPage.value)),
-  );
+  const totalCombos = useComputed$(() => data[0].length);
+  const totalPages = useComputed$(() => {
+    const total = Math.max(1, Math.ceil(totalCombos.value / combosPerPage.value))
+    selectedPage.value = 1
+    return total
+  });
 
   const range = useComputed$(() => {
     const selPage = selectedPage.value;
@@ -29,7 +31,7 @@ export default component$((props: Props) => {
     const combPage =
       combosPerPage.value == -1 ? totalcomb : combosPerPage.value;
     return {
-      start: Math.max(0, (selPage - 1) * combPage),
+      start: Math.max(0, Math.min(totalcomb, (selPage - 1) * combPage)),
       end: Math.min(totalcomb, selPage * combPage),
     };
   });
@@ -41,7 +43,11 @@ export default component$((props: Props) => {
         selectedPage={selectedPage}
         combosPerPage={combosPerPage}
         onPageChange$={(page: number) => {
-          selectedPage.value = page;
+          if (page > 0 && page <= totalPages.value) {
+            selectedPage.value = page;
+          } else {
+            selectedPage.value = 1;
+          }
         }}
         onCombosPerPageChange$={(combos: number) => {
           combosPerPage.value = combos;
