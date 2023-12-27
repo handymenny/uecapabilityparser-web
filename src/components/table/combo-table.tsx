@@ -20,15 +20,16 @@ export default component$((props: Props) => {
   const combosPerPage = useSignal<number>(50);
   const selectedPage = useSignal<number>(1);
   const totalPages = useComputed$(() =>
-    Math.ceil(totalCombos.value / combosPerPage.value),
+    Math.max(1, Math.ceil(totalCombos.value / combosPerPage.value)),
   );
 
   const range = useComputed$(() => {
     const selPage = selectedPage.value;
-    const combPage = combosPerPage.value;
     const totalcomb = totalCombos.value;
+    const combPage =
+      combosPerPage.value == -1 ? totalcomb : combosPerPage.value;
     return {
-      start: (selPage - 1) * combPage,
+      start: Math.max(0, (selPage - 1) * combPage),
       end: Math.min(totalcomb, selPage * combPage),
     };
   });
@@ -43,7 +44,7 @@ export default component$((props: Props) => {
           selectedPage.value = page;
         }}
         onCombosPerPageChange$={(combos: number) => {
-          combosPerPage.value = combos == -1 ? totalCombos.value : combos;
+          combosPerPage.value = combos;
           selectedPage.value = 1;
         }}
       />
