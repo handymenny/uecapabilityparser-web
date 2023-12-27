@@ -7,6 +7,7 @@ interface Props {
   hideEmpty: boolean;
   noSpoiler?: boolean;
   pagination?: boolean;
+  monochrome?: boolean;
 }
 
 export default component$((props: Props) => {
@@ -15,7 +16,8 @@ export default component$((props: Props) => {
       col.every((cell) => cell === '' || cell === undefined),
     );
   };
-  const { title, headers, data, hideEmpty, noSpoiler, pagination } = props;
+  const { title, headers, data, hideEmpty, noSpoiler, pagination, monochrome } =
+    props;
   const emptyColumns = hideEmpty ? getEmptyColumns() : [];
   const combosPerPage = useSignal<number>(50);
   const selectedPage = useSignal<number>(1);
@@ -43,6 +45,8 @@ export default component$((props: Props) => {
     };
   });
 
+  const monoChromeCss = monochrome ? ' monochrome-bands' : '';
+
   const table = (
     <>
       {pagination && (
@@ -63,7 +67,12 @@ export default component$((props: Props) => {
           }}
         />
       )}
-      <table class="w-full table-auto border-collapse border border-gray-500 text-left">
+      <table
+        class={
+          'w-full table-auto border-collapse border border-gray-500 text-left' +
+          monoChromeCss
+        }
+      >
         <thead>
           <tr>
             {headers.map(

@@ -1,3 +1,8 @@
+.monochrome-bands span {
+  color: black !important;
+  font-weight: 400 !important;
+}
+
 .B1 {
   /* don't edit */
   color: #ee8700;
