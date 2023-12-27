@@ -16,11 +16,11 @@ interface Props {
   title?: string;
   noSpoiler?: boolean;
   noPagination?: boolean;
-  monochrome?: boolean;
+  coloredBands?: boolean;
 }
 
 export default component$((props: Props) => {
-  const { combos, title, noSpoiler, noPagination, monochrome } = props;
+  const { combos, title, noSpoiler, noPagination, coloredBands } = props;
 
   if (combos === undefined || combos.length == 0) {
     return <></>;
@@ -60,7 +60,7 @@ export default component$((props: Props) => {
       data={data}
       noSpoiler={noSpoiler}
       pagination={!noPagination && combos && combos.length > 25}
-      monochrome={monochrome}
+      coloredBands={coloredBands}
     />
   );
 });

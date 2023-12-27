@@ -8,7 +8,7 @@ interface Props {
   hideEmpty: boolean;
   noSpoiler?: boolean;
   pagination?: boolean;
-  monochrome?: boolean;
+  coloredBands?: boolean;
 }
 
 export default component$((props: Props) => {
@@ -45,13 +45,13 @@ export default component$((props: Props) => {
     };
   });
 
-  const monoChrome = useSignal<boolean>(props.monochrome == true);
+  const monoChrome = useSignal<boolean>(props.coloredBands == false);
   const monoChromeCss = monoChrome.value ? ' monochrome-bands' : '';
 
   const table = (
     <>
       <div class="flex max-w-full flex-wrap justify-around gap-x-5 sm:justify-between">
-        {!props.monochrome && (
+        {props.coloredBands && (
           <div class={'min-w-full px-2 lg:min-w-52' + monoChromeCss}>
             <Button
               type="button"

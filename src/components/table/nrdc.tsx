@@ -84,6 +84,7 @@ export default component$((props: Props) => {
       headers={headers}
       data={data}
       pagination={combos && combos.length > 25}
+      coloredBands={true}
     />
   );
 });

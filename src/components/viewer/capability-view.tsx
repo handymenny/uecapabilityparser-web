@@ -141,7 +141,11 @@ export default component$(({ capabilities, inputs }: Props) => {
         </div>
         <div class="mx-auto w-full max-w-7xl overflow-x-auto">
           <div class="w-full text-sm sm:w-fit sm:min-w-[32rem] sm:max-w-full md:min-w-[36rem]">
-            <Lteca combos={capabilities?.lteca} title="LTE CA Combos" />
+            <Lteca
+              combos={capabilities?.lteca}
+              coloredBands={true}
+              title="LTE CA Combos"
+            />
           </div>
         </div>
         <div class="mx-auto w-full max-w-7xl overflow-x-auto">
