@@ -26,9 +26,33 @@ export default component$((props: Props) => {
   const { title, headers, data, hideEmpty, noSpoiler, pagination, noSearch } =
     props;
   const emptyColumns = hideEmpty ? getEmptyColumns() : [];
+
+  const columnsIds = [...data.keys()];
+  const filters = useStore<string[]>(columnsIds.map(() => ''));
+  const validIds = useComputed$(() => {
+    const filterArray = filters;
+    const validIds = [...data[0].keys()].map((rowId) => {
+      const res = columnsIds.every((colId) => {
+        const valueToSearch = filterArray[colId];
+        if (valueToSearch == '') {
+          return true;
+        } else {
+          const value = data[colId][rowId].replace(
+            /(?:<span .*?>)|(?:<\/span>)|\s/g,
+            '',
+          );
+          return value.includes(valueToSearch);
+        }
+      });
+      if (res) return rowId;
+    });
+    return validIds.filter((it) => it !== undefined) as number[];
+  });
+
+  const totalCombos = useComputed$(() => validIds.value.length);
   const combosPerPage = useSignal<number>(50);
   const selectedPage = useSignal<number>(1);
-  const totalCombos = useComputed$(() => data[0].length);
+
   const totalPages = useComputed$(() => {
     const total = Math.max(
       1,
@@ -54,28 +78,6 @@ export default component$((props: Props) => {
 
   const monoChrome = useSignal<boolean>(props.coloredBands == false);
   const monoChromeCss = monoChrome.value ? ' monochrome-bands' : '';
-  const columnsIds = [...data.keys()];
-  const filters = useStore<string[]>(columnsIds.map(() => ''));
-
-  const validIds = useComputed$(() => {
-    const filterArray = filters;
-    const validIds = [...data[0].keys()].map((rowId) => {
-      const res = columnsIds.every((colId) => {
-        const valueToSearch = filterArray[colId];
-        if (valueToSearch == '') {
-          return true;
-        } else {
-          const value = data[colId][rowId].replace(
-            /(?:<span .*?>)|(?:<\/span>)|\s/g,
-            '',
-          );
-          return value.includes(valueToSearch);
-        }
-      });
-      if (res) return rowId;
-    });
-    return validIds.filter((it) => it !== undefined) as number[];
-  });
 
   const table = (
     <>
