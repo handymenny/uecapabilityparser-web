@@ -35,11 +35,13 @@ export default component$(
     const hideNext = useComputed$(() => selectedPage.value == totalPages.value);
 
     return (
-      <div class={'flex max-w-full flex-wrap justify-between'}>
-        <div class={'my-2 mr-5'}>
-          <span class="block text-center text-base sm:inline sm:text-left">
-            Combos/Page
-          </span>
+      <div
+        class={
+          'flex max-w-full flex-wrap justify-around gap-x-5 sm:justify-between'
+        }
+      >
+        <div class={'my-2'}>
+          <span class="block text-center text-base sm:inline">Combos/Page</span>
           <SelectInput
             class="!inline-flex !flex-row-reverse py-1 align-middle sm:ml-4 sm:py-0"
             selectClass={'!border-black'}
