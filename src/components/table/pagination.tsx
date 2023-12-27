@@ -35,11 +35,7 @@ export default component$(
     const hideNext = useComputed$(() => selectedPage.value == totalPages.value);
 
     return (
-      <div
-        class={
-          'flex max-w-full flex-wrap justify-around gap-x-5 sm:justify-between'
-        }
-      >
+      <>
         <div class={'my-2'}>
           <span class="block text-center text-base sm:inline">Combos/Page</span>
           <SelectInput
@@ -97,7 +93,7 @@ export default component$(
             />
           </Pagination>
         </div>
-      </div>
+      </>
     );
   },
 );

@@ -1,5 +1,6 @@
 import { component$, useSignal, useComputed$ } from '@builder.io/qwik';
 import Pagination from './pagination';
+import Button from '../inputs/button';
 interface Props {
   title?: string;
   headers: string[];
@@ -16,8 +17,7 @@ export default component$((props: Props) => {
       col.every((cell) => cell === '' || cell === undefined),
     );
   };
-  const { title, headers, data, hideEmpty, noSpoiler, pagination, monochrome } =
-    props;
+  const { title, headers, data, hideEmpty, noSpoiler, pagination } = props;
   const emptyColumns = hideEmpty ? getEmptyColumns() : [];
   const combosPerPage = useSignal<number>(50);
   const selectedPage = useSignal<number>(1);
@@ -45,28 +45,42 @@ export default component$((props: Props) => {
     };
   });
 
-  const monoChromeCss = monochrome ? ' monochrome-bands' : '';
+  const monoChrome = useSignal<boolean>(props.monochrome == true);
+  const monoChromeCss = monoChrome.value ? ' monochrome-bands' : '';
 
   const table = (
     <>
-      {pagination && (
-        <Pagination
-          totalPages={totalPages}
-          selectedPage={selectedPage}
-          combosPerPage={combosPerPage}
-          onPageChange$={(page: number) => {
-            if (page > 0 && page <= totalPages.value) {
-              selectedPage.value = page;
-            } else {
+      <div class="flex max-w-full flex-wrap justify-around gap-x-5 sm:justify-between">
+        {!props.monochrome && (
+          <div class={'min-w-full px-2 lg:min-w-52' + monoChromeCss}>
+            <Button
+              type="button"
+              label={monoChrome.value ? 'Colored bands' : 'Monochrome bands'}
+              onClick$={() => {
+                monoChrome.value = !monoChrome.value;
+              }}
+            />
+          </div>
+        )}
+        {pagination && (
+          <Pagination
+            totalPages={totalPages}
+            selectedPage={selectedPage}
+            combosPerPage={combosPerPage}
+            onPageChange$={(page: number) => {
+              if (page > 0 && page <= totalPages.value) {
+                selectedPage.value = page;
+              } else {
+                selectedPage.value = 1;
+              }
+            }}
+            onCombosPerPageChange$={(combos: number) => {
+              combosPerPage.value = combos;
               selectedPage.value = 1;
-            }
-          }}
-          onCombosPerPageChange$={(combos: number) => {
-            combosPerPage.value = combos;
-            selectedPage.value = 1;
-          }}
-        />
-      )}
+            }}
+          />
+        )}
+      </div>
       <table
         class={
           'w-full table-auto border-collapse border border-gray-500 text-left' +

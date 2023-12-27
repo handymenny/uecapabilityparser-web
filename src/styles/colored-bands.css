@@ -3,6 +3,10 @@
   font-weight: 400 !important;
 }
 
+.monochrome-bands button {
+  background: #ee8700 !important;
+}
+
 .B1 {
   /* don't edit */
   color: #ee8700;
