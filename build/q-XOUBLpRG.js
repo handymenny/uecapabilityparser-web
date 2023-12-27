@@ -1,0 +1,7 @@
+import{s as _,P as s,g as r,_ as o,h as n,L as c,K as a,f as i,v as p}from"./q-HklCxkIg.js";import{C as u}from"./q-CZVzQPE4.js";import{u as d}from"./q-Q-kDXvYf.js";import{S as f}from"./q-Lp-DeKxu.js";import"./q-ZppFbWGL.js";const m=()=>{const e=d();return _(r(()=>o(()=>Promise.resolve().then(()=>l),void 0),"s_zqpXT8B27s0",[r(()=>o(()=>Promise.resolve().then(()=>l),void 0),"s_9gTfUp8Cz2U",[e])]),{strategy:"document-ready"}),s(c,{children:[n("h1",null,{class:"mb-2 text-center text-4xl font-semibold opacity-0"},"Loading...",3,null),n("div",null,{class:"flex flex-1 flex-col"},s(u,{centered:!0,[a]:{centered:a}},3,"H1_0"),1,null)]},1,"H1_1")},g=async()=>{const[e]=i();try{const t=await f.isStoreSuported();e(t?"/library":"/parser")}catch(t){console.error(t),e("/parser")}},v=()=>{const[e]=i();e()},l=Object.freeze(Object.defineProperty({__proto__:null,_hW:p,s_9gTfUp8Cz2U:g,s_xYL1qOwPyDI:m,s_zqpXT8B27s0:v},Symbol.toStringTag,{value:"Module"}));export{p as _hW,g as s_9gTfUp8Cz2U,m as s_xYL1qOwPyDI,v as s_zqpXT8B27s0};
+function __vite__mapDeps(indexes) {
+  if (!__vite__mapDeps.viteFileDeps) {
+    __vite__mapDeps.viteFileDeps = []
+  }
+  return indexes.map((i) => __vite__mapDeps.viteFileDeps[i])
+}
