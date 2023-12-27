@@ -1,3 +1,5 @@
+@import url('styles/custom.css');
+
 /**
  * Tailwind CSS imports
  * View the full documentation at https://tailwindcss.com
@@ -5,12 +7,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-* {
-  transition-duration: 300ms;
-  scroll-behavior: smooth;
-}
-
-.break-words {
-  word-break: break-word;
-}
