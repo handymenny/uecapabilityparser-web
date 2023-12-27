@@ -80,6 +80,12 @@ export default component$((props: Props) => {
   );
 
   return (
-    <ComboTable title={title} hideEmpty={true} headers={headers} data={data} />
+    <ComboTable
+      title={title}
+      hideEmpty={true}
+      headers={headers}
+      data={data}
+      pagination={combos && combos.length > 25}
+    />
   );
 });

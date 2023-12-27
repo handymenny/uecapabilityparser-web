@@ -57,6 +57,7 @@ export default component$((props: Props) => {
       headers={headers}
       data={data}
       noSpoiler={noSpoiler}
+      pagination={combos && combos.length > 25}
     />
   );
 });

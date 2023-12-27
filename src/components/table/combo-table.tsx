@@ -6,6 +6,7 @@ interface Props {
   data: string[][];
   hideEmpty: boolean;
   noSpoiler?: boolean;
+  pagination?: boolean;
 }
 
 export default component$((props: Props) => {
@@ -14,22 +15,28 @@ export default component$((props: Props) => {
       col.every((cell) => cell === '' || cell === undefined),
     );
   };
-  const { title, headers, data, hideEmpty, noSpoiler } = props;
+  const { title, headers, data, hideEmpty, noSpoiler, pagination } = props;
   const emptyColumns = hideEmpty ? getEmptyColumns() : [];
   const combosPerPage = useSignal<number>(50);
   const selectedPage = useSignal<number>(1);
   const totalCombos = useComputed$(() => data[0].length);
   const totalPages = useComputed$(() => {
-    const total = Math.max(1, Math.ceil(totalCombos.value / combosPerPage.value))
-    selectedPage.value = 1
-    return total
+    const total = Math.max(
+      1,
+      Math.ceil(totalCombos.value / combosPerPage.value),
+    );
+    selectedPage.value = 1;
+    return total;
   });
 
   const range = useComputed$(() => {
     const selPage = selectedPage.value;
     const totalcomb = totalCombos.value;
     const combPage =
-      combosPerPage.value == -1 ? totalcomb : combosPerPage.value;
+      !pagination || combosPerPage.value == -1
+        ? totalcomb
+        : combosPerPage.value;
+
     return {
       start: Math.max(0, Math.min(totalcomb, (selPage - 1) * combPage)),
       end: Math.min(totalcomb, selPage * combPage),
@@ -38,22 +45,24 @@ export default component$((props: Props) => {
 
   const table = (
     <>
-      <Pagination
-        totalPages={totalPages}
-        selectedPage={selectedPage}
-        combosPerPage={combosPerPage}
-        onPageChange$={(page: number) => {
-          if (page > 0 && page <= totalPages.value) {
-            selectedPage.value = page;
-          } else {
+      {pagination && (
+        <Pagination
+          totalPages={totalPages}
+          selectedPage={selectedPage}
+          combosPerPage={combosPerPage}
+          onPageChange$={(page: number) => {
+            if (page > 0 && page <= totalPages.value) {
+              selectedPage.value = page;
+            } else {
+              selectedPage.value = 1;
+            }
+          }}
+          onCombosPerPageChange$={(combos: number) => {
+            combosPerPage.value = combos;
             selectedPage.value = 1;
-          }
-        }}
-        onCombosPerPageChange$={(combos: number) => {
-          combosPerPage.value = combos;
-          selectedPage.value = 1;
-        }}
-      />
+          }}
+        />
+      )}
       <table class="w-full table-auto border-collapse border border-gray-500 text-left">
         <thead>
           <tr>
