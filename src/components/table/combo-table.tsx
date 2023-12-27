@@ -16,19 +16,20 @@ export default component$((props: Props) => {
   };
   const { title, headers, data, hideEmpty, noSpoiler } = props;
   const emptyColumns = hideEmpty ? getEmptyColumns() : [];
+  const totalCombos = useComputed$(() => data[0].length);
   const combosPerPage = useSignal<number>(50);
   const selectedPage = useSignal<number>(1);
-  const totalCombos = data[0].length;
   const totalPages = useComputed$(() =>
-    Math.ceil(totalCombos / combosPerPage.value),
+    Math.ceil(totalCombos.value / combosPerPage.value),
   );
 
   const range = useComputed$(() => {
     const selPage = selectedPage.value;
     const combPage = combosPerPage.value;
+    const totalcomb = totalCombos.value;
     return {
       start: (selPage - 1) * combPage,
-      end: Math.min(totalCombos, selPage * combPage),
+      end: Math.min(totalcomb, selPage * combPage),
     };
   });
 
@@ -42,7 +43,7 @@ export default component$((props: Props) => {
           selectedPage.value = page;
         }}
         onCombosPerPageChange$={(combos: number) => {
-          combosPerPage.value = combos == -1 ? totalCombos : combos;
+          combosPerPage.value = combos == -1 ? totalCombos.value : combos;
           selectedPage.value = 1;
         }}
       />
