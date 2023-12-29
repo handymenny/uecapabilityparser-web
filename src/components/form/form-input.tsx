@@ -19,26 +19,26 @@ export default component$((props: Props) => {
   const defaultType = 'H';
   const type = useSignal(defaultType);
   let options = [
-    { label: 'UE Capability Information Hex Dump', value: 'H' },
-    { label: 'Wireshark UE Capability Information', value: 'W' },
-    { label: 'NSG UE Capability Information', value: 'N' },
-    { label: 'LTE Carrier policy', value: 'C' },
-    { label: 'NR Cap Prune', value: 'CNR' },
+    { label: 'UE Capability Info hexdump', value: 'H' },
+    { label: 'UE Capability Info from Wireshark', value: 'W' },
+    { label: 'UE Capability Info from Qtrun NSG/Airscreen', value: 'N' },
+    { label: 'UE Capability Info from Osix', value: 'O' },
+    { label: 'UE Capability Info from Qualcomm Tools', value: 'QC' },
+    { label: 'UE Capability Info from TEMS', value: 'T' },
+    { label: '0xB0CD - LTE RRC Supported CA Combos hexdump', value: 'QLTE' },
+    { label: '0xB826 - NR5G RRC Supported CA Combos hexdump', value: 'QNR' },
+    { label: '0xB0CD - LTE RRC Supported CA Combos (text)', value: 'Q' },
+    { label: 'Qct Modem Capabilities (LTE CA Combos)', value: 'RF' },
+    { label: 'Qualcomm LTE Carrier policy', value: 'C' },
+    { label: 'Qualcomm NR Cap Prune', value: 'CNR' },
     { label: '28874 nvitem binary', value: 'E' },
-    { label: '0xB0CD (LTE RRC Supported CA Combos)', value: 'Q' },
-    { label: '0xB0CD (LTE RRC Supported CA Combos) hexdump', value: 'QLTE' },
-    { label: '0xB826 (NR5G RRC Supported CA Combos) hexdump', value: 'QNR' },
-    { label: 'Mediatek CA_COMB_INFO as text', value: 'M' },
-    { label: 'Osix UE Capability Information', value: 'O' },
-    { label: 'Qcat UE Capability Information', value: 'QC' },
-    { label: 'Tems UE Capability Information', value: 'T' },
-    { label: 'Qct Modem Capabilities', value: 'RF' },
+    { label: 'Mediatek CA_COMB_INFO (text)', value: 'M' },
     { label: 'Shannon NR UE cap config', value: 'SHNR' },
-    { label: 'PCAP', value: 'P' },
     { label: 'DLF Baseband Log', value: 'DLF' },
     { label: 'QMDL Baseband Log', value: 'QMDL' },
     { label: 'HDF Baseband Log', value: 'HDF' },
     { label: 'SDM Baseband Log', value: 'SDM' },
+    { label: 'PCAP', value: 'P' }
   ];
 
   const supLogs = props.supportedLogs ?? [];
