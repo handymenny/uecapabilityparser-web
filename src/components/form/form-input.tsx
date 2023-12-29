@@ -31,6 +31,7 @@ export default component$((props: Props) => {
     { label: 'Mediatek CA_COMB_INFO as text', value: 'M' },
     { label: 'Osix UE Capability Information', value: 'O' },
     { label: 'Qcat UE Capability Information', value: 'QC' },
+    { label: 'Tems UE Capability Information', value: 'T' },
     { label: 'Qct Modem Capabilities', value: 'RF' },
     { label: 'Shannon NR UE cap config', value: 'SHNR' },
     { label: 'PCAP', value: 'P' },
