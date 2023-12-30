@@ -35,6 +35,7 @@ export enum LogType {
   O = 'O',
   QC = 'QC',
   T = 'T',
+  A = 'A',
   RF = 'RF',
   SHNR = 'SHNR',
   P = 'P',

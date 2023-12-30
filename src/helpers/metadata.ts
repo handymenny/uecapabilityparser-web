@@ -26,6 +26,8 @@ export function logTypeToString(type: string) {
       return 'QCAT UE Capability';
     case 'T':
       return 'Tems UE Capability';
+    case 'A':
+      return 'Amarisoft UE Capability';
     case 'RF':
       return 'QCT Modem Capabilities';
     case 'SHNR':

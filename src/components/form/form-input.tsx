@@ -25,6 +25,7 @@ export default component$((props: Props) => {
     { label: 'UE Capability Info from Osix', value: 'O' },
     { label: 'UE Capability Info from Qualcomm Tools', value: 'QC' },
     { label: 'UE Capability Info from TEMS', value: 'T' },
+    { label: 'UE Capability Info from Amarisoft', value: 'A' },
     { label: '0xB0CD - LTE RRC Supported CA Combos hexdump', value: 'QLTE' },
     { label: '0xB826 - NR5G RRC Supported CA Combos hexdump', value: 'QNR' },
     { label: '0xB0CD - LTE RRC Supported CA Combos (text)', value: 'Q' },
@@ -38,7 +39,7 @@ export default component$((props: Props) => {
     { label: 'QMDL Baseband Log', value: 'QMDL' },
     { label: 'HDF Baseband Log', value: 'HDF' },
     { label: 'SDM Baseband Log', value: 'SDM' },
-    { label: 'PCAP', value: 'P' }
+    { label: 'PCAP', value: 'P' },
   ];
 
   const supLogs = props.supportedLogs ?? [];
