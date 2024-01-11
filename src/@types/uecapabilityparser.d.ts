@@ -326,11 +326,12 @@ export interface LibraryIndex {
 export interface IndexLine {
   id: string;
   timestamp: number;
-  description: string;
-  inputs: string[];
+  description?: string;
+  inputs?: string[];
   compressed?: boolean;
   defaultNR?: boolean;
   parserVersion: string;
+  metadata?: { [key: string]: string } | null;
 }
 
 export interface MultiIndexLine {
@@ -414,4 +415,195 @@ export interface RequestMultiPart {
   type: LogType;
   subTypes?: string[];
   description?: string;
+}
+
+export interface Query {
+  criteriaList: Criteria[];
+}
+
+export type Criteria =
+  | Criteria.bands
+  | Criteria.combos
+  | Criteria.number
+  | Criteria.string
+  | Criteria.strings;
+
+export namespace Criteria {
+  export enum Type {
+    bands = 'bands',
+    combos = 'combos',
+    number = 'number',
+    string = 'string',
+    strings = 'strings',
+  }
+
+  export interface bands {
+    type: Criteria.Type.bands;
+    field: FieldBandsDetails;
+    comparator: Comparator;
+    value?: IBandDetailsValue[] | null;
+  }
+
+  export interface combos {
+    type: Criteria.Type.combos;
+    field: FieldCombos;
+    comparator: Comparator;
+    value?: IComboValue[] | null;
+  }
+
+  export interface number {
+    type: Criteria.Type.number;
+    field: FieldNumber;
+    comparator: Comparator;
+    value: number;
+  }
+
+  export interface string {
+    type: Criteria.Type.string;
+    field: FieldString;
+    comparator: Comparator;
+    value: string;
+  }
+
+  export interface strings {
+    type: Criteria.Type.strings;
+    field: FieldStrings;
+    comparator: Comparator;
+    value?: string[] | null;
+  }
+}
+
+export enum FieldBandsDetails {
+  LTE_BANDS = 'LTE_BANDS',
+  NR_BANDS = 'NR_BANDS',
+}
+
+export enum Comparator {
+  EQUALS = 'EQUALS',
+  NOT_EQUALS = 'NOT_EQUALS',
+  GREATER = 'GREATER',
+  LESS = 'LESS',
+  CONTAINS = 'CONTAINS',
+  NOT_CONTAINS = 'NOT_CONTAINS',
+  IS_EMPTY = 'IS_EMPTY',
+  IS_NOT_EMPTY = 'IS_NOT_EMPTY',
+  HAS_ANY = 'HAS_ANY',
+  HAS_ALL = 'HAS_ALL',
+  HAS_NONE = 'HAS_NONE',
+}
+
+export enum FieldCombos {
+  LTE_COMBOS = 'LTE_COMBOS',
+  NR_COMBOS = 'NR_COMBOS',
+  ENDC_COMBOS = 'ENDC_COMBOS',
+  NRDC_COMBOS = 'NRDC_COMBOS',
+}
+
+export enum FieldNumber {
+  LTE_CATEGORY_DL = 'LTE_CATEGORY_DL',
+  LTE_CATEGORY_UL = 'LTE_CATEGORY_UL',
+  TIMESTAMP = 'TIMESTAMP',
+}
+
+export enum FieldString {
+  DESCRIPTION = 'DESCRIPTION',
+  LOG_TYPE = 'LOG_TYPE',
+}
+
+export enum FieldStrings {
+  NSA_BANDS = 'NSA_BANDS',
+  SA_BANDS = 'SA_BANDS',
+  LTE_ALT_TBS_IND = 'LTE_ALT_TBS_IND',
+}
+
+export type IBandDetailsValue = IBandDetailsValue.lte | IBandDetailsValue.nr;
+
+export namespace IBandDetailsValue {
+  export enum Type {
+    lte = 'lte',
+    nr = 'nr',
+  }
+
+  export interface lte {
+    type: IBandDetailsValue.Type.lte;
+    band: number;
+    minMimoDl?: number;
+    minPowerClass?: PowerClass;
+  }
+
+  export interface nr {
+    type: IBandDetailsValue.Type.nr;
+    band: number;
+    minMimoDl?: number;
+    minMimoUl?: number;
+    minPowerClass?: PowerClass;
+    supportedBw?: number;
+  }
+}
+
+export type IComboValue = IComboValue.mrdc | IComboValue.simple;
+
+export namespace IComboValue {
+  export enum Type {
+    mrdc = 'mrdc',
+    simple = 'simple',
+  }
+
+  export interface mrdc {
+    type: IComboValue.Type.mrdc;
+    dlMaster: IComponentValue[];
+    ulMaster: IComponentValue[];
+    dlSecondary: IComponentValue[];
+    ulSecondary: IComponentValue[];
+  }
+
+  export interface simple {
+    type: IComboValue.Type.simple;
+    dl: IComponentValue[];
+    ul: IComponentValue[];
+  }
+}
+
+export type IComponentValue =
+  | IComponentValue.lteDl
+  | IComponentValue.lteUl
+  | IComponentValue.nrDl
+  | IComponentValue.nrUl;
+
+export namespace IComponentValue {
+  export enum Type {
+    lteDl = 'lteDl',
+    lteUl = 'lteUl',
+    nrDl = 'nrDl',
+    nrUl = 'nrUl',
+  }
+
+  export interface lteDl {
+    type: IComponentValue.Type.lteDl;
+    band: number;
+    minBwClass?: BwClass;
+    minMimo?: number;
+  }
+
+  export interface lteUl {
+    type: IComponentValue.Type.lteUl;
+    band: number;
+    minBwClass?: BwClass;
+  }
+
+  export interface nrDl {
+    type: IComponentValue.Type.nrDl;
+    band: number;
+    minBwClass?: BwClass;
+    minMimo?: number;
+    minMaxBwPerCC?: number;
+  }
+
+  export interface nrUl {
+    type: IComponentValue.Type.nrUl;
+    band: number;
+    minBwClass?: BwClass;
+    minMimo?: number;
+    minMaxBwPerCC?: number;
+  }
 }
