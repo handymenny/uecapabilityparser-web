@@ -16,9 +16,10 @@ import { sleep } from '~/helpers/sleep';
 interface Props {
   data: (IndexLine | MultiIndexLine)[];
   searchId: string;
+  hideAddNew?: boolean;
 }
 
-export default component$(({ data, searchId }: Props) => {
+export default component$(({ data, searchId, hideAddNew }: Props) => {
   const getUrl = (item: MultiIndexLine | IndexLine) => {
     const multi = (item as MultiIndexLine).indexLineIds != null;
     const path = multi ? '/view/multi/' : '/view/';
@@ -100,12 +101,14 @@ export default component$(({ data, searchId }: Props) => {
           'grid grid-cols-2 gap-x-5 gap-y-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'
         }
       >
-        <Cell
-          label={'Add New'}
-          url={'/parser'}
-          Icon={PlusCircleIcon}
-          inverted={true}
-        />
+        {hideAddNew == true || (
+          <Cell
+            label={'Add New'}
+            url={'/parser'}
+            Icon={PlusCircleIcon}
+            inverted={true}
+          />
+        )}
         {filteredData.value
           .slice(0, count.value)
           ?.map((item) => (
