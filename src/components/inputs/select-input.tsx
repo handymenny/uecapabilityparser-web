@@ -38,7 +38,7 @@ export default component$((props: Props) => {
         for={id}
         aria-label={label}
         aria-hidden={hidden}
-        class={'my-2' + props.labelClass ? ` ${props.labelClass}` : ''}
+        class={'my-2' + (props.labelClass ? ` ${props.labelClass}` : '')}
       >
         {label}
       </label>
