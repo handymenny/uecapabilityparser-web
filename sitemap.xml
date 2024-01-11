@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url><loc>http://localhost/</loc></url>
-<url><loc>http://localhost/view/multi/</loc></url>
 <url><loc>http://localhost/library/</loc></url>
 <url><loc>http://localhost/parser/</loc></url>
 <url><loc>http://localhost/view/</loc></url>
+<url><loc>http://localhost/view/multi/</loc></url>
+<url><loc>http://localhost/library/advancedsearch/</loc></url>
 </urlset>
