@@ -14,7 +14,8 @@ import MulticapabilityView from '~/components/viewer/multicapability-view';
 import CircleSpinner from '~/components/spinner/circle-spinner';
 import Title from '~/components/header/title';
 import { Endpoints } from '~/helpers/endpoints';
-import { AlertException } from '~/helpers/alert';
+import { AlertException, markdownToHtml } from '~/helpers/alert';
+import Alert from '~/components/modal/alert';
 
 export default component$(() => {
   const location = useLocation();
@@ -53,6 +54,8 @@ export default component$(() => {
   );
 
   const spinner = <CircleSpinner centered={true} />;
+  const showAlert = useSignal<boolean>(false);
+  const alertMessage = useSignal<string>('');
 
   return (
     <>
@@ -73,7 +76,15 @@ export default component$(() => {
               );
             }
           }}
+          onRejected={(error) => {
+            showAlert.value = true;
+            alertMessage.value = markdownToHtml(error.message);
+            return <></>;
+          }}
         />
+        <Alert title="Error" show={showAlert}>
+          <p dangerouslySetInnerHTML={alertMessage.value} />
+        </Alert>
       </div>
     </>
   );

@@ -18,6 +18,7 @@ import type {
 import LibraryGrid from '~/components/grid/libraryGrid';
 import Title from '~/components/header/title';
 import Button from '~/components/inputs/button';
+import Alert from '~/components/modal/alert';
 import Advancedsearch from '~/components/search/advancedsearch';
 import CircleSpinner from '~/components/spinner/circle-spinner';
 import {
@@ -29,7 +30,7 @@ import {
   isNumber,
   isText,
 } from '~/helpers/advancedsearch';
-import { AlertException } from '~/helpers/alert';
+import { AlertException, markdownToHtml } from '~/helpers/alert';
 import { Endpoints } from '~/helpers/endpoints';
 
 export default component$(() => {
@@ -78,7 +79,10 @@ export default component$(() => {
   const spinner = <CircleSpinner centered={true} />;
   const count = useSignal(1);
 
-  const submitFun = $(async (_: any, currentTarget: HTMLFormElement) => {
+  const showAlert = useSignal<boolean>(false);
+  const alertMessage = useSignal<string>('');
+
+  const submitFun = $((_: any, currentTarget: HTMLFormElement) => {
     try {
       const queryLen = count.value;
       const form = currentTarget;
@@ -182,6 +186,9 @@ export default component$(() => {
             </div>
           </div>
         </form>
+        <Alert title="Error" show={showAlert}>
+          <p dangerouslySetInnerHTML={alertMessage.value} />
+        </Alert>
         <Resource
           value={resultData}
           onPending={() => spinner}
@@ -198,7 +205,11 @@ export default component$(() => {
               );
             }
           }}
-          onRejected={() => <></>}
+          onRejected={(error) => {
+            showAlert.value = true;
+            alertMessage.value = markdownToHtml(error.message);
+            return <></>;
+          }}
         />
       </div>
     </>

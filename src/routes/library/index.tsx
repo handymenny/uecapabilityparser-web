@@ -12,8 +12,9 @@ import axios from 'axios';
 import type { LibraryIndex } from '~/@types/uecapabilityparser';
 import LibraryGrid from '~/components/grid/libraryGrid';
 import Title from '~/components/header/title';
+import Alert from '~/components/modal/alert';
 import CircleSpinner from '~/components/spinner/circle-spinner';
-import { AlertException } from '~/helpers/alert';
+import { AlertException, markdownToHtml } from '~/helpers/alert';
 import { Endpoints } from '~/helpers/endpoints';
 
 export default component$(() => {
@@ -68,6 +69,8 @@ export default component$(() => {
   );
 
   const spinner = <CircleSpinner centered={true} />;
+  const showAlert = useSignal<boolean>(false);
+  const alertMessage = useSignal<string>('');
 
   return (
     <>
@@ -83,7 +86,15 @@ export default component$(() => {
               return <LibraryGrid data={data} searchId="library" />;
             }
           }}
+          onRejected={(error) => {
+            showAlert.value = true;
+            alertMessage.value = markdownToHtml(error.message);
+            return <></>;
+          }}
         />
+        <Alert title="Error" show={showAlert}>
+          <p dangerouslySetInnerHTML={alertMessage.value} />
+        </Alert>
       </div>
     </>
   );
