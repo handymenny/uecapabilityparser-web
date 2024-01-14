@@ -7,12 +7,14 @@ import {
   isAltTbsIndex,
   isDate,
   isListBand,
+  isListCombos,
   isListString,
   isLogType,
   isNumber,
   isText,
 } from '~/helpers/advancedsearch';
 import { AlertException } from '~/helpers/alert';
+import MultiComboSearch from './multi-combo-search';
 
 interface Props {
   suffix: string;
@@ -73,6 +75,7 @@ export default component$((props: Props) => {
   ];
 
   const valueType = useSignal('numeric');
+  const valueCount = useSignal(1);
 
   const currentComparator = useComputed$(() => {
     const allowed: string[] = [];
@@ -91,7 +94,10 @@ export default component$((props: Props) => {
         break;
       case 'listSimpleBand':
       case 'listSimpleAltTbs':
-      case 'notSupported':
+      case 'LTE_COMBOS':
+      case 'NR_COMBOS':
+      case 'ENDC_COMBOS':
+      case 'NRDC_COMBOS':
         allowed.push(...['HAS_ANY', 'HAS_ALL', 'HAS_NONE']);
         break;
     }
@@ -121,6 +127,9 @@ export default component$((props: Props) => {
             }
           } else if (isListBand(value)) {
             valueType.value = 'listSimpleBand';
+          } else if (isListCombos(value)) {
+            valueType.value = value;
+            valueCount.value = 1;
           } else {
             valueType.value = 'notSupported';
             throw new AlertException('Not supported by this demo');
@@ -167,6 +176,15 @@ export default component$((props: Props) => {
           label="Value"
           name={`value-${suffix}`}
           options={logTypeOptions}
+        />
+      )}
+      {isListCombos(valueType.value) && (
+        <MultiComboSearch
+          suffix={`${suffix}`}
+          lte={['LTE_COMBOS', 'ENDC_COMBOS'].includes(valueType.value)}
+          nr={valueType.value != 'LTE_COMBOS'}
+          nrDc={valueType.value == 'NRDC_COMBOS'}
+          label="Values"
         />
       )}
     </>

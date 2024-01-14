@@ -12,6 +12,8 @@ import axios from 'axios';
 import type {
   Comparator,
   Criteria,
+  IComboValue,
+  IComponentValue,
   LibraryIndex,
   Query,
 } from '~/@types/uecapabilityparser';
@@ -24,6 +26,7 @@ import CircleSpinner from '~/components/spinner/circle-spinner';
 import {
   isDate,
   isListBand,
+  isListCombos,
   isListString,
   isLogType,
   isLteBands,
@@ -137,6 +140,100 @@ export default component$(() => {
               };
             }),
           } as Criteria.bands;
+        } else if (isListCombos(field)) {
+          const valueLength = parseInt(value);
+          const values = [];
+
+          for (let comboIndex = 0; comboIndex < valueLength; comboIndex++) {
+            const components = {
+              lteDl: [],
+              lteUl: [],
+              nrDl: [],
+              nrUl: [],
+              nrDcDl: [],
+              nrDcUl: [],
+            };
+            const currentIndex = `-${index}-${comboIndex}`;
+            const comboValueId = `combo-value${currentIndex}`;
+            const compLength = parseInt(formData.get(comboValueId) as string);
+
+            for (let compIndex = 0; compIndex < compLength; compIndex++) {
+              const currentIndex = `-${index}-${comboIndex}-${compIndex}`;
+              const type = formData.get(`type${currentIndex}`) as string;
+              const band = parseInt(
+                formData.get(`band${currentIndex}`) as string,
+              );
+              const mimo = parseInt(
+                formData.get(`mimo${currentIndex}`) as string,
+              );
+              const bwClass = formData.get(`class${currentIndex}`) as string;
+              const bw = parseInt(formData.get(`bw${currentIndex}`) as string);
+
+              const value = {} as IComponentValue;
+              value.type = type.replace('Dc', '') as IComponentValue.Type;
+              value.band = band;
+
+              if (bwClass != null && bwClass.length > 0) {
+                value.minBwClass = bwClass;
+              }
+
+              if (value.type != 'lteUl' && !isNaN(mimo)) {
+                value.minMimo = mimo;
+              }
+
+              if (
+                !isNaN(bw) &&
+                (value.type == 'nrDl' || value.type == 'nrUl')
+              ) {
+                value.minMaxBwPerCC = bw;
+              }
+              (components as any)[type].push(value);
+            }
+            values.push(components);
+          }
+
+          const combos = [] as IComboValue[];
+
+          for (let i = 0; i < values.length; i++) {
+            const combo = {} as IComboValue;
+
+            const comboCriteria = values[i];
+            if (field == 'LTE_COMBOS' || field == 'NR_COMBOS') {
+              combo.type = 'simple' as IComboValue.Type;
+              if (combo.type == 'simple') {
+                if (field == 'LTE_COMBOS') {
+                  combo.dl = comboCriteria.lteDl;
+                  combo.ul = comboCriteria.lteUl;
+                } else {
+                  combo.dl = comboCriteria.nrDl;
+                  combo.ul = comboCriteria.nrUl;
+                }
+              }
+            } else {
+              combo.type = 'mrdc' as IComboValue.Type;
+              if (combo.type == 'mrdc') {
+                if (field == 'ENDC_COMBOS') {
+                  combo.dlMaster = comboCriteria.lteDl;
+                  combo.ulMaster = comboCriteria.lteUl;
+                  combo.dlSecondary = comboCriteria.nrDl;
+                  combo.ulSecondary = comboCriteria.nrUl;
+                } else {
+                  combo.dlMaster = comboCriteria.nrDl;
+                  combo.ulMaster = comboCriteria.nrUl;
+                  combo.dlSecondary = comboCriteria.nrDcDl;
+                  combo.ulSecondary = comboCriteria.nrDcUl;
+                }
+              }
+            }
+            combos.push(combo);
+          }
+
+          request = {
+            type: 'combos',
+            field: field,
+            comparator: comparator,
+            value: combos,
+          } as Criteria.combos;
         } else {
           throw 'Not supported by this demo';
         }
