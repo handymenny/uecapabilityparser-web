@@ -3,7 +3,7 @@ import { component$, useId } from '@builder.io/qwik';
 interface Props {
   label?: string;
   placeholder?: string;
-  value?: string;
+  value?: number;
   name?: string;
   disabled?: boolean;
   hidden?: boolean;
