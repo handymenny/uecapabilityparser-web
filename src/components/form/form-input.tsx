@@ -59,7 +59,7 @@ export default component$((props: Props) => {
         options={options}
         name={`${prefix}type`}
         disabled={submitting.value}
-        onInput$={(value) => {
+        onInput$={async (value) => {
           type.value = value;
         }}
       />

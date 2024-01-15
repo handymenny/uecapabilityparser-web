@@ -109,7 +109,7 @@ export default component$(() => {
                 type="button"
                 label="Remove"
                 hidden={!multiParseSupported.value || count.value < 2}
-                onClick$={() => {
+                onClick$={async () => {
                   if (count.value > 1) {
                     count.value--;
                   }
@@ -119,7 +119,7 @@ export default component$(() => {
                 type="button"
                 label="Add"
                 hidden={!multiParseSupported.value}
-                onClick$={() => {
+                onClick$={async () => {
                   count.value++;
                 }}
               />

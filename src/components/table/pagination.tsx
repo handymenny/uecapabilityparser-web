@@ -46,7 +46,7 @@ export default component$(
             options={options}
             selectedValue={combosPerPage.value.toString()}
             // eslint-disable-next-line qwik/valid-lexical-scope
-            onInput$={(page: string) => {
+            onInput$={async (page: string) => {
               onCombosPerPageChange$(parseInt(page));
               (document.activeElement as HTMLElement)?.blur();
             }}
@@ -61,7 +61,7 @@ export default component$(
             totalPages={totalPages.value}
             siblingCount={1}
             // eslint-disable-next-line qwik/valid-lexical-scope
-            onPageChange$={(page: any) => {
+            onPageChange$={async (page: any) => {
               onPageChange$(page);
               (document.activeElement as HTMLElement)?.blur();
             }}
