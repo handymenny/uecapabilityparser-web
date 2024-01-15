@@ -1,5 +1,5 @@
 {
-  "manifestHash": "kcl4bm",
+  "manifestHash": "7fdrxm",
   "symbols": {
     "s_02wMImzEAbk": {
       "origin": "../node_modules/@builder.io/qwik-city/index.qwik.mjs",
@@ -188,7 +188,7 @@
       "captures": false,
       "loc": [
         268,
-        705
+        738
       ]
     },
     "s_6sHTqeXob0Q": {
@@ -656,7 +656,7 @@
       "captures": false,
       "loc": [
         243,
-        1156
+        1249
       ]
     },
     "s_1WsG8g0Z08g": {
@@ -5593,7 +5593,7 @@
     "s_2AXMoH1V6Yw": "q-p-hqsC78.js",
     "s_2pjEpZsdP20": "q-0mUqF-Py.js",
     "s_3UzNI81hmEw": "q-IWYbocrF.js",
-    "s_3sccYCDd1Z0": "q-FIN_5elt.js",
+    "s_3sccYCDd1Z0": "q-hnjjtjXs.js",
     "s_6sHTqeXob0Q": "q-b3Arcc54.js",
     "s_8UCveneOcvc": "q-ofJHRixA.js",
     "s_AU75U67QNPw": "q-M96BpZks.js",
@@ -5629,7 +5629,7 @@
     "s_xm15NHoTGpg": "q-ljfS3KOb.js",
     "s_ys3BRaK39yk": "q-wZpLIjjw.js",
     "s_zWcCKs1Mlpc": "q-JWXvO7CQ.js",
-    "s_zrbrqoaqXSY": "q-3pCJ2C-l.js",
+    "s_zrbrqoaqXSY": "q-ds42A7tH.js",
     "s_1WsG8g0Z08g": "q-yZ_Jbtbz.js",
     "s_27BIuhV8z9w": "q-7Ue5zMdQ.js",
     "s_2c3fuNa4nnQ": "q-yZ_Jbtbz.js",
@@ -6234,20 +6234,6 @@
         "s_j4g0R0xj0OU",
         "s_K60auzrBjoo",
         "s_OGIZVgS7ipg"
-      ]
-    },
-    "q-3pCJ2C-l.js": {
-      "size": 861,
-      "imports": [
-        "q-AwFONOrQ.js",
-        "q-rDVhsHeT.js"
-      ],
-      "origins": [
-        "src/entry_RouterHead.js",
-        "src/s_zrbrqoaqxsy.js"
-      ],
-      "symbols": [
-        "s_zrbrqoaqXSY"
       ]
     },
     "q-3sB7azcW.js": {
@@ -7793,6 +7779,20 @@
         "s_Ecmxn7J5lbU"
       ]
     },
+    "q-ds42A7tH.js": {
+      "size": 910,
+      "imports": [
+        "q-AwFONOrQ.js",
+        "q-rDVhsHeT.js"
+      ],
+      "origins": [
+        "src/entry_RouterHead.js",
+        "src/s_zrbrqoaqxsy.js"
+      ],
+      "symbols": [
+        "s_zrbrqoaqXSY"
+      ]
+    },
     "q-Ds8QALy3.js": {
       "size": 981,
       "imports": [
@@ -8022,24 +8022,6 @@
         "s_xPT6xAB1GNM"
       ]
     },
-    "q-FIN_5elt.js": {
-      "size": 557,
-      "imports": [
-        "q-AwFONOrQ.js",
-        "q-rDVhsHeT.js"
-      ],
-      "dynamicImports": [
-        "q-3pCJ2C-l.js"
-      ],
-      "origins": [
-        "src/components/router-head/router-head.tsx",
-        "src/entry_root.js",
-        "src/s_3sccycdd1z0.js"
-      ],
-      "symbols": [
-        "s_3sccYCDd1Z0"
-      ]
-    },
     "q-FnTZmePn.js": {
       "size": 1202,
       "imports": [
@@ -8131,6 +8113,19 @@
         "node_modules/@nozbe/microfuzz/dist/index.js",
         "node_modules/@nozbe/microfuzz/dist/normalizeText.js",
         "src/helpers/search.ts"
+      ]
+    },
+    "q-G-u1tsHv.js": {
+      "size": 339,
+      "imports": [
+        "q-rDVhsHeT.js"
+      ],
+      "dynamicImports": [
+        "q-hnjjtjXs.js"
+      ],
+      "origins": [
+        "src/global.css",
+        "src/root.tsx"
       ]
     },
     "q-g1VyEqKs.js": {
@@ -8502,6 +8497,24 @@
       ],
       "symbols": [
         "s_97QLm1cXb2k"
+      ]
+    },
+    "q-hnjjtjXs.js": {
+      "size": 607,
+      "imports": [
+        "q-AwFONOrQ.js",
+        "q-rDVhsHeT.js"
+      ],
+      "dynamicImports": [
+        "q-ds42A7tH.js"
+      ],
+      "origins": [
+        "src/components/router-head/router-head.tsx",
+        "src/entry_root.js",
+        "src/s_3sccycdd1z0.js"
+      ],
+      "symbols": [
+        "s_3sccYCDd1Z0"
       ]
     },
     "q-HoKVejvI.js": {
@@ -11535,19 +11548,6 @@
       ],
       "symbols": [
         "s_zs3NZsN7iIc"
-      ]
-    },
-    "q-ZZYO0aSc.js": {
-      "size": 339,
-      "imports": [
-        "q-rDVhsHeT.js"
-      ],
-      "dynamicImports": [
-        "q-FIN_5elt.js"
-      ],
-      "origins": [
-        "src/global.css",
-        "src/root.tsx"
       ]
     }
   },
