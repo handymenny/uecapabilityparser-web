@@ -76,7 +76,7 @@ export default component$(({ capabilitiesList, groupDescription }: Props) => {
           <SelectInput
             label="Select log"
             options={capabilitiesSelector}
-            onInput$={(value) => {
+            onInput$={async (value) => {
               const index = Number.parseInt(value);
               currentIndex.value = index;
             }}

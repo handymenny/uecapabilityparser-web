@@ -48,7 +48,7 @@ export default component$((props: Props) => {
             type="button"
             label="Remove"
             hidden={count.value < 2}
-            onClick$={() => {
+            onClick$={async () => {
               if (count.value > 1) {
                 count.value--;
               }
@@ -57,7 +57,7 @@ export default component$((props: Props) => {
           <Button
             type="button"
             label="Add"
-            onClick$={() => {
+            onClick$={async () => {
               count.value++;
             }}
           />

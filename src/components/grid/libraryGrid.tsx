@@ -88,7 +88,7 @@ export default component$(({ data, searchId, hideAddNew }: Props) => {
         hidden={false}
         disabled={false}
         fuzzy={{ id: searchId, keys: ['description', 'timestamp'], data: data }}
-        onKeyUp$={(value: string) => {
+        onKeyUp$={async (value: string) => {
           if (value.trim().length == 0) {
             filteredData.value = data;
           } else {

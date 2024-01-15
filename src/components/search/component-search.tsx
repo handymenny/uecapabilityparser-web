@@ -45,7 +45,7 @@ export default component$((props: Props) => {
           label="Type"
           name={`type-${suffix}`}
           options={currentOptions.value}
-          onInput$={(value) => {
+          onInput$={async (value) => {
             componentType.value = value;
           }}
         />

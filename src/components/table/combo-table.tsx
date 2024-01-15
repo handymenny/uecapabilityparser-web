@@ -87,7 +87,7 @@ export default component$((props: Props) => {
             <Button
               type="button"
               label={monoChrome.value ? 'Colored bands' : 'Monochrome bands'}
-              onClick$={() => {
+              onClick$={async () => {
                 monoChrome.value = !monoChrome.value;
               }}
             />
@@ -98,14 +98,14 @@ export default component$((props: Props) => {
             totalPages={totalPages}
             selectedPage={selectedPage}
             combosPerPage={combosPerPage}
-            onPageChange$={(page: number) => {
+            onPageChange$={async (page: number) => {
               if (page > 0 && page <= totalPages.value) {
                 selectedPage.value = page;
               } else {
                 selectedPage.value = 1;
               }
             }}
-            onCombosPerPageChange$={(combos: number) => {
+            onCombosPerPageChange$={async (combos: number) => {
               combosPerPage.value = combos;
               selectedPage.value = 1;
             }}
