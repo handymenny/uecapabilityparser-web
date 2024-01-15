@@ -13,8 +13,8 @@ export const RouterHead = component$(() => {
 
   return (
     <>
-      <meta charSet="utf-8" />
       <title>{head.title}</title>
+
       <link rel="canonical" href={loc.url.href} />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -29,6 +29,10 @@ export const RouterHead = component$(() => {
 
       {head.styles.map((s) => (
         <style key={s.key} {...s.props} dangerouslySetInnerHTML={s.style} />
+      ))}
+
+      {head.scripts.map((s) => (
+        <script key={s.key} {...s.props} dangerouslySetInnerHTML={s.script} />
       ))}
 
       {customcss.length > 0 && <link rel="stylesheet" href={customcss} />}
