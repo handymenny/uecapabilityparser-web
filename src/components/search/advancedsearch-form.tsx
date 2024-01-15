@@ -102,6 +102,7 @@ export default component$(({ query }: Props) => {
             for (let compIndex = 0; compIndex < compLength; compIndex++) {
               const currentIndex = `-${index}-${comboIndex}-${compIndex}`;
               const type = formData.get(`type${currentIndex}`) as string;
+              if (type == null) continue;
               const band = parseInt(
                 formData.get(`band${currentIndex}`) as string,
               );
@@ -131,7 +132,7 @@ export default component$(({ query }: Props) => {
               }
               (components as any)[type].push(value);
             }
-            values.push(components);
+            if (compLength > 0) values.push(components);
           }
 
           const combos = [] as IComboValue[];
