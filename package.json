@@ -32,7 +32,7 @@
     "@types/node": "^18.19.7",
     "@typescript-eslint/eslint-plugin": "^6.18.1",
     "@typescript-eslint/parser": "^6.18.1",
-    "autoprefixer": "^10.4.16",
+    "autoprefixer": "^10.4.17",
     "axios": "^1.6.5",
     "axios-cache-interceptor": "^1.4.1",
     "dompurify": "^3.0.8",
