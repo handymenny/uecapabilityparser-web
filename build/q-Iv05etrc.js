@@ -1,7 +1,0 @@
-import{V as _,y as l,a as o,j as s,m as a,C as n,K as t,_ as i,z as c,l as d}from"./q-yEEMOV0P.js";import"./q-QStyeqFi.js";import{x as u}from"./q-kw675-FN.js";const b=_(l(()=>o(()=>import("./q-eogMDA3P.js"),__vite__mapDeps([])),"s_VXOY7yQNLIw")),h=_(l(()=>o(()=>import("./q-8EHgHNdc.js"),__vite__mapDeps([])),"s_CAqbb96qy40")),m=_(l(()=>o(()=>import("./q-KgllrcTw.js"),__vite__mapDeps([])),"s_gdotxVBg6D4")),p=e=>s(c,{children:s(b,{get"bind:show"(){return e.show},alert:!0,children:[s(m,{children:a("div",null,{class:"flex justify-between"},[a("h2",null,{class:"text-xl font-bold"},n(r=>r.title,[e]),3,null),a("button",null,{class:"",onClick$:l(()=>o(()=>Promise.resolve().then(()=>W),void 0),"s_GIivYPc8WZw",[e])},s(u,{strokeWidth:3,[t]:{strokeWidth:t}},3,"Wa_0"),1,null)],1,null)},1,"Wa_1"),s(h,{children:s(i,null,3,"Wa_2"),class:"mb-2 pt-2",[t]:{class:t}},1,"Wa_3")],class:"max-w-[25rem] p-[28px] backdrop:backdrop-blur backdrop:backdrop-brightness-50",[t]:{alert:t,"bind:show":n(r=>r.show,[e]),class:t}},1,"Wa_4")},1,"Wa_5"),v=()=>{const[e]=d();return e.show.value=!1},W=Object.freeze(Object.defineProperty({__proto__:null,s_GIivYPc8WZw:v,s_PqBGYTpWr3Q:p},Symbol.toStringTag,{value:"Module"}));export{v as s_GIivYPc8WZw,p as s_PqBGYTpWr3Q};
-function __vite__mapDeps(indexes) {
-  if (!__vite__mapDeps.viteFileDeps) {
-    __vite__mapDeps.viteFileDeps = []
-  }
-  return indexes.map((i) => __vite__mapDeps.viteFileDeps[i])
-}
