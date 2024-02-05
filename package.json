@@ -34,7 +34,7 @@
     "@typescript-eslint/parser": "^6.20.0",
     "autoprefixer": "^10.4.17",
     "axios": "^1.6.7",
-    "axios-cache-interceptor": "^1.4.1",
+    "axios-cache-interceptor": "^1.5.1",
     "dompurify": "^3.0.8",
     "eslint": "^8.56.0",
     "eslint-plugin-qwik": "^1.4.3",
