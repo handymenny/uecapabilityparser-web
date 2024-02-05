@@ -1,0 +1,7 @@
+import{l as u,j as v,o as d,W as l,k as f,C as g,a as k,y as a,_ as c,b as y,h as p}from"./q-kBRCEvCZ.js";import{S as E}from"./q-POVI9Nn8.js";const h=function({cleanup:n}){var s;const[t,r]=u();function o(e){e.preventDefault(),t.isOpenSig.value=!t.isOpenSig.value}(s=r.value)==null||s.addEventListener("click",o),n(()=>{var e;(e=r.value)==null||e.removeEventListener("click",o)})},m=function({cleanup:n}){var s;const[t,r]=u();function o(e){(e.key==="Home"||e.key==="End")&&e.preventDefault(),(e.key==="ArrowDown"||e.key==="ArrowUp"||e.key==="Enter"||e.key===" ")&&(t.isOpenSig.value=!0)}(s=r.value)==null||s.addEventListener("keydown",o),n(()=>{var e;(e=r.value)==null||e.removeEventListener("keydown",o)})},S=i=>{const n=v(E),t=d();return n.triggerRef=t,l(a(()=>c(()=>Promise.resolve().then(()=>_),void 0),"s_80qoWIXMIfc",[n,t])),l(a(()=>c(()=>Promise.resolve().then(()=>_),void 0),"s_wQEhBlyku50",[n,t])),f("button",{ref:t,...i,children:k(y,null,3,"VR_0")},{"aria-expanded":g(r=>r.isOpenSig.value,[n],"p0.isOpenSig.value")},0,"VR_1")},_=Object.freeze(Object.defineProperty({__proto__:null,_hW:p,s_80qoWIXMIfc:h,s_QNah0rGW5hg:S,s_wQEhBlyku50:m},Symbol.toStringTag,{value:"Module"}));export{p as _hW,h as s_80qoWIXMIfc,S as s_QNah0rGW5hg,m as s_wQEhBlyku50};
+function __vite__mapDeps(indexes) {
+  if (!__vite__mapDeps.viteFileDeps) {
+    __vite__mapDeps.viteFileDeps = []
+  }
+  return indexes.map((i) => __vite__mapDeps.viteFileDeps[i])
+}

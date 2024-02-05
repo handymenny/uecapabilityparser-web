@@ -1,0 +1,7 @@
+import{m,n as v,f as x,o as C}from"./q-POVI9Nn8.js";import{l as _,F as h,n as b,j as c,k as P,C as l,e as $,y as r,a as y,_ as a,b as E}from"./q-kBRCEvCZ.js";const L=m,j=()=>{const[e,o]=_();return e.items.scrollAt(o.index)},k=()=>{const[e,o]=_();return e.items.scrollAt(o.index)},D=e=>{const o=h(e,["index","onClick$","label"]);b(r(()=>a(()=>Promise.resolve().then(()=>i),void 0),"s_L2t1ZYaMmtQ"));const d=v(),s=c(x),u=c(C);return P("div",{...o,children:[$("input",null,{"aria-label":l((t,n)=>n.label||`Go to the ${t==null?void 0:t(n.index+1)} item`,[d,e],"p1.label||`Go to the ${p0?.(p1.index+1)} item`"),checked:l((t,n)=>t.items.active.current.value===n.index,[s,e],"p0.items.active.current.value===p1.index"),name:l(t=>`control-${t.id}`,[u],"`control-${p0.id}`"),onChange$:r(()=>a(()=>Promise.resolve().then(()=>i),void 0),"s_KMuD8ad6BIY",[s,e]),type:"radio"},null,3,null),y(E,null,3,"d4_12")],onClick$:[r(()=>a(()=>Promise.resolve().then(()=>i),void 0),"s_046SLdYoam0",[s,e]),e.onClick$]},{"aria-current":l((t,n)=>t.items.active.current.value===n.index,[s,e],"p0.items.active.current.value===p1.index")},0,"d4_13")},i=Object.freeze(Object.defineProperty({__proto__:null,s_046SLdYoam0:k,s_KMuD8ad6BIY:j,s_KjEWhtG7Dp4:D,s_L2t1ZYaMmtQ:L},Symbol.toStringTag,{value:"Module"}));export{k as s_046SLdYoam0,j as s_KMuD8ad6BIY,D as s_KjEWhtG7Dp4,L as s_L2t1ZYaMmtQ};
+function __vite__mapDeps(indexes) {
+  if (!__vite__mapDeps.viteFileDeps) {
+    __vite__mapDeps.viteFileDeps = []
+  }
+  return indexes.map((i) => __vite__mapDeps.viteFileDeps[i])
+}

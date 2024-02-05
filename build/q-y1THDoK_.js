@@ -1,0 +1,7 @@
+import{l as _,j as S,o as l,L as g,k as f,C as u,a as p,y as r,_ as c,b as m,h}from"./q-kBRCEvCZ.js";import{h as O}from"./q-POVI9Nn8.js";const E=()=>{const[t,i]=_();t.isOpenSig.value||(i.value=!0)},C=async function({track:i}){const[e,a,o]=_();if(i(()=>e.isOpenSig.value),!e.contentRef.value)return;await e.getContentDimensions$();const{animationDuration:n,transitionDuration:s}=getComputedStyle(e.contentRef.value);n!=="0s"?(console.log(n),a.value=!0):s!=="0s"&&(a.value=!0),e.isOpenSig.value&&(o.value=!1),e.initialStateSig.value=!1},x=t=>{const i=S(O),e=l(!1),a=l(!1),o=r(()=>c(()=>Promise.resolve().then(()=>v),void 0),"s_c3W0WhB6hn8",[i,e]);return g(r(()=>c(()=>Promise.resolve().then(()=>v),void 0),"s_vL9GRJix2tM",[i,a,e])),f("div",{...t,children:p(m,null,3,"5i_0"),onAnimationEnd$:[o,t.onAnimationEnd$],onTransitionEnd$:[o,t.onTransitionEnd$],ref:i.contentRef},{"data-state":u(n=>n.initialStateSig.value?"initial":n.isOpenSig.value?"open":"closed",[i],'p0.initialStateSig.value?"initial":p0.isOpenSig.value?"open":"closed"'),hidden:u((n,s,d)=>s.value?d.value:!n.isOpenSig.value,[i,a,e],"p1.value?p2.value:!p0.isOpenSig.value")},0,"5i_1")},v=Object.freeze(Object.defineProperty({__proto__:null,_hW:h,s_VKFXS9azuEM:x,s_c3W0WhB6hn8:E,s_vL9GRJix2tM:C},Symbol.toStringTag,{value:"Module"}));export{h as _hW,x as s_VKFXS9azuEM,E as s_c3W0WhB6hn8,C as s_vL9GRJix2tM};
+function __vite__mapDeps(indexes) {
+  if (!__vite__mapDeps.viteFileDeps) {
+    __vite__mapDeps.viteFileDeps = []
+  }
+  return indexes.map((i) => __vite__mapDeps.viteFileDeps[i])
+}
