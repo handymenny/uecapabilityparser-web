@@ -334,7 +334,7 @@ function dlEquals(a: Component, b: Component, nr?: boolean) {
     a.bwClassDl === b.bwClassDl &&
     mimoEquals(a.mimoDl, b.mimoDl) &&
     modEquals(a.modulationDl, b.modulationDl) &&
-    (!nr || equalsBwScs(a, b))
+    (!nr || equalsBwScs(a, b, true))
   );
 }
 
@@ -344,7 +344,7 @@ function ulEquals(a: Component, b: Component, nr?: boolean) {
     a.bwClassUl === b.bwClassUl &&
     mimoEquals(a.mimoUl, b.mimoUl) &&
     modEquals(a.modulationUl, b.modulationUl) &&
-    (!nr || equalsBwScs(a, b))
+    (!nr || equalsBwScs(a, b, false))
   );
 }
 
@@ -390,11 +390,34 @@ function modEquals(a?: Modulation, b?: Modulation) {
   return true;
 }
 
-function equalsBwScs(component: ComponentNr, other: ComponentNr) {
+function bwEquals(a?: Bandwidth, b?: Bandwidth) {
+  if (
+    a === undefined ||
+    b === undefined ||
+    a?.type === 'empty' ||
+    b?.type === 'empty'
+  ) {
+    return a?.type === b?.type;
+  }
+  const bwA = a.value;
+  const bwB = b.value;
+  if (Array.isArray(bwA) && Array.isArray(bwB)) {
+    if (!equalsArray(bwA, bwB)) {
+      return false;
+    }
+  } else if (bwA !== bwB) {
+    return false;
+  }
+  return true;
+}
+
+function equalsBwScs(component: ComponentNr, other: ComponentNr, dl: boolean) {
   return (
     other.maxScs === component.maxScs &&
     other.bw90mhzSupported === component.bw90mhzSupported &&
-    other.maxBw === component.maxBw
+    other.maxBw === component.maxBw &&
+    (!dl || bwEquals(other.maxBwDl, component.maxBwDl)) &&
+    (dl || bwEquals(other.maxBwUl, component.maxBwUl))
   );
 }
 
