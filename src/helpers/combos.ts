@@ -465,7 +465,7 @@ export function componentsMimoDlToStr(
   nr: boolean = false,
 ): string {
   const result: string[] = [];
-  groupComponentsDl(components).flatMap((value) => {
+  groupComponentsDl(components, nr).flatMap((value) => {
     const component = value[0];
     const mimoFeature = mimoToFeature(
       component.band,
@@ -487,7 +487,7 @@ export function componentsMimoUlToStr(
   nr: boolean = false,
 ): string {
   const result: string[] = [];
-  groupComponentsUl(components).forEach((value) => {
+  groupComponentsUl(components, nr).forEach((value) => {
     const component = value[0];
     const mimoStr = mimoToFeature(
       component.band,
@@ -509,7 +509,7 @@ export function componentsModDlToStr(
   nr: boolean = false,
 ): string {
   const result: string[] = [];
-  groupComponentsDl(components).forEach((value) => {
+  groupComponentsDl(components, nr).forEach((value) => {
     const component = value[0];
     const modStr = modToFeatures(
       component.band,
@@ -535,7 +535,7 @@ export function componentsModUlToStr(
   nr: boolean = false,
 ): string {
   const result: string[] = [];
-  groupComponentsUl(components).forEach((value) => {
+  groupComponentsUl(components, nr).forEach((value) => {
     const component = value[0];
     const modStr = modToFeatures(
       component.band,
@@ -560,7 +560,7 @@ export function componentsModUlToStr(
 
 export function componentsScsDlToStr(components: ComponentNr[]): string {
   const result: string[] = [];
-  groupComponentsDl(components).forEach((value) => {
+  groupComponentsDl(components, true).forEach((value) => {
     const component = value[0] as ComponentNr;
     const scsStr = scsToFeatures(
       component.band,
@@ -578,7 +578,7 @@ export function componentsScsDlToStr(components: ComponentNr[]): string {
 
 export function componentsScsUlToStr(components: ComponentNr[]): string {
   const result: string[] = [];
-  groupComponentsUl(components).forEach((value) => {
+  groupComponentsUl(components, true).forEach((value) => {
     const component = value[0] as ComponentNr;
     const scsStr = scsToFeatures(
       component.band,
@@ -596,7 +596,7 @@ export function componentsScsUlToStr(components: ComponentNr[]): string {
 
 export function componentsBwDlToStr(components: ComponentNr[]): string {
   const result: string[] = [];
-  groupComponentsDl(components).forEach((value) => {
+  groupComponentsDl(components, true).forEach((value) => {
     const component = value[0] as ComponentNr;
     let bwStr = null;
     // Prefer maxBwDl/maxBwUl to maxBw
@@ -624,7 +624,7 @@ export function componentsBwDlToStr(components: ComponentNr[]): string {
 
 export function componentsBwUlToStr(components: ComponentNr[]): string {
   const result: string[] = [];
-  groupComponentsUl(components).forEach((value) => {
+  groupComponentsUl(components, true).forEach((value) => {
     const component = value[0] as ComponentNr;
     let bwStr = null;
     // Prefer maxBwDl/maxBwUl to maxBw
