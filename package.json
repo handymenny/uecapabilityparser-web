@@ -38,7 +38,7 @@
     "dompurify": "^3.0.8",
     "eslint": "^8.56.0",
     "eslint-plugin-qwik": "^1.4.3",
-    "js-base64": "^3.7.6",
+    "js-base64": "^3.7.7",
     "postcss": "^8.4.33",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.11",
