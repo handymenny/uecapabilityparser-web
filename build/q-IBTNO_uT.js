@@ -1,1 +1,0 @@
-import{S as n}from"./q-POVI9Nn8.js";import{F as l,j as s,k as c}from"./q-kBRCEvCZ.js";const d=e=>{const o=l(e,["placeholder"]),t=s(n).selectedOptionSig.value;return c("span",{...o,children:t||e.placeholder},null,0,"2w_0")};export{d as s_n92TrcEV90g};

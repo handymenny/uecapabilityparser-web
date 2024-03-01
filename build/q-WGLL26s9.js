@@ -1,7 +1,0 @@
-import{a8 as i}from"./q-POVI9Nn8.js";import{n as s,e as l,C as n,y as r,_ as o}from"./q-kBRCEvCZ.js";const a=i,c=t=>(s(r(()=>o(()=>Promise.resolve().then(()=>d),void 0),"s_zuLQ9EumCnU")),l("div",null,{class:n(e=>`spinner-container ${e.class}`,[t],"`spinner-container ${p0.class}`"),style:n(e=>e.style,[t],"p0.style")},l("svg",null,{class:"spinner",role:"spinner"},[l("circle",null,{class:"track",r:n(e=>`calc(0.5em - ${e.width??"2px"}/2)`,[t],'`calc(0.5em - ${p0.width??"2px"}/2)`'),style:n(e=>({strokeWidth:e.width??"2px",stroke:e.trackColor??"#8080803f"}),[t],'{strokeWidth:p0.width??"2px",stroke:p0.trackColor??"#8080803f"}')},null,3,null),l("circle",null,{class:"indicator",r:n(e=>`calc(0.5em - ${e.width??"2px"}/2)`,[t],'`calc(0.5em - ${p0.width??"2px"}/2)`'),style:n(e=>({strokeWidth:e.width??"2px",stroke:e.indicatorColor??"#006ce9",animation:`spin ${e.speed??"2s"} linear infinite`}),[t],'{strokeWidth:p0.width??"2px",stroke:p0.indicatorColor??"#006ce9",animation:`spin ${p0.speed??"2s"} linear infinite`}')},null,3,null)],3,null),3,"WQ_0")),d=Object.freeze(Object.defineProperty({__proto__:null,s_ZwkJC2DeV1w:c,s_zuLQ9EumCnU:a},Symbol.toStringTag,{value:"Module"}));export{c as s_ZwkJC2DeV1w,a as s_zuLQ9EumCnU};
-function __vite__mapDeps(indexes) {
-  if (!__vite__mapDeps.viteFileDeps) {
-    __vite__mapDeps.viteFileDeps = []
-  }
-  return indexes.map((i) => __vite__mapDeps.viteFileDeps[i])
-}
