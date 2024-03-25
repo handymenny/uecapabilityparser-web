@@ -35,7 +35,7 @@
     "autoprefixer": "^10.4.17",
     "axios": "^1.6.7",
     "axios-cache-interceptor": "^1.5.1",
-    "dompurify": "^3.0.9",
+    "dompurify": "^3.0.11",
     "eslint": "^8.57.0",
     "eslint-plugin-qwik": "^1.4.5",
     "js-base64": "^3.7.7",
