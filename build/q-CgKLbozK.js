@@ -1,1 +1,0 @@
-import{x as r,O as e,M as i,E as l,H as n}from"./q-Kd_xxsJC.js";const t=s=>{const a=r(s,["disabled"]);return e("div",{...a,children:l(n,null,3,"B4_0")},{"aria-disabled":i(d=>d.disabled,[s],"p0.disabled"),role:"group"},0,"B4_1")};export{t as s_cjNOIcJWsZ8};

@@ -1,7 +1,0 @@
-import{$ as u,P as v,c as d,L as l,O as f,M as g,E as k,q as a,_ as c,H as p,w as y}from"./q-Kd_xxsJC.js";import{S as E}from"./q-GY6aYWUm.js";const O=function({cleanup:n}){var o;const[t,r]=u();function s(e){e.preventDefault(),t.isOpenSig.value=!t.isOpenSig.value}(o=r.value)==null||o.addEventListener("click",s),n(()=>{var e;(e=r.value)==null||e.removeEventListener("click",s)})},m=function({cleanup:n}){var o;const[t,r]=u();function s(e){(e.key==="Home"||e.key==="End")&&e.preventDefault(),(e.key==="ArrowDown"||e.key==="ArrowUp"||e.key==="Enter"||e.key===" ")&&(t.isOpenSig.value=!0)}(o=r.value)==null||o.addEventListener("keydown",s),n(()=>{var e;(e=r.value)==null||e.removeEventListener("keydown",s)})},S=i=>{const n=v(E),t=d();return n.triggerRef=t,l(a(()=>c(()=>Promise.resolve().then(()=>_),void 0),"s_80qoWIXMIfc",[n,t])),l(a(()=>c(()=>Promise.resolve().then(()=>_),void 0),"s_wQEhBlyku50",[n,t])),f("button",{ref:t,...i,children:k(p,null,3,"VR_0")},{"aria-expanded":g(r=>r.isOpenSig.value,[n],"p0.isOpenSig.value")},0,"VR_1")},_=Object.freeze(Object.defineProperty({__proto__:null,_hW:y,s_80qoWIXMIfc:O,s_QNah0rGW5hg:S,s_wQEhBlyku50:m},Symbol.toStringTag,{value:"Module"}));export{y as _hW,O as s_80qoWIXMIfc,S as s_QNah0rGW5hg,m as s_wQEhBlyku50};
-function __vite__mapDeps(indexes) {
-  if (!__vite__mapDeps.viteFileDeps) {
-    __vite__mapDeps.viteFileDeps = []
-  }
-  return indexes.map((i) => __vite__mapDeps.viteFileDeps[i])
-}
