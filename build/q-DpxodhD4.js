@@ -1,0 +1,1 @@
+import{S as r,Q as s}from"./q-CC1jhtLR.js";import{P as a,a as n,b as c,O as l,E as p,H as u}from"./q-Dk_gIsW-.js";const i=o=>{const e=a(r),t=n();return c(s,{labelId:t}),l("div",{...o,children:p(u,null,3,"B4_0"),ref:e.groupRef},{"aria-labelledby":t,role:"group"},0,"B4_1")};export{i as s_cjNOIcJWsZ8};
