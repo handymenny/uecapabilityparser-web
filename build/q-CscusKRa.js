@@ -1,0 +1,6 @@
+import{Y as c}from"./q-CNKChEG2.js";import{u as i,i as v,p as t,_ as p,f as d,q as r}from"./q-CqQeKCeh.js";import{_ as n}from"./q-C7i0xNVT.js";const m=()=>{const[o]=i();return c.includes(o.orientation??"horizontal")?o.orientation??"horizontal":(console.warn(`Invalid prop 'orientation' of value '${o.orientation??"horizontal"}' supplied to 'separator',
+        expected one of:
+        - horizontal
+        - vertical
+
+        Defaulting to 'horizontal'.`),"horizontal")},f=()=>{const[o]=i();return o.value==="vertical"?o.value:void 0},P=()=>{const[o,e]=i();return e.decorative?{role:"none"}:{role:"separator","aria-orientation":o.value}},h=o=>{const e=v(o,["orientation","decorative"]),s=t(r(()=>n(()=>Promise.resolve().then(()=>a),void 0),"s_D24KQnvZKfo",[o])),l=t(r(()=>n(()=>Promise.resolve().then(()=>a),void 0),"s_HeX0Zr0PaZI",[s])),_=t(r(()=>n(()=>Promise.resolve().then(()=>a),void 0),"s_mE8oaukqj3U",[l,o]));return p("div",{..._.value,...e},{"data-orientation":d(u=>u.value,[s],"p0.value")},0,"FC_0")},a=Object.freeze(Object.defineProperty({__proto__:null,s_BmtaV0nCbAI:h,s_D24KQnvZKfo:m,s_HeX0Zr0PaZI:f,s_mE8oaukqj3U:P},Symbol.toStringTag,{value:"Module"}));export{h as s_BmtaV0nCbAI,m as s_D24KQnvZKfo,f as s_HeX0Zr0PaZI,P as s_mE8oaukqj3U};
