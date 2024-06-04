@@ -28,8 +28,8 @@ export default component$((props: Props) => {
   return (
     <div
       class={
-        'relative flex flex-col' +
-        (hidden ? ' hidden' : '') +
+        'relative flex flex-col ' +
+        (hidden ? 'hidden' : '') +
         (props.class ? ` ${props.class}` : '')
       }
       aria-hidden={hidden}

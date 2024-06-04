@@ -69,7 +69,7 @@ export default component$(({ capabilitiesList, groupDescription }: Props) => {
       <div
         class={
           'mb-4 flex flex-col ' +
-          (capabilitiesSelector.length < 2 ? ' hidden' : '')
+          (capabilitiesSelector.length < 2 ? 'hidden' : '')
         }
       >
         <div class="mx-auto w-full max-w-7xl">

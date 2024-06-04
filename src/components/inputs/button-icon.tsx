@@ -16,7 +16,7 @@ export default component$((props: Props) => {
   return (
     <div
       class={
-        'flex flex-grow basis-0 flex-col-reverse' + (hidden ? ' hidden' : '')
+        'flex flex-grow basis-0 flex-col-reverse ' + (hidden ? 'hidden' : '')
       }
     >
       <button
