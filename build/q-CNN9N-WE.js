@@ -1,1 +1,0 @@
-import{i as r,a as n,g as o,S as a}from"./q-CqQeKCeh.js";import{b as i}from"./q-CNKChEG2.js";import"./q-C7i0xNVT.js";const l=t=>{const e=r(t,["as"]),s=`${n(i).itemId}-header`;return o(t.as??"h3",{id:s,...e,children:o(a,null,3,"X8_0")},0,"X8_1")};export{l as s_bB5ZxNj2LlA};

@@ -1,0 +1,1 @@
+import{t as s}from"./q-CS8-Vk9R.js";const o=e=>{const r=s("div",null,{class:"h-64 w-64 animate-spin rounded-full border-[12px] border-solid border-gray-100 border-t-gray-800"},null,3,"p5_0");return e.centered?s("div",null,{class:"m-auto p-12"},r,1,"p5_1"):r};export{o as s_VvP6Pc6SDYs};
