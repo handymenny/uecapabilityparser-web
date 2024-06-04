@@ -1,1 +1,0 @@
-import{r,k as a,_,E as t,b as n,O as i,e as o}from"./q-B2JE0ZoP.js";const u=r(a(()=>_(()=>import("./q-CpE-a2PM.js"),[]),"s_PPo1FD9B3nw")),m=e=>e.filters===void 0?t(o,null,3,"VY_0"):n("details",null,{open:!1},[n("summary",null,{class:"mt-10 text-xl font-bold"},i(l=>l.title,[e]),3,null),e.filters.map((l,s)=>t(u,{filter:l},3,s))],1,"VY_1");export{m as s_8UCveneOcvc};

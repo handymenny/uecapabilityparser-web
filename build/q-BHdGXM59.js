@@ -1,0 +1,1 @@
+import{f as l}from"./q-DIywAcZT.js";import{a as n,_ as e,g as r,S as a}from"./q-BllQxhLr.js";const f=t=>{const o=n(l),s=`${o.localId}-input`;return e("label",{...t,children:r(a,null,3,"OG_0"),for:s,ref:o.labelRef},null,0,"OG_1")};export{f as s_BRmoXrcYLGs};

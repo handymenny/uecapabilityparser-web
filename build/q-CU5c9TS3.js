@@ -1,0 +1,1 @@
+import{b as o,l,m as n,f as e,g as c,S as d}from"./q-BllQxhLr.js";import{l as i}from"./q-DIywAcZT.js";const _=a=>{const t=(Math.random()*1e3).toString(),r=o("closed");return l(i,{randomId:t,drawerState:r}),n("div",null,{class:e(s=>s.class?s.class:"",[a],'p0.class?p0.class:""')},c(d,null,3,"yt_0"),1,"yt_1")};export{_ as s_cnMP0d9Lrd8};
