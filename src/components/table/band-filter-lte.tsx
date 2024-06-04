@@ -35,6 +35,7 @@ export default component$(({ lteBands }: Props) => {
       headers={headers}
       data={data}
       noSpoiler={true}
+      noSearch={true}
     />
   );
 });

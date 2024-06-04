@@ -37,6 +37,7 @@ export default component$(({ nrBands }: Props) => {
       headers={headers}
       data={data}
       noSpoiler={true}
+      noSearch={true}
     />
   );
 });
