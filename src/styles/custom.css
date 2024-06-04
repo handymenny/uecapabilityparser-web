@@ -10,3 +10,8 @@
 .colored-button button {
   background: #ee8700 !important;
 }
+
+dialog {
+  /* transition-duration 300ms break qwikui modal */
+  transition-duration: unset;
+}
