@@ -73,6 +73,7 @@ export default component$((props: Props) => {
       }
       ref={outputRef}
       href={url}
+      prefetch={false}
     >
       <div class={'m-auto break-words'}>
         <span>{multilineLabel}</span>
