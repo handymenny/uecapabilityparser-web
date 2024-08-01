@@ -42,18 +42,23 @@ function equalsArray<T>(a: T[], b: T[]) {
 }
 
 function multipleComponentsToStr(
-  component: string,
+  component: Component,
   multiplier: number,
   minMultiplier: number,
+  direction: 'dl' | 'ul',
 ) {
   const result: string[] = [];
   if (multiplier >= minMultiplier) {
-    const bwClass = component[component.length - 1];
-    const resultString = component.slice(0, -1) + `(${multiplier}${bwClass})`;
-    result.push(resultString);
+    const bwClass =
+      direction === 'dl' ? component.bwClassDl : component.bwClassUl;
+    const str = `<span class="font-semibold B${component.band}">${component.band}(${multiplier}${bwClass})</span>`;
+    result.push(str);
   } else {
     for (let i = 0; i < multiplier; i++) {
-      result.push(component);
+      const bwClass =
+        direction === 'dl' ? component.bwClassDl : component.bwClassUl;
+      const str = `<span class="font-semibold B${component.band}">${component.band}${bwClass}</span>`;
+      result.push(str);
     }
   }
 
@@ -323,11 +328,6 @@ function multiBwToFeatures(band: number, bw?: Bandwidth, bwClass?: string) {
   return result;
 }
 
-const componentToDlStr = (component: Component) =>
-  `<span class="font-semibold B${component.band}">${component.band}${component.bwClassDl}</span>`;
-const componentToUlStr = (component: Component) =>
-  `<span class="font-semibold B${component.band}">${component.band}${component.bwClassUl}</span>`;
-
 function dlEquals(a: Component, b: Component, nr?: boolean) {
   return (
     a.band === b.band &&
@@ -460,11 +460,7 @@ export function componentsDlToStr(
   nr?: boolean,
 ): string {
   const result = groupComponentsDl(components, nr).flatMap((value) =>
-    multipleComponentsToStr(
-      componentToDlStr(value[0]),
-      value.length,
-      minMultiplier,
-    ),
+    multipleComponentsToStr(value[0], value.length, minMultiplier, 'dl'),
   );
   return result.join(' + ');
 }
@@ -474,11 +470,7 @@ export function componentsUlToStr(
   nr?: boolean,
 ): string {
   const result = groupComponentsUl(components, nr).flatMap((value) =>
-    multipleComponentsToStr(
-      componentToUlStr(value[0]),
-      value.length,
-      minMultiplier,
-    ),
+    multipleComponentsToStr(value[0], value.length, minMultiplier, 'ul'),
   );
   return result.join(' + ');
 }
