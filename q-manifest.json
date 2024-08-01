@@ -1,5 +1,5 @@
 {
-  "manifestHash": "pzay1q",
+  "manifestHash": "ky8iz9",
   "symbols": {
     "s_or3ZWgi00hc": {
       "origin": "../node_modules/@qwik-ui/headless/components/popover/use-popover.qwik.mjs",
@@ -799,6 +799,20 @@
         1107
       ]
     },
+    "s_Y0Dba4SFhY8": {
+      "origin": "../node_modules/@qwik-ui/headless/components/carousel/pagination.qwik.mjs",
+      "displayName": "HCarouselPagination_component",
+      "canonicalFilename": "s_y0dba4sfhy8",
+      "hash": "Y0Dba4SFhY8",
+      "ctxKind": "function",
+      "ctxName": "component$",
+      "captures": false,
+      "parent": null,
+      "loc": [
+        305,
+        955
+      ]
+    },
     "s_Zdgphc4Ye00": {
       "origin": "components/table/nrdc.tsx",
       "displayName": "nrdc_component",
@@ -965,20 +979,6 @@
       "loc": [
         231,
         929
-      ]
-    },
-    "s_p2dGNt1HjMY": {
-      "origin": "../node_modules/@qwik-ui/headless/components/collapsible/collapsible.qwik.mjs",
-      "displayName": "HCollapsible_component",
-      "canonicalFilename": "s_p2dgnt1hjmy",
-      "hash": "p2dGNt1HjMY",
-      "ctxKind": "function",
-      "ctxName": "component$",
-      "captures": false,
-      "parent": null,
-      "loc": [
-        422,
-        2922
       ]
     },
     "s_qPWSbvCeiUw": {
@@ -4495,20 +4495,6 @@
         73269
       ]
     },
-    "s_Y0Dba4SFhY8": {
-      "origin": "../node_modules/@qwik-ui/headless/components/carousel/pagination.qwik.mjs",
-      "displayName": "HCarouselPagination_component",
-      "canonicalFilename": "s_y0dba4sfhy8",
-      "hash": "Y0Dba4SFhY8",
-      "ctxKind": "function",
-      "ctxName": "component$",
-      "captures": false,
-      "parent": null,
-      "loc": [
-        305,
-        955
-      ]
-    },
     "s_YNoCIb1oJRs": {
       "origin": "../node_modules/qwik-feather-icons/lib/index.qwik.mjs",
       "displayName": "book_icon_component",
@@ -5781,6 +5767,20 @@
       "loc": [
         352381,
         353802
+      ]
+    },
+    "s_p2dGNt1HjMY": {
+      "origin": "../node_modules/@qwik-ui/headless/components/collapsible/collapsible.qwik.mjs",
+      "displayName": "HCollapsible_component",
+      "canonicalFilename": "s_p2dgnt1hjmy",
+      "hash": "p2dGNt1HjMY",
+      "ctxKind": "function",
+      "ctxName": "component$",
+      "captures": false,
+      "parent": null,
+      "loc": [
+        422,
+        2922
       ]
     },
     "s_p4vEji1075M": {
@@ -8670,6 +8670,7 @@
     "s_WNu1rBuKxtI": "q-CK8CNuXS.js",
     "s_WXTgm1srZ7w": "q-Jrbjork5.js",
     "s_XHwTFp0s9lo": "q-nzrPDLSx.js",
+    "s_Y0Dba4SFhY8": "q-BnjHnDuZ.js",
     "s_Zdgphc4Ye00": "q-D0DuBoQf.js",
     "s_a08hikrrgz0": "q-SRt097Uu.js",
     "s_ceU05TscGYE": "q-B_sBPqCt.js",
@@ -8682,7 +8683,6 @@
     "s_kxT0k7Q0RMM": "q-DqqpmEYn.js",
     "s_lCEtqoabVsA": "q-D_EVkbDw.js",
     "s_lhvZLmN5R44": "q-QS79p_YX.js",
-    "s_p2dGNt1HjMY": "q-DRqvg-7y.js",
     "s_qPWSbvCeiUw": "q--zhFI-f8.js",
     "s_sD3aCbP01XU": "q-BC5rqyOW.js",
     "s_tktTjd55mgQ": "q-L-kIeqG7.js",
@@ -8934,7 +8934,6 @@
     "s_XYAPCjr4wm8": "q-BEO7P0wV.js",
     "s_XhX9JZHxgis": "q-DjzwSz2Y.js",
     "s_Xs0z5Dj1eds": "q-CsjxGIYW.js",
-    "s_Y0Dba4SFhY8": "q-BnjHnDuZ.js",
     "s_YNoCIb1oJRs": "q-Ck-652vr.js",
     "s_YRGHTUEzplo": "q-Cx3GPeAZ.js",
     "s_YtY3U3EivSw": "q-CyrogksM.js",
@@ -9026,6 +9025,7 @@
     "s_os0q4h2WwE8": "q-Dk9tey6A.js",
     "s_ozXqWoMGDT8": "q-BojSy8VS.js",
     "s_p0ypDiA8Kzo": "q-CyX-Da4B.js",
+    "s_p2dGNt1HjMY": "q-DRqvg-7y.js",
     "s_p4vEji1075M": "q-CbGuEIYR.js",
     "s_p5Sh009fz20": "q-jogU1l2N.js",
     "s_pDmRrX0mPQA": "q-bALyNkG_.js",
@@ -16724,7 +16724,7 @@
       "location": "head",
       "attributes": {
         "rel": "stylesheet",
-        "href": "/build/q-CUBRA-No.css"
+        "href": "/build/q-UClOBwzN.css"
       }
     }
   ],
