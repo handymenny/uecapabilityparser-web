@@ -1,0 +1,1 @@
+import{u}from"./q-xR5KXqz6.js";const c=a=>{const[e,l,s]=u();if(a.key==="Backspace"){if(!e.multiple||e.selectedValueSetSig.value.size===0||!e.removeOnBackspace)return;if((s.value||l.value)&&e.inputValueSig.value.length===0){const t=[...e.selectedValueSetSig.value];t.pop(),e.selectedValueSetSig.value=new Set(t)}}};export{c as s_EsnY8MIAoFE};

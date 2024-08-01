@@ -1,0 +1,1 @@
+import{s as n}from"./q-BFGzgae4.js";import{u as i}from"./q-xR5KXqz6.js";import"./q-C7i0xNVT.js";import"./q-BKjajERW.js";const b=function({track:e}){const[s,o,t]=i(),a=e(()=>s.tabInfoList),c=t.value;n(a,o,t,{tabIdToSelect:c},!0)};export{b as s_jXgz0XyNKTo};

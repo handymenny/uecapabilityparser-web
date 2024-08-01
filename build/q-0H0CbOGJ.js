@@ -1,1 +1,0 @@
-import{u}from"./q-DhVgi9SL.js";const n=l=>{const[e,r,s,t,o]=u();if(!r.value||o.value===void 0||!e.scrollerRef.value)return;const a=(l.pageX-e.scrollerRef.value.offsetLeft-o.value)*1.75;e.scrollerRef.value.scrollLeft=t.value-a,s.value=!0};export{n as s_SCafOkiejmw};

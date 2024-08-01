@@ -1,0 +1,1 @@
+import{u as l}from"./q-xR5KXqz6.js";const n=()=>{const[e,i]=l();e.currentIndexSig.value>=i.value&&e.isLoopSig.value?e.currentIndexSig.value=0:e.currentIndexSig.value++};export{n as s_6AOi9lFLoFU};

@@ -1,0 +1,1 @@
+import{u}from"./q-xR5KXqz6.js";const s=({track:l})=>{const[a,i,e,o]=u();l(()=>e.value),a.triggerRefsArray.value[e.value]=o,l(()=>i.value),i.value&&(a.selectedIndexSig.value=e.value)};export{s as s_mDldXWz9ohY};

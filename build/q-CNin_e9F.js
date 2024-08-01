@@ -1,0 +1,1 @@
+import{u as s}from"./q-xR5KXqz6.js";const t=async({track:o})=>{const[e,a,i]=s();o(()=>e.isOpenSig.value),a.value||(e.isOpenSig.value?await i.showPopover():await i.hidePopover())};export{t as s_dE8SM1S2zv4};

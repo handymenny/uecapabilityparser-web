@@ -1,0 +1,1 @@
+import{u as d}from"./q-xR5KXqz6.js";const r=function({track:n}){const[c,i,e,o]=d();n(()=>i.currentIndexSig.value);const t=window.matchMedia("(prefers-reduced-motion: reduce)");o.value=t.matches,e.value||(t.addEventListener("change",c),e.value=!0)};export{r as s_PKe8r3vvsuE};

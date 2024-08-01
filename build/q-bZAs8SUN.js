@@ -1,1 +1,0 @@
-import{u as n}from"./q-DhVgi9SL.js";const c=async function(){const[e,o]=n();if(o._index===void 0)throw Error("Qwik UI: Select component item cannot find its proper index.");e.value=o._index};export{c as s_KPo8EN4Xm18};
