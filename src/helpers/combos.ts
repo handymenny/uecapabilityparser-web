@@ -111,7 +111,8 @@ function lteBwClassCCs(bwClass: string) {
     case 'F':
       return 5;
     default:
-      throw 'InvalidValue';
+      console.warn(`lteBwClassCCs: ${bwClass} is invalid`);
+      return 1;
   }
 }
 
@@ -140,7 +141,8 @@ function nrFr1BwClassCCs(bwClass: string) {
     case 'L':
       return 8;
     default:
-      throw 'InvalidValue';
+      console.warn(`nrFr1BwClassCCs: ${bwClass} is invalid`);
+      return 1;
   }
 }
 
@@ -192,7 +194,8 @@ function nrFr2BwClassCCs(bwClass: string) {
     case 'R12':
       return 12;
     default:
-      throw 'InvalidValue';
+      console.warn(`nrFr2BwClassCCs: ${bwClass} is invalid`);
+      return 1;
   }
 }
 
