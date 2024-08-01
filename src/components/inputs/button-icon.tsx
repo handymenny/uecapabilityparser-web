@@ -23,7 +23,6 @@ export default component$((props: Props) => {
         type={type}
         class={`appearance-none p-[5.6px] focus:outline-none focus:ring focus:ring-gray-400 disabled:bg-gray-300 disabled:opacity-70`}
         disabled={disabled}
-        // eslint-disable-next-line qwik/valid-lexical-scope
         onClick$={onClick$}
         aria-label={label}
         aria-hidden={hidden}
