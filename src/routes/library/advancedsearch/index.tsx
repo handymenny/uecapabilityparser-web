@@ -55,6 +55,7 @@ export default component$(() => {
 
   const resultData = useResource$(({ track }) => {
     track(() => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       query.criteriaList;
     });
     if (isServer) return;

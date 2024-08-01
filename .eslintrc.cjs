@@ -35,7 +35,23 @@ module.exports = {
     'prefer-spread': 'off',
     'no-case-declarations': 'off',
     'no-console': 'off',
-    '@typescript-eslint/no-unused-vars': ['error'],
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      {
+        args: 'all',
+        argsIgnorePattern: '^_',
+        caughtErrorsIgnorePattern: '^_',
+        destructuredArrayIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+        ignoreRestSiblings: true,
+      },
+    ],
     '@typescript-eslint/consistent-type-imports': 'warn',
+    '@typescript-eslint/no-unused-expressions': [
+      'error',
+      {
+        allowShortCircuit: true,
+      },
+    ],
   },
 };

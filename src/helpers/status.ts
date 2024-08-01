@@ -60,7 +60,7 @@ const getMultiParseLegacy = async () => {
       validateStatus: () => true,
     });
     return response.status !== 404 && response.status < 500;
-  } catch (ignored) {
+  } catch (_) {
     return false;
   }
 };

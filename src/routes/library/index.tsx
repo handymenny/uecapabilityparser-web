@@ -54,6 +54,7 @@ export default component$(() => {
 
   const resultData = useResource$(({ track }) => {
     track(() => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       documentReady.value;
     });
     if (isServer) return;

@@ -38,7 +38,7 @@ export function logTypeToString(type: string) {
     case 'QMDL':
     case 'HDF':
     case 'SDM':
-      'Diag log';
+      return 'Diag log';
   }
   return 'Unknown';
 }

@@ -24,7 +24,7 @@ export default component$(({ capabilitiesList, groupDescription }: Props) => {
       const result = await axios.get(itemUrl, { params: { id: id } });
       const indexLine = result.data as IndexLine;
       items.value[id] = indexLine;
-    } catch (ignored) {
+    } catch (_) {
       /* do nothing */
     }
     return items.value[id];
