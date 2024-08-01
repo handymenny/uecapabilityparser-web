@@ -1,1 +1,0 @@
-import{u as l}from"./q-xR5KXqz6.js";const v=function({track:o}){var a;const[u,e,n]=l(),i=n["bind:open"];o(()=>e.value),u.value||(a=n.onOpenChange$)==null||a.call(n,e.value),i&&i.value!==e.value&&(i.value=e.value)};export{v as s_Jn3Zzhj38gw};

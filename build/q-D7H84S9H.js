@@ -1,1 +1,0 @@
-import{u as t}from"./q-xR5KXqz6.js";const g=function({track:i}){const[e,a,n,u,l]=t();if(i(()=>e.selectedIndexSig.value),!e.isMultipleSig.value)if(e.selectedIndexSig.value!==u.value)n.value=!1;else{if(!a.value&&l.value&&e.onChange$&&e.onChange$(l.value),!e.givenValueSig)return;e.givenValueSig.value=l.value??null}};export{g as s_IKodNs4gXmQ};

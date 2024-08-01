@@ -1,0 +1,1 @@
+import{u as o}from"./q-Dt-s0v6u.js";const u=l=>{var a,n,p;const[e,t]=o();e.isOpenSig.value=l.newState==="open",(a=e.panelRef)!=null&&a.value&&(n=e.panelRef)!=null&&n.value.classList.contains(":popover-open")&&(p=e.panelRef)!=null&&p.value.parentElement&&!t.value&&e.panelRef.value.parentElement.appendChild(e.panelRef.value)};export{u as s_0p00H2IILu4};

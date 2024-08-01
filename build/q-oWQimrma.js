@@ -1,0 +1,1 @@
+import{c as r,o as e,d as t,r as n,l as a}from"./q-Dt-s0v6u.js";import{c}from"./q-55c_HSBC.js";const m=o=>{const s=`${r(c).localId}-error-message`;return e("div",{role:"alert",id:s,...o,children:t(n,null,3,"s6_0")},{role:a},0,"s6_1")};export{m as s_1NTJkZnOxYs};

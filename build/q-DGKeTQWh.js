@@ -1,0 +1,1 @@
+import{u as t}from"./q-Dt-s0v6u.js";const n=async()=>{const[s,e,o,l,i]=t();o.value||(i._index??-1)===null||(await s.selectionManager$(i._index??-1,"toggle"),!l.value&&!e.multiple&&(e.isListboxOpenSig.value=!1))};export{n as s_VLC5wAMdsew};
