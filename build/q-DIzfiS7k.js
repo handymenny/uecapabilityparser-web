@@ -1,0 +1,1 @@
+import{u as a}from"./q-DhVgi9SL.js";const u=async()=>{var c,t;const[n,l,o,s,e]=a();o||s.value===null||((c=e.onItemSelect)==null||c.call(e),n&&(l.isOpenSig.value=!1,(t=l.triggerRef.value)==null||t.focus()))};export{u as s_IOmWD0hVDmU};

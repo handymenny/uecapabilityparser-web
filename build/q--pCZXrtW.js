@@ -1,1 +1,0 @@
-import{_ as t}from"./q-C7i0xNVT.js";import{A as e,q as l,d as o,S as s,b as r}from"./q-DiiDRB9g.js";const i=e(l(()=>t(()=>import("./q-DUbESzUH.js"),[]),"s_uiCqQ5UkIHM")),m=_=>o(i,{role:"region",..._,children:o(s,null,3,"0S_0"),[r]:{role:r}},0,"0S_1");export{m as s_KiwHG3QWfRA};

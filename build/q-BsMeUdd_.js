@@ -1,0 +1,1 @@
+import{u as l}from"./q-DhVgi9SL.js";const p=e=>{var r;const[t]=l();let o=1;const s=t.itemsMapSig.value.size;if(!t.loop&&e-1<0)return e;for(;o<=s;){const a=(e-o+s)%s;if(!((r=t.itemsMapSig.value.get(a))!=null&&r.disabled))return a;if(o++,!t.loop&&e-o<0)break}return e};export{p as s_ZRP7FGyaKu8};

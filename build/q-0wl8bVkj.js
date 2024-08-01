@@ -1,1 +1,0 @@
-import{v as e,a as r}from"./q-DiiDRB9g.js";import{p as s}from"./q-CVeAmpIm.js";const p=o=>{const t=e(s);return r("div",{ref:t.arrowRef,get style(){return{position:"absolute",background:"red"}},...o},{style:{position:"absolute",background:"red"}},0,"cM_0")};export{p as s_umXhevHQ2vg};

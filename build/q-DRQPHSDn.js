@@ -1,0 +1,1 @@
+import{u as s}from"./q-DhVgi9SL.js";const d=({track:o,cleanup:n})=>{const[e,i]=s();o(()=>e.isListboxOpenSig.value),e.isListboxOpenSig.value&&window.addEventListener("pointerdown",i),n(()=>{window.removeEventListener("pointerdown",i)})};export{d as s_21Mo3Qd9UB4};

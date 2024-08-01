@@ -1,0 +1,1 @@
+import{u as a}from"./q-DhVgi9SL.js";const i=e=>{const[t]=a(),o=t.itemsMapSig.value.size;if(o===1)return t.disabledIndexSetSig.value.has(0)?-1:0;let s=1;if(!t.loop&&e+1>=o)return e;for(;s<o;){const r=(e+s)%o;if(!t.disabledIndexSetSig.value.has(r))return r;if(s++,!t.loop&&e+s>=o)break}return e};export{i as s_XUVQIyHVFoU};

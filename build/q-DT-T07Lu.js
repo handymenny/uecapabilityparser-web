@@ -1,0 +1,1 @@
+import{u as r}from"./q-DhVgi9SL.js";const o=async s=>{const[e,t]=r();if(!e.isOpenSig.value||!e.panelRef.value||!e.triggerRef.value)return;const c=e.panelRef.value.getBoundingClientRect(),u=e.triggerRef.value.getBoundingClientRect(),{clientX:i,clientY:n}=s,a=await t(c,i,n),g=await t(u,i,n);a&&g&&(e.isOpenSig.value=!1)};export{o as s_pNglM5GOirg};

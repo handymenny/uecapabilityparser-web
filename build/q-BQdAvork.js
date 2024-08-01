@@ -1,0 +1,1 @@
+import{u as a}from"./q-DhVgi9SL.js";const l=function({track:u}){var t;const[n,e,i]=a();u(()=>n.inputValueSig.value),e.value||(t=i.onInput$)==null||t.call(i,n.inputValueSig.value)};export{l as s_X18WzcHsKew};

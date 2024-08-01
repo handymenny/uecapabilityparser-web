@@ -1,0 +1,34 @@
+const n=`/* This only applies when popover isn't supported */
+@supports not selector(:popover-open) {
+  /* The polyfill adds this class when popped out */
+  [popover]:not(.\\:popover-open) {
+    display: none;
+  }
+}
+
+.popover-closing {
+  display: block !important;
+}
+
+/* Strips the user agent styles from the popover when in floating mode */
+@layer qwik-ui {
+  [data-floating] {
+    margin: unset;
+    padding: unset;
+    border: unset;
+    overflow: unset;
+    position: absolute;
+  }
+}
+
+/** override the polyfill's layer, which gets dynamically imported later on. */
+@layer popover-polyfill {
+  [data-floating] {
+    margin: unset;
+    padding: unset;
+    border: unset;
+    overflow: unset;
+    position: absolute;
+  }
+}
+`,o=n;export{o as s_XydisE1slPA};
