@@ -1,0 +1,1 @@
+import{t,v as e,x as l,d as n,S as o}from"./q-DiiDRB9g.js";import{s as a}from"./q-cnYlTvu_.js";const c=()=>{t();const s=e(a);return l("span",null,null,s.isSelectedSig.value&&n(o,null,3,"yK_0"),1,"yK_1")};export{c as s_ejbQa60HlD0};

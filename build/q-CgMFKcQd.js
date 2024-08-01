@@ -1,0 +1,1 @@
+let w;(function(r){r.ArrowLeft="ArrowLeft",r.ArrowRight="ArrowRight",r.ArrowUp="ArrowUp",r.ArrowDown="ArrowDown",r.Home="Home",r.End="End",r.PageUp="PageUp",r.PageDown="PageDown",r.Enter="Enter"})(w||(w={}));export{w as K};

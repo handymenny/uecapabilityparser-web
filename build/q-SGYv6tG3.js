@@ -1,0 +1,1 @@
+function e(n){return typeof n=="number"}function r(n){return e(n)&&!isNaN(n)&&n>0}function i(n,t){return e(n)&&!isNaN(n)&&n<=t&&n>=0}function u(n,t){return`${Math.round(n/t*100)}%`}function a(n,t){return n==null?"indeterminate":n===t?"complete":"loading"}export{i as a,e as b,u as d,a as g,r as i};
