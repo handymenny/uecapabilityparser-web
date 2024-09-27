@@ -49,6 +49,16 @@ export default component$(() => {
 
       return itemsMerged;
     } catch (err: any) {
+      if (axios.isAxiosError(err)) {
+        switch (err.response?.status) {
+          case 413:
+          case 400:
+          case 500:
+            throw new AlertException('Invalid search');
+          default:
+            throw new AlertException(err.message);
+        }
+      }
       throw new AlertException(err);
     }
   });
