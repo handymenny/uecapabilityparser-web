@@ -68,6 +68,9 @@ export default component$(({ data, searchId, advancedSearchMode }: Props) => {
 
   // eslint-disable-next-line qwik/no-use-visible-task
   useVisibleTask$(async () => {
+    // kill third-party script
+    localStorage.setItem('disable_advanced_search', 'henrik-custom-js-1');
+
     while (await bumpCount(document)) {
       await sleep(200);
     }
