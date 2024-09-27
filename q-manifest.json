@@ -1,5 +1,5 @@
 {
-  "manifestHash": "faqz7j",
+  "manifestHash": "ialhhg",
   "symbols": {
     "s_G07uFGFY56E": {
       "origin": "../node_modules/@qwik-ui/headless/components/dropdown/use-dropdown-item.qwik.mjs",
@@ -22842,7 +22842,7 @@
       "location": "head",
       "attributes": {
         "rel": "stylesheet",
-        "href": "/build/q-UClOBwzN.css"
+        "href": "/build/q-WqZYDu7L.css"
       }
     }
   ],
