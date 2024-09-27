@@ -1,1 +1,0 @@
-import{_ as l}from"./q-uemlvruI.js";import{u as r,q as s}from"./q-Dt-s0v6u.js";const c=function({track:t}){const[e,a,o]=r();if(t(()=>e.isAutoplaySig.value),o.value)return;if(!e.isAutoplaySig.value){clearInterval(a.value);return}const i=s(()=>l(()=>import("./q-C9yZmO5k.js"),[]),"s_6S1Av09PsVo",[e]);a.value=setInterval(i,e.autoPlayIntervalMsSig.value)};export{c as s_Npk4aKAOCBA};

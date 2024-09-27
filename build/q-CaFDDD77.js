@@ -1,1 +1,0 @@
-import{s as c}from"./q-DIpSkvo2.js";import{u as i}from"./q-Dt-s0v6u.js";import"./q-uemlvruI.js";import"./q-BKjajERW.js";const S=e=>{const[t,o,s]=i();c(t.tabInfoList,o,s,{tabIdToSelect:e})};export{S as s_wuRYlp09lLI};

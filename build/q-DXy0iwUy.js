@@ -1,1 +1,0 @@
-import{u as a}from"./q-Dt-s0v6u.js";const c=()=>{const[e,t,u,l]=a();if(!e.isLoopSig.value){if(t.value&&l.value){const o=document.activeElement;setTimeout(()=>{var i;document.activeElement===o&&u.value>=e.currentIndexSig.value&&((i=e.prevButtonRef.value)==null||i.focus())},2e3)}t.value=!1}};export{c as s_l70fsSrhNpY};

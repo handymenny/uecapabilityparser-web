@@ -1,0 +1,1 @@
+import{u as r}from"./q-DS5F2qDR.js";const t=function(){const[i,e,o]=r();if(e._index!==void 0)i.slideRefsArray.value[e._index]=o;else throw new Error("Qwik UI: Carousel Slide cannot find its proper index.")};export{t as s_liDUAtwVZiQ};

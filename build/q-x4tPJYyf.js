@@ -1,1 +1,0 @@
-import{u as l}from"./q-Dt-s0v6u.js";const c=async a=>{const[e,o,t]=l();e.alert===!0||e.closeOnBackdropClick===!1||a.target instanceof HTMLDialogElement&&await o.wasModalBackdropClicked(t.value,a)&&(e.showSig.value=!1)};export{c as s_0BUFMph3sB0};

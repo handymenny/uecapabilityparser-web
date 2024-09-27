@@ -1,0 +1,1 @@
+import{u as r}from"./q-DS5F2qDR.js";const o=async e=>{const[a]=r();switch(e.key){case"ArrowDown":await a("next");break;case"ArrowUp":await a("prev");break;case"Home":await a("first");break;case"End":await a("last");break}};export{o as s_A0NIoASUqG0};

@@ -1,0 +1,1 @@
+import{u as r}from"./q-DS5F2qDR.js";const g=async function({track:n}){var t;const[o,l,s,u,a]=r(),e=u["bind:value"];if(e){n(()=>e.value);for(const[i,c]of s.value)(t=e.value)!=null&&t.includes(c.value)?(await a.selectionManager$(i,"add"),l.value&&(o.highlightedIndexSig.value=i)):await a.selectionManager$(i,"remove")}};export{g as s_HWs4E0uYeZo};
