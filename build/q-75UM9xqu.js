@@ -1,1 +1,0 @@
-import{u as s}from"./q-DS5F2qDR.js";const t=function(){const[e,l,i]=s(),n=e.numSlidesSig.value-e.slidesPerViewSig.value;typeof i._index=="number"&&i._index>n&&(l.value=!1)};export{t as s_GAJ0gU4gixM};

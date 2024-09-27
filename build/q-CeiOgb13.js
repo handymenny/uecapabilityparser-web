@@ -1,1 +1,0 @@
-import{_ as r}from"./q-2LWRYvkK.js";import{c as s,o as _,d as e,q as l,r as n}from"./q-DS5F2qDR.js";import{m as a}from"./q-ssYn7nN3.js";const p=t=>{const o=s(a);return _("button",{...t,children:e(n,null,3,"Vp_0"),onClick$:l(()=>r(()=>import("./q-_tco-dDd.js"),[]),"s_lb3riOeAHtU",[o])},null,0,"Vp_1")};export{p as s_jt6id8arrus};

@@ -1,0 +1,1 @@
+import{a as l}from"./q-CDgUVCuJ.js";import{c as a,o as n,e as t,i as o,d as r,r as u}from"./q-By7BYNEc.js";const x=e=>{const i=a(l);return n("div",{...e,children:t("div",null,{class:o(s=>s.value===!0?"visible":"invisible",[i],'p0.value===true?"visible":"invisible"'),"aria-hidden":"true"},r(u,null,3,"09_0"),1,null)},null,0,"09_1")};export{x as s_2Y6gau0lmeo};

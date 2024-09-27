@@ -1,1 +1,0 @@
-import{u as i}from"./q-DS5F2qDR.js";const c=()=>{const[e,t]=i();if(!e.isLoopSig.value){if(t.value&&e.currentIndexSig.value===0){const o=document.activeElement;setTimeout(()=>{var u;document.activeElement===o&&e.currentIndexSig.value===0&&((u=e.nextButtonRef.value)==null||u.focus())},2e3)}t.value=!1}};export{c as s_P60UeC7X8s8};
