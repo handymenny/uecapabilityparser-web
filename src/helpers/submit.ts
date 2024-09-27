@@ -15,6 +15,7 @@ const preprocessorUrl =
   '[prepocessor](https://github.com/HandyMenny/uecapabilityparser-prepocessor)';
 const pcapNgError = `PcapNg isn't supported, please convert this file to PCAP before submitting.<br>You can use ${preprocessorUrl} to do that.`;
 const tooBigError = `Input data too big for this instance.<br> You can use ${preprocessorUrl} to reduce its size.<br>Alternatively, you can run you own instance or use cli.`;
+const noLogError = 'No log attached.';
 
 const fileToBase64 = async (data: File) => {
   const arrayBuffer = await data.arrayBuffer();
@@ -214,6 +215,10 @@ export const submitMultiPart = async (
       `${index}-inputText`,
       `${index}-inputFile`,
     );
+
+    if (input.length == 0) {
+      throw noLogError;
+    }
 
     let inputs = [...input];
 
