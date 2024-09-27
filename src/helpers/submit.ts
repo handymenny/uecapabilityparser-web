@@ -10,12 +10,17 @@ import { encode, fromUint8Array } from 'js-base64';
 import axios from 'axios';
 import { Endpoints } from '~/helpers/endpoints';
 import { StatusHelper } from './status';
+import { getLogTypeOption } from './logtypes';
 
 const preprocessorUrl =
   '[prepocessor](https://github.com/HandyMenny/uecapabilityparser-prepocessor)';
 const pcapNgError = `PcapNg isn't supported, please convert this file to PCAP before submitting.<br>You can use ${preprocessorUrl} to do that.`;
 const tooBigError = `Input data too big for this instance.<br> You can use ${preprocessorUrl} to reduce its size.<br>Alternatively, you can run you own instance or use cli.`;
 const noLogError = 'No log attached.';
+const multiOutputNotSupportedError =
+  'Uploading multiple logs is not supported when one of them is a PCAP or Diag Log.<br>Please upload them separately.';
+const parseError =
+  "Parsing failed. The input is invalid or doesn't contain valid data.";
 
 const fileToBase64 = async (data: File) => {
   const arrayBuffer = await data.arrayBuffer();
@@ -193,7 +198,7 @@ export const submitMultiLegacy = async (
   const multi = result.data as MultiCapabilities;
 
   if (multi.capabilitiesList == undefined) {
-    throw "Parsing failed. The input is invalid or doesn't contain valid data.";
+    throw parseError;
   }
 
   return multi;
@@ -277,6 +282,14 @@ export const submitMultiPart = async (
     });
   }
 
+  // check if there's more than one request and one is multioutput
+  const foundMultiOutputType = requests.some(
+    (it) => getLogTypeOption(it.type)?.multiOutput,
+  );
+  if (requests.length > 1 && foundMultiOutputType) {
+    throw multiOutputNotSupportedError;
+  }
+
   const maxRequestSize = await StatusHelper.getMaxRequestSize();
   const sizes = files.map((it) => it.size);
   const fullSize = sizes.reduce((acc, current) => acc + current);
@@ -286,15 +299,35 @@ export const submitMultiPart = async (
   }
 
   const url = Endpoints.PARSEMULTIPART;
-  const result = await axios.postForm(url, {
-    requests: JSON.stringify(requests),
-    file: files,
-  });
 
-  const multi = result.data as MultiCapabilities;
+  let multi: MultiCapabilities | undefined;
 
-  if (multi.capabilitiesList == undefined) {
-    throw "Parsing failed. The input is invalid or doesn't contain valid data.";
+  try {
+    const result = await axios.postForm(url, {
+      requests: JSON.stringify(requests),
+      file: files,
+    });
+
+    multi = result.data as MultiCapabilities;
+  } catch (err: any) {
+    console.error(err);
+    if (axios.isAxiosError(err)) {
+      switch (err.response?.status) {
+        case 413:
+          throw tooBigError;
+        case 400:
+        case 500:
+          throw parseError;
+        default:
+          throw err.message;
+      }
+    }
+    throw err;
   }
+
+  if (multi?.capabilitiesList == undefined) {
+    throw parseError;
+  }
+
   return multi;
 };
