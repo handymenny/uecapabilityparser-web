@@ -1,0 +1,1 @@
+import{y as c}from"./q-PXVB0oKg.js";const i=t=>{const e=t.cloneNode(!0);Object.assign(e.style,{overflow:"visible",height:"auto",maxHeight:"none",opacity:"0",visibility:"hidden",display:"block"}),t.after(e);const o=e.offsetHeight;return e.remove(),o};export{c as _hW,i as s_FcZ4KfgFEDg};

@@ -1,1 +1,0 @@
-import{u as l}from"./q-By7BYNEc.js";const f=async s=>{const[e,t]=l();if(!e.isListboxOpenSig.value||!e.popoverRef.value||!e.triggerRef.value)return;const n=e.popoverRef.value.getBoundingClientRect(),c=e.triggerRef.value.getBoundingClientRect(),{clientX:i,clientY:o}=s,u=await t(n,i,o),a=await t(c,i,o);u&&a&&(e.isListboxOpenSig.value=!1)};export{f as s_CiikGjft2OY};

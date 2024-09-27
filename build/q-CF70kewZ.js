@@ -1,1 +1,0 @@
-import{u as i}from"./q-By7BYNEc.js";const u=async function({track:l}){var a;const[t,n,e]=i();if(l(()=>t.selectedIndexSetSig.value),!e.nativeSelectRef.value||!n.value)return;const s=new Event("input",{bubbles:!1});(a=e.nativeSelectRef.value)==null||a.dispatchEvent(s),n.value.selected=t.selectedIndexSetSig.value.has(e.index)};export{u as s_8VAbwZDH308};

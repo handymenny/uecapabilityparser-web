@@ -1,1 +1,0 @@
-import{u}from"./q-By7BYNEc.js";const n=()=>{const[e]=u();e.currentIndexSig.value===0&&e.isLoopSig.value?e.currentIndexSig.value=e.numSlidesSig.value-1:e.currentIndexSig.value--};export{n as s_oyqp6PfM0PA};

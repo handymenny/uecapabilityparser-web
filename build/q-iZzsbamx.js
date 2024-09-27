@@ -1,1 +1,0 @@
-import{u}from"./q-By7BYNEc.js";const r=async()=>{const[l,t,a,i,p,e]=u(),o=typeof HTMLElement<"u"&&typeof HTMLElement.prototype=="object"&&"popover"in HTMLElement.prototype;return i.value=o,!a.value&&!o&&await p(),t.value||(e.value===null&&(e.value=document.getElementById(`${l}-panel`)),t.value=!0),e.value};export{r as s_S4GiA3DvL3w};

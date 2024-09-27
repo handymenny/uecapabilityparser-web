@@ -1,1 +1,0 @@
-import{u as l}from"./q-By7BYNEc.js";const p=async()=>{var e;const[i,o,a,t]=l();if(await o(),!a.value)for(;!i.value;)await new Promise(s=>setTimeout(s,10));(e=t.value)==null||e.hidePopover()};export{p as s_dHGYVGlwJKw};

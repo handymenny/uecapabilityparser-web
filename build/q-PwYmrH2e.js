@@ -1,1 +1,0 @@
-const p=r=>{var t,a;for(;r!=null&&r.parentElement;){if(((t=r.parentElement)==null?void 0:t.tagName)==="DIALOG"||(a=r.parentElement)!=null&&a.hasAttribute("popover"))return r.parentElement;r=r.parentElement}return null};export{p as s_KSA0sf8wVLo};

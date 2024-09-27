@@ -1,1 +1,0 @@
-import{s as n}from"./q-DqXkeO1s.js";import{u as c}from"./q-By7BYNEc.js";import"./q-2LWRYvkK.js";import"./q-BKjajERW.js";const u=function({track:o}){const[t,s,e,i]=c(),a=o(()=>e.value);n(s.tabInfoList,e,i,{indexToSelect:a}),typeof e.value<"u"&&(t==null||t(e.value))};export{u as s_Lxbat20NR5o};

@@ -1,1 +1,0 @@
-import{u as s}from"./q-By7BYNEc.js";const r=({track:i,cleanup:o})=>{const[e,n]=s();i(()=>e.isOpenSig.value),e.isOpenSig.value&&window.addEventListener("pointerdown",n),o(()=>{window.removeEventListener("pointerdown",n)})};export{r as s_tSs1qrEncmg};

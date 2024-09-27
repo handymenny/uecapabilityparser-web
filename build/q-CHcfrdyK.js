@@ -1,0 +1,1 @@
+import{g as o,y as n}from"./q-PXVB0oKg.js";const t=a=>{const[e,s]=o();s.value=a,e&&e(s.value)},u=Object.freeze(Object.defineProperty({__proto__:null,_hW:n,s_obH38hK9UDo:t},Symbol.toStringTag,{value:"Module"})),c=a=>{const[e,s]=o();return e(s.value.filter(l=>l!==a))},g=a=>{const[e,s]=o();return e([...s.value,a])};export{n as _hW,g as a,u as b,c as s,t as s_obH38hK9UDo};
