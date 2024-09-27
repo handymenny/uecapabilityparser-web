@@ -74,28 +74,30 @@ export default component$(() => {
         <Alert title="Error" show={showAlert}>
           <p dangerouslySetInnerHTML={alertMessage.value} />
         </Alert>
-        <Resource
-          value={resultData}
-          onPending={() => spinner}
-          onResolved={(data) => {
-            if (data == null) {
+        {query.criteriaList.length == 0 || (
+          <Resource
+            value={resultData}
+            onPending={() => spinner}
+            onResolved={(data) => {
+              if (data == null) {
+                return <></>;
+              } else {
+                return (
+                  <LibraryGrid
+                    data={data}
+                    advancedSearchMode={true}
+                    searchId="advancedSearch"
+                  />
+                );
+              }
+            }}
+            onRejected={(error) => {
+              showAlert.value = true;
+              alertMessage.value = markdownToHtml(error.message);
               return <></>;
-            } else {
-              return (
-                <LibraryGrid
-                  data={data}
-                  hideAddNew={true}
-                  searchId="advancedSearch"
-                />
-              );
-            }
-          }}
-          onRejected={(error) => {
-            showAlert.value = true;
-            alertMessage.value = markdownToHtml(error.message);
-            return <></>;
-          }}
-        />
+            }}
+          />
+        )}
       </div>
     </>
   );

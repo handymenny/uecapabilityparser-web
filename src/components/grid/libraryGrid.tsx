@@ -12,14 +12,15 @@ import type { IndexLine, MultiIndexLine } from '~/@types/uecapabilityparser';
 import Search from '../search/search';
 import { searchFuzzyLibrary } from '~/helpers/search';
 import { sleep } from '~/helpers/sleep';
+import ButtonLink from '../inputs/button-link';
 
 interface Props {
   data: (IndexLine | MultiIndexLine)[];
   searchId: string;
-  hideAddNew?: boolean;
+  advancedSearchMode?: boolean;
 }
 
-export default component$(({ data, searchId, hideAddNew }: Props) => {
+export default component$(({ data, searchId, advancedSearchMode }: Props) => {
   const getUrl = (item: MultiIndexLine | IndexLine) => {
     const multi = (item as MultiIndexLine).indexLineIds != null;
     const path = multi ? '/view/multi/' : '/view/';
@@ -83,25 +84,39 @@ export default component$(({ data, searchId, hideAddNew }: Props) => {
 
   return (
     <div class={'mx-auto w-full max-w-7xl'}>
-      <Search
-        placeholder={'Search logs'}
-        hidden={false}
-        disabled={false}
-        fuzzy={{ id: searchId, keys: ['description', 'timestamp'], data: data }}
-        onKeyUp$={async (value: string) => {
-          if (value.trim().length == 0) {
-            filteredData.value = data;
-          } else {
-            filteredData.value = searchFuzzyLibrary(searchId, value) ?? data;
-          }
-        }}
-      />
+      <div class="flex gap-x-4">
+        {advancedSearchMode == true || (
+          <div class={'w-auto'}>
+            <ButtonLink
+              href="/library/advancedsearch/"
+              label="Advanced Search"
+            />
+          </div>
+        )}
+        <Search
+          placeholder={'Search logs'}
+          hidden={false}
+          disabled={false}
+          fuzzy={{
+            id: searchId,
+            keys: ['description', 'timestamp'],
+            data: data,
+          }}
+          onKeyUp$={async (value: string) => {
+            if (value.trim().length == 0) {
+              filteredData.value = data;
+            } else {
+              filteredData.value = searchFuzzyLibrary(searchId, value) ?? data;
+            }
+          }}
+        />
+      </div>
       <div
         class={
           'grid grid-cols-2 gap-x-5 gap-y-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'
         }
       >
-        {hideAddNew == true || (
+        {advancedSearchMode == true || (
           <Cell
             label={'Add New'}
             url={'/parser'}

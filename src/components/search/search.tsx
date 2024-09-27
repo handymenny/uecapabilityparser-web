@@ -22,13 +22,13 @@ export default component$((props: Props) => {
   if (fuzzy) initializeFuzzySearcher(fuzzy.id, fuzzy.keys, fuzzy.data);
 
   return (
-    <div class="relative my-2 flex flex-col">
+    <div class="flex-basis-0 relative my-2 flex flex-grow flex-col">
       <label for={id} aria-label={label} class={`${hiddenCssClass}`}></label>
       <input
         type="text"
         id={id}
         placeholder={placeholder}
-        class={`appearance-none border-2 border-solid border-black bg-white p-2 pl-[40px] placeholder:text-gray-400 focus:outline-none focus:ring focus:ring-gray-400 disabled:bg-gray-300 disabled:opacity-70 ${hiddenCssClass}`}
+        class={`h-full appearance-none border-2 border-solid border-black bg-white p-2 pl-[40px] text-lg placeholder:text-gray-400 focus:outline-none focus:ring focus:ring-gray-400 disabled:bg-gray-300 disabled:opacity-70 ${hiddenCssClass}`}
         name={name}
         disabled={disabled}
         onKeyUp$={(_, currentTarget) => {
@@ -39,7 +39,7 @@ export default component$((props: Props) => {
         size={28}
         strokeWidth={1.3}
         color={disabled ? 'rgb(106, 112, 129)' : 'rgb(156 163 175)'}
-        class="absolute bottom-[0.4em] left-[0.5em]"
+        class="absolute left-[0.5em] h-full"
       />
     </div>
   );
