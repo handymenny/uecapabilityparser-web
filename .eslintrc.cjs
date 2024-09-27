@@ -47,6 +47,7 @@ module.exports = {
       },
     ],
     '@typescript-eslint/consistent-type-imports': 'warn',
+    // '@typescript-eslint/no-unnecessary-condition': 'warn', - too noisy for our codebase
     '@typescript-eslint/no-unused-expressions': [
       'error',
       {

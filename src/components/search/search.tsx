@@ -32,7 +32,6 @@ export default component$((props: Props) => {
         name={name}
         disabled={disabled}
         onKeyUp$={(_, currentTarget) => {
-          // eslint-disable-next-line qwik/valid-lexical-scope
           onKeyUp$ && onKeyUp$(currentTarget.value);
         }}
       />

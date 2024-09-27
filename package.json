@@ -2,9 +2,14 @@
   "name": "my-qwik-basic-starter",
   "description": "App with Routing built-in (recommended)",
   "engines": {
-    "node": ">=15.0.0"
+    "node": "^18.17.0 || ^20.3.0 || >=21.0.0"
   },
+  "engines-annotation": "Mostly required by sharp which needs a Node-API v9 compatible runtime",
   "private": true,
+  "trustedDependencies": [
+    "sharp"
+  ],
+  "trustedDependencies-annotation": "Needed for bun to allow running install scripts",
   "type": "module",
   "scripts": {
     "build": "qwik build",

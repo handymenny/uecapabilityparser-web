@@ -45,7 +45,6 @@ export default component$((props: Props) => {
       <select
         id={id}
         onInput$={(_, currentTarget) => {
-          // eslint-disable-next-line qwik/valid-lexical-scope
           onInput$ && onInput$(currentTarget.value);
         }}
         class={
