@@ -1,4 +1,0 @@
-import{b as r,l as d,t as _,u as i,x as l,h as c,j as u,i as s,k as h,q as a,S as j,_hW as x}from"./q-BBXjioMF.js";import{_ as o}from"./q-DLWsK9kw.js";const S=r("CheckBox.context"),g=`[data-qds-indicator][data-hidden] {
-  display: none;
-}
-`,v=g,E=Object.freeze(Object.defineProperty({__proto__:null,s_EIJ692M0ujw:v},Symbol.toStringTag,{value:"Module"})),p=({track:t})=>{const[e]=d();t(()=>e.value)},y=Object.freeze(Object.defineProperty({__proto__:null,_hW:x,s_sPEgKydJAIE:p},Symbol.toStringTag,{value:"Module"})),m=t=>{_(a(()=>o(()=>Promise.resolve().then(()=>E),void 0),"s_EIJ692M0ujw"));const e=i(S);return l(a(()=>o(()=>Promise.resolve().then(()=>y),void 0),"s_sPEgKydJAIE",[e])),c("div",{...t,get"data-hidden"(){return!e.value},"data-qds-indicator":!0,"aria-hidden":"true",children:h(j,null,3,"jk_0")},{"data-hidden":u(n=>!n.value,[e]),"data-qds-indicator":s,"aria-hidden":s},0,"jk_1")};export{S as C,m as a,p as s,v as s_EIJ692M0ujw};
