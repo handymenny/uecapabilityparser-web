@@ -90,6 +90,12 @@ const LogTypeOptions: LogTypeOptions[] = [
   },
   { value: 'SHNR', label: 'Shannon NR UE cap config', type: 'binary' },
   {
+    value: 'NSG',
+    label: 'NSG Baseband Log (Json)',
+    type: 'text',
+    multiOutput: true,
+  },
+  {
     value: 'DLF',
     label: 'DLF Baseband Log',
     type: 'binary',
@@ -124,8 +130,8 @@ export function getSupportedLogTypeOptions(
     return LogTypeOptions.filter((it) => supportedLogs.includes(it.value));
   } else {
     const unsupLogs = multiparse
-      ? ['DLF', 'QMDL', 'HDF', 'SDM']
-      : ['SHNR', 'P', 'DLF', 'QMDL', 'HDF', 'SDM'];
+      ? ['DLF', 'QMDL', 'HDF', 'SDM', 'NSG']
+      : ['SHNR', 'P', 'DLF', 'QMDL', 'HDF', 'SDM', 'NSG'];
     return LogTypeOptions.filter((it) => !unsupLogs.includes(it.value));
   }
 }
@@ -162,7 +168,9 @@ export function getLogTypeHelpFile(value: string) {
     case 'QMDL':
     case 'HDF':
     case 'SDM':
-      return 'Attach a diag log';
+      return 'Attach a baseband log';
+    case 'NSG':
+      return 'Attach a baseband log (only JSON format is supported)';
     default:
       return 'Attach files representing a unique set of UE Capability Information';
   }

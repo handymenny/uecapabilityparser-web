@@ -43,6 +43,7 @@ export enum LogType {
   QMDL = 'QMDL',
   HDF = 'HDF',
   SDM = 'SDM',
+  NSG = 'NSG',
 }
 
 export interface ComboLte {

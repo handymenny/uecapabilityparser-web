@@ -38,7 +38,8 @@ export function logTypeToString(type: string) {
     case 'QMDL':
     case 'HDF':
     case 'SDM':
-      return 'Diag log';
+    case 'NSG':
+      return 'Baseband log';
   }
   return 'Unknown';
 }
