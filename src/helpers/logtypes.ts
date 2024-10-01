@@ -92,7 +92,7 @@ const LogTypeOptions: LogTypeOptions[] = [
   { value: 'SHNR', label: 'Shannon NR UE cap config', type: 'binary' },
   {
     value: 'NSG',
-    label: 'NSG Baseband Log (Json)',
+    label: 'Qtrun NSG/Airscreen Baseband Log (Json)',
     type: 'text',
     multiOutput: true,
   },
