@@ -30,6 +30,8 @@ export function logTypeToString(type: string) {
       return 'Amarisoft UE Capability';
     case 'RF':
       return 'QCT Modem Capabilities';
+    case 'SHLTE':
+      return 'Shannon LTE UE cap config';
     case 'SHNR':
       return 'Shannon NR UE cap config';
     case 'P':

@@ -71,6 +71,7 @@ export default component$((props: Props) => {
     { label: 'Qualcomm NR Cap Prune', value: 'CNR' },
     { label: '28874 nvitem binary', value: 'E' },
     { label: 'Mediatek CA_COMB_INFO (text)', value: 'M' },
+    { label: 'Shannon LTE UE cap config', value: 'SHLTE' },
     { label: 'Shannon NR UE cap config', value: 'SHNR' },
   ];
 

@@ -88,6 +88,7 @@ const LogTypeOptions: LogTypeOptions[] = [
     type: 'text',
     multiInput: true,
   },
+  { value: 'SHLTE', label: 'Shannon LTE UE cap config', type: 'binary' },
   { value: 'SHNR', label: 'Shannon NR UE cap config', type: 'binary' },
   {
     value: 'NSG',
@@ -130,8 +131,8 @@ export function getSupportedLogTypeOptions(
     return LogTypeOptions.filter((it) => supportedLogs.includes(it.value));
   } else {
     const unsupLogs = multiparse
-      ? ['DLF', 'QMDL', 'HDF', 'SDM', 'NSG']
-      : ['SHNR', 'P', 'DLF', 'QMDL', 'HDF', 'SDM', 'NSG'];
+      ? ['SHLTE', 'DLF', 'QMDL', 'HDF', 'SDM', 'NSG']
+      : ['SHLTE', 'SHNR', 'P', 'DLF', 'QMDL', 'HDF', 'SDM', 'NSG'];
     return LogTypeOptions.filter((it) => !unsupLogs.includes(it.value));
   }
 }
@@ -161,7 +162,8 @@ export function getLogTypeHelpFile(value: string) {
     case 'RF':
       return 'Attach a file containing CA COMBOS from Qct Modem Capabilities';
     case 'SHNR':
-      return 'Attach a Shannon NR UE cap config protobuf (.binarypb)';
+    case 'SHLTE':
+      return 'Attach a Shannon UE cap config protobuf (.binarypb)';
     case 'P':
       return 'Attach a PCAP file (.pcap)';
     case 'DLF':

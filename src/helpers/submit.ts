@@ -36,7 +36,7 @@ const hexToUint8Array = (hex: string) => {
 };
 
 const textToBase64 = async (type: LogType, data: string) => {
-  const binaryTypes = ['E', 'SHNR', 'P', 'DLF', 'QMDL', 'HDF', 'SDM'];
+  const binaryTypes = ['E', 'SHLTE', 'SHNR', 'P', 'DLF', 'QMDL', 'HDF', 'SDM'];
   if (type in binaryTypes) {
     return fromUint8Array(hexToUint8Array(data));
   } else {
@@ -45,7 +45,7 @@ const textToBase64 = async (type: LogType, data: string) => {
 };
 
 const textToFile = (type: string, data: string) => {
-  const binaryTypes = ['E', 'SHNR', 'P', 'DLF', 'QMDL', 'HDF', 'SDM'];
+  const binaryTypes = ['E', 'SHLTE', 'SHNR', 'P', 'DLF', 'QMDL', 'HDF', 'SDM'];
   if (type in binaryTypes) {
     const uint8 = hexToUint8Array(data);
     return new File([uint8], '');
