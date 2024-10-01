@@ -37,13 +37,14 @@ export enum LogType {
   T = 'T',
   A = 'A',
   RF = 'RF',
+  SHLTE = 'SHLTE',
   SHNR = 'SHNR',
   P = 'P',
+  NSG = 'NSG',
   DLF = 'DLF',
   QMDL = 'QMDL',
   HDF = 'HDF',
   SDM = 'SDM',
-  NSG = 'NSG',
 }
 
 export interface ComboLte {
@@ -354,6 +355,20 @@ export interface ServerStatus {
   endpoints: string[];
   logTypes: LogType[];
   maxRequestSize: number;
+  searchableFields: SearchableField[];
+}
+
+export interface SearchableField {
+  name: string;
+  type: FieldType;
+}
+
+export enum FieldType {
+  number = 'number',
+  string = 'string',
+  strings = 'strings',
+  bandDetails = 'bandDetails',
+  combos = 'combos',
 }
 
 export type RequestCsv =
@@ -463,7 +478,7 @@ export namespace Criteria {
     type: Criteria.Type.string;
     field: FieldString;
     comparator: Comparator;
-    value: string;
+    value?: string | null;
   }
 
   export interface strings {
