@@ -28,7 +28,7 @@ export default component$((props: Props) => {
         type="text"
         id={id}
         placeholder={placeholder}
-        class={`h-full appearance-none border-2 border-solid border-black bg-white p-2 pl-[40px] text-lg placeholder:text-gray-400 focus:outline-none focus:ring focus:ring-gray-400 disabled:bg-gray-300 disabled:opacity-70 ${hiddenCssClass}`}
+        class={`h-full w-full appearance-none border-2 border-solid border-black bg-white p-2 pl-[40px] text-lg placeholder:text-gray-400 focus:outline-none focus:ring focus:ring-gray-400 disabled:bg-gray-300 disabled:opacity-70 ${hiddenCssClass}`}
         name={name}
         disabled={disabled}
         onKeyUp$={(_, currentTarget) => {

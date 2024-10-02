@@ -87,9 +87,9 @@ export default component$(({ data, searchId, advancedSearchMode }: Props) => {
 
   return (
     <div class={'mx-auto w-full max-w-7xl'}>
-      <div class="flex gap-x-4">
+      <div class="flex flex-wrap-reverse gap-x-4 sm:flex-nowrap">
         {advancedSearchMode == true || (
-          <div class={'w-auto'}>
+          <div class={'w-full sm:w-auto'}>
             <ButtonLink
               href="/library/advancedsearch/"
               label="Advanced Search"
