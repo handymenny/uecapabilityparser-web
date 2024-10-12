@@ -30,19 +30,19 @@ export default component$(() => {
       const items = library.items;
       const multiItems = library.multiItems ?? [];
 
+      const itemsIds = new Set<string>();
+      items.forEach(({ id }) => itemsIds.add(id));
+
       const multiItemsToShow = multiItems.filter((multiItem) => {
-        const idsFound = multiItem.indexLineIds.filter((id) => {
-          return items.find((it) => it.id == id);
-        });
-        return idsFound.length > 0;
+        return multiItem.indexLineIds.some((id) => itemsIds.has(id));
       });
 
-      const idsToRemove = multiItemsToShow.flatMap(
-        (multiItem) => multiItem.indexLineIds,
-      );
-      const itemsToShow = items.filter(
-        (item) => !idsToRemove.includes(item.id),
-      );
+      const idsToRemove = new Set<string>();
+      multiItemsToShow.forEach(({ indexLineIds }) => {
+        indexLineIds.forEach((id) => idsToRemove.add(id));
+      });
+
+      const itemsToShow = items.filter((item) => !idsToRemove.has(item.id));
 
       const itemsMerged = [...itemsToShow, ...multiItemsToShow];
       itemsMerged.sort((a, b) => b.timestamp - a.timestamp);
