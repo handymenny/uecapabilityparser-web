@@ -17,6 +17,7 @@ import AdvancedsearchForm from '~/components/search/advancedsearch-form';
 import CircleSpinner from '~/components/spinner/circle-spinner';
 import { AlertException, markdownToHtml } from '~/helpers/alert';
 import { Endpoints } from '~/helpers/endpoints';
+import { StatusHelper } from '~/helpers/status';
 
 export default component$(() => {
   const query = useStore<Query>({ criteriaList: [] });
@@ -25,6 +26,13 @@ export default component$(() => {
     const url = Endpoints.STORE + 'list/filtered';
 
     try {
+      const isAdvancedSearchSupported =
+        await StatusHelper.isAdvancedSearchSupported();
+
+      if (!isAdvancedSearchSupported) {
+        throw 'Advanced search is not available';
+      }
+
       const response = await axios.post(url, query);
       const library = response.data as LibraryIndex;
       const items = library.items;
@@ -68,7 +76,10 @@ export default component$(() => {
       // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       query.criteriaList;
     });
+
     if (isServer) return;
+    if (query.criteriaList.length == 0) return;
+
     return getList(query);
   });
 

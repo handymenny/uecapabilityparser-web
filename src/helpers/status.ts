@@ -74,4 +74,13 @@ export namespace StatusHelper {
       return [];
     }
   };
+
+  export const isAdvancedSearchSupported = async () => {
+    const status = await getStatus();
+    if (status != null) {
+      return status.endpoints.includes('/store/list/filtered');
+    } else {
+      return false;
+    }
+  };
 }
