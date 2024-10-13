@@ -123,16 +123,11 @@ const LogTypeOptions: LogTypeOptions[] = [
   { value: 'P', label: 'PCAP', type: 'binary', multiOutput: true },
 ];
 
-export function getSupportedLogTypeOptions(
-  multiparse: boolean,
-  supportedLogs: string[],
-) {
+export function getSupportedLogTypeOptions(supportedLogs: string[]) {
   if (supportedLogs.length > 0) {
     return LogTypeOptions.filter((it) => supportedLogs.includes(it.value));
   } else {
-    const unsupLogs = multiparse
-      ? ['SHLTE', 'DLF', 'QMDL', 'HDF', 'SDM', 'NSG']
-      : ['SHLTE', 'SHNR', 'P', 'DLF', 'QMDL', 'HDF', 'SDM', 'NSG'];
+    const unsupLogs = ['SHLTE', 'DLF', 'QMDL', 'HDF', 'SDM', 'NSG'];
     return LogTypeOptions.filter((it) => !unsupLogs.includes(it.value));
   }
 }

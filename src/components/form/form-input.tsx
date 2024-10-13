@@ -15,7 +15,6 @@ import {
 interface Props {
   submitting: Signal<boolean>;
   prefix: string;
-  multiparse?: boolean;
   supportedLogs?: LogType[];
 }
 
@@ -25,7 +24,7 @@ export default component$((props: Props) => {
   const defaultType = 'H';
   const type = useSignal(defaultType);
   const supLogs = props.supportedLogs ?? [];
-  const options = getSupportedLogTypeOptions(props.multiparse == true, supLogs);
+  const options = getSupportedLogTypeOptions(supLogs);
 
   return (
     <>

@@ -15,32 +15,24 @@ export default component$(() => {
   const resultGroupDescription = useSignal<string | undefined>(undefined);
   const submitting = useSignal(false);
   const count = useSignal(1);
-  const multiParseSupported = useSignal(false);
   const supportedLogTypes = useSignal<LogType[]>([]);
 
   const submitFun = $(async (_: any, currentTarget: HTMLFormElement) => {
     resultData.value = undefined;
     submitting.value = true;
     try {
-      let capList: Capabilities[];
-      let url: string;
-      let id: string | undefined;
-      let groupDescription: string | undefined = undefined;
+      const isMultiPartSupported = await StatusHelper.isMultiPartSupported();
 
-      if (multiParseSupported.value) {
-        url = '/view/multi/?id=';
-        let result;
-        if (await StatusHelper.isMultiPartSupported()) {
-          result = await submitMultiPart(currentTarget, count.value);
-        } else {
-          throw 'This UE Capability Parser version is not supported';
-        }
-        id = result.id;
-        capList = result.capabilitiesList ?? [];
-        groupDescription = result.description;
-      } else {
+      if (!isMultiPartSupported) {
         throw 'This UE Capability Parser version is not supported';
       }
+
+      const url = '/view/multi/?id=';
+      const result = await submitMultiPart(currentTarget, count.value);
+      const id = result.id;
+      const capList = result.capabilitiesList ?? [];
+      const groupDescription = result.description;
+
       if (!isServer && id != null) {
         history.pushState({}, '', url + id);
         window.addEventListener(
@@ -66,7 +58,6 @@ export default component$(() => {
   // eslint-disable-next-line qwik/no-use-visible-task
   useVisibleTask$(
     async () => {
-      multiParseSupported.value = await StatusHelper.isMultiSupported();
       supportedLogTypes.value = await StatusHelper.getSupportedLogs();
     },
     { strategy: 'document-ready' },
@@ -92,7 +83,6 @@ export default component$(() => {
                 key={value}
                 prefix={`${value}-`}
                 submitting={submitting}
-                multiparse={multiParseSupported.value}
                 supportedLogs={supportedLogTypes.value}
               />
             ))}
@@ -101,7 +91,7 @@ export default component$(() => {
               <Button
                 type="button"
                 label="Remove"
-                hidden={!multiParseSupported.value || count.value < 2}
+                hidden={count.value < 2}
                 onClick$={async () => {
                   if (count.value > 1) {
                     count.value--;
@@ -111,7 +101,6 @@ export default component$(() => {
               <Button
                 type="button"
                 label="Add"
-                hidden={!multiParseSupported.value}
                 onClick$={async () => {
                   count.value++;
                 }}

@@ -30,48 +30,13 @@ const getStatus = async () => {
   return undefined;
 };
 
-const getVersionLegacy = async () => {
-  const url = Endpoints.VERSION;
-  try {
-    const res = await axios.get(url, cacheOptions);
-    return res.data.version as string;
-  } catch (err) {
-    console.error(err);
-  }
-  return undefined;
-};
-
-const getStoreLegacy = async () => {
-  const url = Endpoints.STORE + 'status';
-  try {
-    const res = await axios.get(url, cacheOptions);
-    return res.data.enabled == true;
-  } catch (err) {
-    console.error(err);
-  }
-  return false;
-};
-
-const getMultiParseLegacy = async () => {
-  const url = Endpoints.PARSEMULTI;
-  try {
-    const response = await axios.get(url, {
-      ...cacheOptions,
-      validateStatus: () => true,
-    });
-    return response.status !== 404 && response.status < 500;
-  } catch (_) {
-    return false;
-  }
-};
-
 export namespace StatusHelper {
   export const getVersion = async () => {
     const status = await getStatus();
     if (status != null) {
       return status.version;
     } else {
-      return await getVersionLegacy();
+      return undefined;
     }
   };
 
@@ -79,21 +44,8 @@ export namespace StatusHelper {
     const status = await getStatus();
     if (status != null) {
       return status.endpoints.includes('/store/list');
-    } else {
-      return await getStoreLegacy();
     }
-  };
-
-  export const isMultiSupported = async () => {
-    const status = await getStatus();
-    if (status != null) {
-      return (
-        status.endpoints.includes('/parse/multi') ||
-        status.endpoints.includes('/parse/multiPart')
-      );
-    } else {
-      return await getMultiParseLegacy();
-    }
+    return false;
   };
 
   export const isMultiPartSupported = async () => {
