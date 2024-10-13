@@ -7,11 +7,7 @@ import MulticapabilityView from '../viewer/multicapability-view';
 import CircleSpinner from '../spinner/circle-spinner';
 import Title from '../header/title';
 import { StatusHelper } from '~/helpers/status';
-import {
-  submitLegacy,
-  submitMultiLegacy,
-  submitMultiPart,
-} from '~/helpers/submit';
+import { submitMultiPart } from '~/helpers/submit';
 import { AlertException } from '~/helpers/alert';
 
 export default component$(() => {
@@ -37,16 +33,13 @@ export default component$(() => {
         if (await StatusHelper.isMultiPartSupported()) {
           result = await submitMultiPart(currentTarget, count.value);
         } else {
-          result = await submitMultiLegacy(currentTarget, count.value);
+          throw 'This UE Capability Parser version is not supported';
         }
         id = result.id;
         capList = result.capabilitiesList ?? [];
         groupDescription = result.description;
       } else {
-        url = '/view/?id=';
-        const result = await submitLegacy(currentTarget);
-        id = result.id;
-        capList = [result];
+        throw 'This UE Capability Parser version is not supported';
       }
       if (!isServer && id != null) {
         history.pushState({}, '', url + id);

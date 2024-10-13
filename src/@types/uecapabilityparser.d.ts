@@ -418,14 +418,6 @@ export interface RequestParse {
   multiple0xB826?: boolean;
 }
 
-// used by old uecapabilityparser
-export interface RequestMultiParse {
-  inputs: string[];
-  type: LogType;
-  subTypes?: string[];
-  description?: string;
-}
-
 export interface RequestMultiPart {
   inputIndexes: number[];
   type: LogType;
