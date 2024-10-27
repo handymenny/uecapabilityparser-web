@@ -75,28 +75,12 @@ export const submitMultiPart = async (
   for (let index = 0; index < capSize; index++) {
     const type = formData.get(`${index}-type`) as LogType;
     const description = formData.get(`${index}-description`) as string;
-    const input = getInputFiles(
+    const inputs = getInputFiles(
       formData,
       type,
       `${index}-inputText`,
       `${index}-inputFile`,
     );
-
-    if (input.length == 0) {
-      throw noLogError;
-    }
-
-    let inputs = [...input];
-
-    if (type == 'P') {
-      const firstInput = inputs[0];
-      if (firstInput != null) {
-        const magic = await getFileHeader(firstInput);
-        if (isPcapNg(magic)) {
-          throw pcapNgError;
-        }
-      }
-    }
 
     let inputEnDc: File | null | undefined = null;
     let inputNr: File | null | undefined = null;
@@ -113,7 +97,23 @@ export const submitMultiPart = async (
         `${index}-inputNRText`,
         `${index}-inputNRFile`,
       )[0];
-      inputs = [...input, inputEnDc, inputNr];
+
+      if (inputEnDc) inputs.push(inputEnDc);
+      if (inputNr) inputs.push(inputNr);
+    }
+
+    if (inputs.length == 0) {
+      throw noLogError;
+    }
+
+    if (type == 'P') {
+      const firstInput = inputs[0];
+      if (firstInput != null) {
+        const magic = await getFileHeader(firstInput);
+        if (isPcapNg(magic)) {
+          throw pcapNgError;
+        }
+      }
     }
 
     const subTypes: string[] = [];
