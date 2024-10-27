@@ -1,5 +1,5 @@
 {
-  "manifestHash": "t2iuwx",
+  "manifestHash": "5g1ypt",
   "symbols": {
     "s_3Moz8sMpGmg": {
       "origin": "../node_modules/@qwik-ui/headless/components/popover/use-popover.qwik.mjs",
@@ -7803,20 +7803,6 @@
         950
       ]
     },
-    "s_4UtACmWqLP8": {
-      "origin": "../node_modules/@qwik-ui/headless/components/accordion/accordion-trigger.qwik.mjs",
-      "displayName": "HAccordionTrigger_component_handleKeyDown",
-      "canonicalFilename": "s_4utacmwqlp8",
-      "hash": "4UtACmWqLP8",
-      "ctxKind": "function",
-      "ctxName": "$",
-      "captures": true,
-      "parent": "s_sqZwtEww05w",
-      "loc": [
-        1757,
-        2094
-      ]
-    },
     "s_514rkcxXHS0": {
       "origin": "../node_modules/@qwik-ui/headless/components/progress/progress-root.qwik.mjs",
       "displayName": "ProgressRoot_component_valueLabelSig_useComputed",
@@ -8295,6 +8281,20 @@
       "loc": [
         3285,
         3354
+      ]
+    },
+    "s_4UtACmWqLP8": {
+      "origin": "../node_modules/@qwik-ui/headless/components/accordion/accordion-trigger.qwik.mjs",
+      "displayName": "HAccordionTrigger_component_handleKeyDown",
+      "canonicalFilename": "s_4utacmwqlp8",
+      "hash": "4UtACmWqLP8",
+      "ctxKind": "function",
+      "ctxName": "$",
+      "captures": true,
+      "parent": "s_sqZwtEww05w",
+      "loc": [
+        1757,
+        2094
       ]
     },
     "s_5mVqZpU3Ers": {
@@ -11538,7 +11538,6 @@
     "s_0txZHNuNMZA": "q-v0gWa4hV.js",
     "s_1h000gsbeTc": "q-Dk4DBEmD.js",
     "s_3K00WbTHGtQ": "q-XIhsH9BY.js",
-    "s_4UtACmWqLP8": "q-DnWkUkti.js",
     "s_514rkcxXHS0": "q-DK_3WVHr.js",
     "s_536fSc3CTis": "q-LsuEYk2n.js",
     "s_EIJ692M0ujw": "q-CybTnJ7P.js",
@@ -11574,6 +11573,7 @@
     "s_2nJ6LT7p0No": "q-0F1TOrfw.js",
     "s_2wlH0JOBkc0": "q-DVt97ZVl.js",
     "s_40oKoDznlqk": "q-DLcfJq94.js",
+    "s_4UtACmWqLP8": "q-DnWkUkti.js",
     "s_5mVqZpU3Ers": "q-DhgpRS90.js",
     "s_6EQSzRw03Fo": "q-C-9bkFaU.js",
     "s_6OFVqJcUkmA": "q-_LJi-dB_.js",
