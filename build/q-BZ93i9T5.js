@@ -1,1 +1,0 @@
-import{_ as e}from"./q-CV6_djNq.js";import{c as a,q as r}from"./q-BmWDAmC3.js";const n=a(r(()=>e(()=>import("./q-DZQ0kDg2.js").then(t=>t.i),[]),"s_xYL1qOwPyDI")),s={title:"UE Capability Parser Web",meta:[{name:"description",content:"UE Capability Parser Web"}]};export{n as default,s as head};
