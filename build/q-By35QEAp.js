@@ -1,0 +1,1 @@
+import{l,_hW as u}from"./q-BmWDAmC3.js";const t=a=>{const[e,s]=l();s.value=a,e&&e(s.value)},r=Object.freeze(Object.defineProperty({__proto__:null,_hW:u,s_obH38hK9UDo:t},Symbol.toStringTag,{value:"Module"})),g=a=>{const[e,s]=l();return e(s.value.filter(o=>o!==a))},c=a=>{const[e,s]=l();return e([...s.value,a])};export{u as _hW,c as a,g as s,t as s_obH38hK9UDo,r as u};

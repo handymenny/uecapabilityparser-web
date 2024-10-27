@@ -1,0 +1,1 @@
+import{l as a,_hW as n}from"./q-BmWDAmC3.js";const l=e=>{const[o,s]=a();s.value=e,o&&o(s.value)},u=Object.freeze(Object.defineProperty({__proto__:null,_hW:n,s_oKuap4fkOYE:l},Symbol.toStringTag,{value:"Module"})),r=e=>{const[o]=a();return o(e)},c=()=>{const[e]=a();return e("")};export{n as _hW,c as a,r as s,l as s_oKuap4fkOYE,u};
