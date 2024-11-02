@@ -14,6 +14,7 @@ export interface Capabilities {
   nrdc?: ComboNrDc[];
   logType: LogType;
   ueCapFilters?: IUeCapabilityFilter[];
+  ratCapabilities?: IRatCapabilities[];
   metadata: { [key: string]: string };
   id?: string;
   parserVersion: string;
@@ -137,6 +138,32 @@ export namespace IUeCapabilityFilter {
   }
 }
 
+export type IRatCapabilities =
+  | IRatCapabilities.RatCapabilitiesLte
+  | IRatCapabilities.RatCapabilitiesNr;
+
+export namespace IRatCapabilities {
+  export enum Type {
+    RatCapabilitiesLte = 'RatCapabilitiesLte',
+    RatCapabilitiesNr = 'RatCapabilitiesNr',
+  }
+
+  export interface RatCapabilitiesLte {
+    type: IRatCapabilities.Type.RatCapabilitiesLte;
+    release?: number | null;
+    ueCapSegmentationSupported?: boolean | null;
+    rat: Rat;
+  }
+
+  export interface RatCapabilitiesNr {
+    type: IRatCapabilities.Type.RatCapabilitiesNr;
+    release?: number | null;
+    ueCapSegmentationSupported?: boolean | null;
+    ueType?: UeType;
+    rat: Rat;
+  }
+}
+
 export type BCS = BCS.all | BCS.empty | BCS.multi | BCS.single;
 
 export namespace BCS {
@@ -240,6 +267,11 @@ export enum Rat {
   SPARE1 = 'SPARE1',
 }
 
+export enum UeType {
+  eMBB = 'eMBB',
+  RedCap_R17 = 'RedCap_R17',
+}
+
 export interface ComponentLte {
   band: number;
   bwClassDl?: BwClass;
@@ -276,8 +308,6 @@ export interface ComponentNr {
   maxScs?: number;
   maxBwDl?: Bandwidth;
   maxBwUl?: Bandwidth;
-  // used by old uecapabilityparser
-  maxBw?: number;
 }
 
 export interface BandFilterLte {
@@ -405,17 +435,6 @@ export namespace RequestCsv {
     type: RequestCsv.Type.nrdc;
     input: ComboNrDc[];
   }
-}
-
-export interface RequestParse {
-  input?: string | null;
-  inputNR?: string | null;
-  inputENDC?: string | null;
-  defaultNR?: boolean;
-  type: LogType;
-  description?: string;
-  // used by old uecapabilityparser
-  multiple0xB826?: boolean;
 }
 
 export interface RequestMultiPart {
