@@ -1,0 +1,1 @@
+import{u as r,h as e}from"./q-BmWDAmC3.js";import{p as s}from"./q-DOWmmWJY.js";import"./q-DVDcPi-e.js";const i=o=>{const t=r(s);return e("div",{ref:t.arrowRef,...o},null,0,"0N_0")};export{i as s_vO91fLiUA0E};
