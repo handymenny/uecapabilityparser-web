@@ -418,7 +418,6 @@ function equalsBwScs(component: ComponentNr, other: ComponentNr, dl: boolean) {
   return (
     other.maxScs === component.maxScs &&
     other.bw90mhzSupported === component.bw90mhzSupported &&
-    other.maxBw === component.maxBw &&
     (!dl || bwEquals(other.maxBwDl, component.maxBwDl)) &&
     (dl || bwEquals(other.maxBwUl, component.maxBwUl))
   );
@@ -616,22 +615,11 @@ export function componentsBwDlToStr(components: ComponentNr[]): string {
   const result: string[] = [];
   groupComponentsDl(components, true).forEach((value) => {
     const component = value[0] as ComponentNr;
-    let bwStr = null;
-    // Prefer maxBwDl/maxBwUl to maxBw
-    // maxBw doesn't support mixed bw and ul bw
-    if (component.maxBwDl != null || component.maxBwUl != null) {
-      bwStr = multiBwToFeatures(
-        component.band,
-        component.maxBwDl,
-        component.bwClassDl,
-      );
-    } else {
-      bwStr = singleBwToFeatures(
-        component.band,
-        component.maxBw,
-        component.bwClassDl,
-      );
-    }
+    const bwStr = multiBwToFeatures(
+      component.band,
+      component.maxBwDl,
+      component.bwClassDl,
+    );
 
     if (bwStr !== null) {
       result.push(...multipleFeaturesToStr(bwStr, value.length, minMultiplier));
@@ -644,22 +632,12 @@ export function componentsBwUlToStr(components: ComponentNr[]): string {
   const result: string[] = [];
   groupComponentsUl(components, true).forEach((value) => {
     const component = value[0] as ComponentNr;
-    let bwStr = null;
-    // Prefer maxBwDl/maxBwUl to maxBw
-    // maxBw doesn't support mixed bw and ul bw
-    if (component.maxBwDl != null || component.maxBwUl != null) {
-      bwStr = multiBwToFeatures(
-        component.band,
-        component.maxBwUl,
-        component.bwClassUl,
-      );
-    } else {
-      bwStr = singleBwToFeatures(
-        component.band,
-        component.maxBw,
-        component.bwClassUl,
-      );
-    }
+    const bwStr = multiBwToFeatures(
+      component.band,
+      component.maxBwUl,
+      component.bwClassUl,
+    );
+
     if (bwStr !== null) {
       result.push(...multipleFeaturesToStr(bwStr, value.length, minMultiplier));
     }
