@@ -1,6 +1,5 @@
 import { $, component$ } from '@builder.io/qwik';
 import Button from '~/components/inputs/button';
-import Other from '~/components/table/other';
 import LteBands from '~/components/table/lte-bands';
 import NrBands from '~/components/table/nr-bands';
 import Lteca from '~/components/table/lteca';
@@ -13,6 +12,7 @@ import Filters from '../table/filters';
 import MetadataTable from '../table/metadata-table';
 import { Endpoints } from '~/helpers/endpoints';
 import { AlertException } from '~/helpers/alert';
+import Ratcapabilities from '../table/ratcapabilities';
 
 interface Props {
   capabilities: Capabilities;
@@ -115,7 +115,7 @@ export default component$(({ capabilities, inputs }: Props) => {
         </div>
         <div class="mx-auto w-full max-w-7xl overflow-x-auto">
           <div class="w-full text-sm sm:w-fit sm:min-w-[32rem] sm:max-w-full md:min-w-[36rem]">
-            <Other
+            <Ratcapabilities
               cap={capabilities ?? undefined}
               title="Generic Capabilities"
             />
