@@ -7,15 +7,33 @@ import MulticapabilityView from '../viewer/multicapability-view';
 import CircleSpinner from '../spinner/circle-spinner';
 import Title from '../header/title';
 import { StatusHelper } from '~/helpers/status';
-import { submitMultiPart } from '~/helpers/submit';
+import { isPowerOfBase, submitMultiPart } from '~/helpers/submit';
 import { AlertException } from '~/helpers/alert';
+import AnnoyingMessage from '../modal/annoying-message';
 
 export default component$(() => {
+  const annoyingAlertBase = import.meta.env.PUBLIC_ANNOYING_ALERT_EXP_BASE ?? 0;
+  const annoyingAlertTimer = import.meta.env.PUBLIC_ANNOYING_ALERT_TIMER ?? 0;
   const resultData = useSignal<Capabilities[] | undefined>(undefined);
   const resultGroupDescription = useSignal<string | undefined>(undefined);
   const submitting = useSignal(false);
   const count = useSignal(1);
   const supportedLogTypes = useSignal<LogType[]>([]);
+  const showAnnoyingAlert = useSignal(false);
+
+  const showAnnoyingAlertFun = $(() => {
+    const counter = localStorage.getItem('parsedCapabilitiesCounter') ?? '0';
+    let counterInt = parseInt(counter);
+    if (isNaN(counterInt)) counterInt = 0;
+    counterInt++;
+    localStorage.setItem('parsedCapabilitiesCounter', counterInt.toString());
+
+    setTimeout(() => {
+      if (counterInt > 1 && isPowerOfBase(counterInt, annoyingAlertBase)) {
+        showAnnoyingAlert.value = true;
+      }
+    }, annoyingAlertTimer);
+  });
 
   const submitFun = $(async (_: any, currentTarget: HTMLFormElement) => {
     resultData.value = undefined;
@@ -44,6 +62,8 @@ export default component$(() => {
           },
           { once: true },
         );
+
+        if (annoyingAlertBase > 0) showAnnoyingAlertFun();
       }
 
       submitting.value = false;
@@ -126,6 +146,8 @@ export default component$(() => {
           />
         </>
       )}
+
+      {annoyingAlertBase > 0 && <AnnoyingMessage show={showAnnoyingAlert} />}
     </>
   );
 });

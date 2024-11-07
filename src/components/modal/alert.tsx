@@ -9,8 +9,8 @@ interface Props {
 
 export default component$((props: Props) => {
   return (
-    <Modal.Root bind:show={props.show} alert={true}>
-      <Modal.Panel class="max-w-[25rem] p-[28px] backdrop:backdrop-blur backdrop:backdrop-brightness-50">
+    <Modal.Root bind:show={props.show} alert={true} class="p-2">
+      <Modal.Panel class="max-w-sm p-[28px] backdrop:backdrop-blur backdrop:backdrop-brightness-50 sm:max-w-md lg:max-w-lg">
         <header>
           <div class="flex justify-between">
             <h2 class="text-xl font-bold">{props.title}</h2>
