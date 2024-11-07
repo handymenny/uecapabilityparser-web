@@ -317,6 +317,13 @@ function multiBwToFeatures(band: number, bw?: Bandwidth, bwClass?: string) {
     return null;
   }
 
+  if (bw.type == 'invalid') {
+    return {
+      basicFeature: ['?'],
+      multiplier: 1,
+    };
+  }
+
   if (bw.type == 'single') {
     return singleBwToFeatures(band, bw.value, bwClass);
   }
@@ -398,7 +405,9 @@ function bwEquals(a?: Bandwidth, b?: Bandwidth) {
     a === undefined ||
     b === undefined ||
     a?.type === 'empty' ||
-    b?.type === 'empty'
+    b?.type === 'empty' ||
+    a?.type === 'invalid' ||
+    b?.type === 'invalid'
   ) {
     return a?.type === b?.type;
   }
