@@ -326,17 +326,26 @@ export interface BandFilterNr {
 
 export type BwClass = string;
 
-export type Bandwidth = Bandwidth.empty | Bandwidth.mixed | Bandwidth.single;
+export type Bandwidth =
+  | Bandwidth.empty
+  | Bandwidth.invalid
+  | Bandwidth.mixed
+  | Bandwidth.single;
 
 export namespace Bandwidth {
   export enum Type {
     empty = 'empty',
+    invalid = 'invalid',
     mixed = 'mixed',
     single = 'single',
   }
 
   export interface empty {
     type: Bandwidth.Type.empty;
+  }
+
+  export interface invalid {
+    type: Bandwidth.Type.invalid;
   }
 
   export interface mixed {
