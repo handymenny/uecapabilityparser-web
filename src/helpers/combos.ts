@@ -656,7 +656,7 @@ export function componentsBwUlToStr(components: ComponentNr[]): string {
 }
 
 export function ulTxSwitchToStr(
-  ulTxSwitchConfigs?: UplinkTxSwitchConfig[],
+  ulTxSwitchConfigs: UplinkTxSwitchConfig[] | undefined,
   reportNotSupported: boolean,
 ): string {
   const result: string[] = [];
