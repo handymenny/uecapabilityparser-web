@@ -657,6 +657,7 @@ export function componentsBwUlToStr(components: ComponentNr[]): string {
 
 export function ulTxSwitchToStr(
   ulTxSwitchConfigs?: UplinkTxSwitchConfig[],
+  reportNotSupported: boolean,
 ): string {
   const result: string[] = [];
   const length = ulTxSwitchConfigs?.length ?? 0;
@@ -684,8 +685,8 @@ export function ulTxSwitchToStr(
     result.push(str);
   }
 
-  if (result.length == 0) {
-    return 'Not supported';
+  if (result.length === 0) {
+    return reportNotSupported ? 'Not supported' : '';
   }
 
   return result.join(', ');

@@ -43,6 +43,11 @@ export default component$((props: Props) => {
     'BCS',
   ];
 
+  // check if any has ulTxSwitch not null/empty
+  const supportUplinkTxSwitch = combos.some(
+    ({ uplinkTxSwitch }) => (uplinkTxSwitch?.length ?? 0) > 0,
+  );
+
   const data: string[][] = [];
   for (let i = 0; i < headers.length; i++) {
     data.push([]);
@@ -60,7 +65,7 @@ export default component$((props: Props) => {
     data[i++].push(componentsModUlToStr(components, true));
     data[i++].push(componentsScsUlToStr(components));
     data[i++].push(componentsBwUlToStr(components));
-    data[i++].push(ulTxSwitchToStr(uplinkTxSwitch));
+    data[i++].push(ulTxSwitchToStr(uplinkTxSwitch, supportUplinkTxSwitch));
     data[i++].push(bcsToStr(bcs));
   });
 
