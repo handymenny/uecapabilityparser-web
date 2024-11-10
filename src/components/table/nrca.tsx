@@ -39,7 +39,7 @@ export default component$((props: Props) => {
     'MOD UL (QAM)',
     'SCS UL (kHz)',
     'BW UL (MHz)',
-    'Dynamic UL Tx Switch',
+    'UL TX Switch',
     'BCS',
   ];
 

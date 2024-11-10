@@ -658,13 +658,8 @@ export function componentsBwUlToStr(components: ComponentNr[]): string {
 export function ulTxSwitchToStr(
   ulTxSwitchConfigs?: UplinkTxSwitchConfig[],
 ): string {
-
   const result: string[] = [];
   const length = ulTxSwitchConfigs?.length ?? 0;
-
-  // check if any supports ul tx switch != R16
-  let hasOtherThanR16 = ulTxSwitchConfigs?.some((config) => config.type !== 'R16');
-  
 
   for (let i = 0; i < length; i++) {
     const config = (ulTxSwitchConfigs as UplinkTxSwitchConfig[])[i];
