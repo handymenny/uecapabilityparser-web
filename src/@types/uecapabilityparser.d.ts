@@ -89,6 +89,7 @@ export interface ComboEnDc {
 export interface ComboNr {
   components: ComponentNr[];
   bcs?: BCS;
+  uplinkTxSwitch?: UplinkTxSwitchConfig[];
 }
 
 export interface ComboNrDc {
@@ -308,6 +309,12 @@ export interface ComponentNr {
   maxScs?: number;
   maxBwDl?: Bandwidth;
   maxBwUl?: Bandwidth;
+  ulTxSwitch?: boolean;
+}
+
+export interface UplinkTxSwitchConfig {
+  type: UplinkTxSwitchType;
+  option: UplinkTxSwitchOption;
 }
 
 export interface BandFilterLte {
@@ -357,6 +364,21 @@ export namespace Bandwidth {
     type: Bandwidth.Type.single;
     value: number;
   }
+}
+
+export enum UplinkTxSwitchType {
+  R16 = 'R16',
+  R17_1T2T = 'R17_1T2T',
+  R17_2T2T = 'R17_2T2T',
+  R18_1T = 'R18_1T',
+  R18_2T = 'R18_2T',
+}
+
+export enum UplinkTxSwitchOption {
+  NONE = 'NONE',
+  SWITCHED_UL = 'SWITCHED_UL',
+  DUAL_UL = 'DUAL_UL',
+  BOTH = 'BOTH',
 }
 
 export interface LibraryIndex {

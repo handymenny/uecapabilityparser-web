@@ -13,6 +13,7 @@ import {
   componentsScsDlToStr,
   componentsScsUlToStr,
   bcsToStr,
+  ulTxSwitchToStr,
 } from '~/helpers/combos';
 import ComboTable from '~/components/table/combo-table';
 interface Props {
@@ -38,6 +39,7 @@ export default component$((props: Props) => {
     'MOD UL (QAM)',
     'SCS UL (kHz)',
     'BW UL (MHz)',
+    'Dynamic UL Tx Switch',
     'BCS',
   ];
 
@@ -46,7 +48,7 @@ export default component$((props: Props) => {
     data.push([]);
   }
 
-  combos.forEach(({ components, bcs }) => {
+  combos.forEach(({ components, bcs, uplinkTxSwitch }) => {
     let i = 0;
     data[i++].push(componentsDlToStr(components, true));
     data[i++].push(componentsMimoDlToStr(components, true));
@@ -58,6 +60,7 @@ export default component$((props: Props) => {
     data[i++].push(componentsModUlToStr(components, true));
     data[i++].push(componentsScsUlToStr(components));
     data[i++].push(componentsBwUlToStr(components));
+    data[i++].push(ulTxSwitchToStr(uplinkTxSwitch));
     data[i++].push(bcsToStr(bcs));
   });
 

@@ -6,6 +6,7 @@ import type {
   Modulation,
   ModulationOrder,
   Bandwidth,
+  UplinkTxSwitchConfig,
 } from '~/@types/uecapabilityparser';
 
 type Component = ComponentLte | ComponentNr;
@@ -652,4 +653,45 @@ export function componentsBwUlToStr(components: ComponentNr[]): string {
     }
   });
   return result.join(' + ');
+}
+
+export function ulTxSwitchToStr(
+  ulTxSwitchConfigs?: UplinkTxSwitchConfig[],
+): string {
+
+  const result: string[] = [];
+  const length = ulTxSwitchConfigs?.length ?? 0;
+
+  // check if any supports ul tx switch != R16
+  let hasOtherThanR16 = ulTxSwitchConfigs?.some((config) => config.type !== 'R16');
+  
+
+  for (let i = 0; i < length; i++) {
+    const config = (ulTxSwitchConfigs as UplinkTxSwitchConfig[])[i];
+    const type = config.type.replace('_', ' ');
+
+    let option = '';
+    switch (config.option) {
+      case 'SWITCHED_UL':
+        option = 'Switched UL (option 1)';
+        break;
+      case 'DUAL_UL':
+        option = 'Dual UL (option 2)';
+        break;
+      case 'BOTH':
+        option = 'Both (option 1 + 2)';
+        break;
+      default:
+        continue;
+    }
+
+    const str = `${type}: ${option}`;
+    result.push(str);
+  }
+
+  if (result.length == 0) {
+    return 'Not supported';
+  }
+
+  return result.join(', ');
 }

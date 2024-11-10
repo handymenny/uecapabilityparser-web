@@ -41,7 +41,7 @@ export default component$((props: Props) => {
             /(?:<span .*?>)|(?:<\/span>)|\s/g,
             '',
           );
-          return value.includes(valueToSearch);
+          return value.toUpperCase().includes(valueToSearch);
         }
       });
       if (res) return rowId;
