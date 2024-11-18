@@ -1,5 +1,5 @@
 {
-  "manifestHash": "eaf8t4",
+  "manifestHash": "fqtrtz",
   "symbols": {
     "s_3Moz8sMpGmg": {
       "origin": "../node_modules/@qwik-ui/headless/components/popover/use-popover.qwik.mjs",
@@ -23883,7 +23883,7 @@
       "location": "head",
       "attributes": {
         "rel": "stylesheet",
-        "href": "/assets/C7ZMog2U-style.css"
+        "href": "/assets/C8auRv-s-style.css"
       }
     }
   ],
@@ -23901,6 +23901,6 @@
     "rollup": "4.22.4",
     "env": "node",
     "os": "linux",
-    "node": "22.10.0"
+    "node": "22.11.0"
   }
 }
