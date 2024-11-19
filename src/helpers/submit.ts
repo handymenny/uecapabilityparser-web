@@ -192,12 +192,3 @@ export const submitMultiPart = async (
 
   return multi;
 };
-
-export const isPowerOfBase = (num: number, base: number): boolean => {
-  if (num <= 0 || base <= 1) return false;
-  const lnBase = Math.log(base);
-  const log = Math.log(num) / lnBase;
-  const rounded = Math.round(log);
-
-  return num == Math.pow(base, rounded);
-};

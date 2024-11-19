@@ -7,13 +7,16 @@ import MulticapabilityView from '../viewer/multicapability-view';
 import CircleSpinner from '../spinner/circle-spinner';
 import Title from '../header/title';
 import { StatusHelper } from '~/helpers/status';
-import { isPowerOfBase, submitMultiPart } from '~/helpers/submit';
+import { submitMultiPart } from '~/helpers/submit';
 import { AlertException } from '~/helpers/alert';
 import AnnoyingMessage from '../modal/annoying-message';
+import { isPowerOfBase, scoreDescription } from '~/helpers/quality';
 
 export default component$(() => {
   const annoyingAlertBase = import.meta.env.PUBLIC_ANNOYING_ALERT_EXP_BASE ?? 0;
   const annoyingAlertTimer = import.meta.env.PUBLIC_ANNOYING_ALERT_TIMER ?? 0;
+  const annoyingAlertThreshold =
+    import.meta.env.PUBLIC_ANNOYING_ALERT_THRESHOLD ?? 0;
   const resultData = useSignal<Capabilities[] | undefined>(undefined);
   const resultGroupDescription = useSignal<string | undefined>(undefined);
   const submitting = useSignal(false);
@@ -21,7 +24,7 @@ export default component$(() => {
   const supportedLogTypes = useSignal<LogType[]>([]);
   const showAnnoyingAlert = useSignal(false);
 
-  const showAnnoyingAlertFun = $(() => {
+  const showAnnoyingAlertFun = $((description?: string) => {
     const counter = localStorage.getItem('parsedCapabilitiesCounter') ?? '0';
     let counterInt = parseInt(counter);
     if (isNaN(counterInt)) counterInt = 0;
@@ -29,7 +32,14 @@ export default component$(() => {
     localStorage.setItem('parsedCapabilitiesCounter', counterInt.toString());
 
     setTimeout(() => {
-      if (counterInt > 1 && isPowerOfBase(counterInt, annoyingAlertBase)) {
+      const scoreBelowThreshold =
+        scoreDescription(description ?? '') < annoyingAlertThreshold;
+      const counterTrigger =
+        counterInt > 1 && isPowerOfBase(counterInt, annoyingAlertBase);
+      if (scoreBelowThreshold || counterTrigger) {
+        if (scoreBelowThreshold) {
+          console.warn("Bad quality description... Let's annoy the user!");
+        }
         showAnnoyingAlert.value = true;
       }
     }, annoyingAlertTimer);
@@ -63,7 +73,9 @@ export default component$(() => {
           { once: true },
         );
 
-        if (annoyingAlertBase > 0) showAnnoyingAlertFun();
+        if (!!annoyingAlertBase || !!annoyingAlertThreshold) {
+          showAnnoyingAlertFun(groupDescription);
+        }
       }
 
       submitting.value = false;
@@ -147,7 +159,9 @@ export default component$(() => {
         </>
       )}
 
-      {annoyingAlertBase > 0 && <AnnoyingMessage show={showAnnoyingAlert} />}
+      {(!!annoyingAlertBase || !!annoyingAlertThreshold) && (
+        <AnnoyingMessage show={showAnnoyingAlert} />
+      )}
     </>
   );
 });

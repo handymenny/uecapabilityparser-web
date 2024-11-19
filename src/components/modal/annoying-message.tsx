@@ -6,7 +6,10 @@ interface Props {
 }
 
 export default component$((props: Props) => {
-  if (import.meta.env.PUBLIC_ANNOYING_ALERT_EXP_BASE == 0) {
+  if (
+    !import.meta.env.PUBLIC_ANNOYING_ALERT_EXP_BASE &&
+    !import.meta.env.PUBLIC_ANNOYING_ALERT_THRESHOLD
+  ) {
     return <></>;
   }
 
