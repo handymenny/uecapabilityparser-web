@@ -35,20 +35,18 @@ export default component$((props: Props) => {
         span.textContent = multilineLabel ?? null;
       }
 
+      // If the span is empty, return
+      if (span.textContent == null) return;
+
+      // Handle text overflow
       const clientHeight = el.clientHeight;
-      if (el.scrollHeight == clientHeight || span.textContent == null) {
-        return;
-      }
-      while (span.offsetHeight + 50 > clientHeight) {
-        const origLen = span.textContent.length;
-        const truncStr: string = span.textContent.replace(/[\W\s]*(\S)+$/, '');
-        const lenDiff = origLen - truncStr.length;
-        if (lenDiff == 0) break;
-        if (lenDiff > 3) {
-          span.textContent = truncStr + '…';
-        } else {
-          span.textContent = truncStr;
-        }
+      if (el.scrollHeight == clientHeight) return;
+
+      let textLen = span.textContent.length;
+      while (span.offsetHeight + 50 > clientHeight && textLen > 3) {
+        textLen -= Math.max(3, Math.floor(textLen / 20));
+        const truncStr: string = span.textContent.slice(0, textLen);
+        span.textContent = truncStr + '…';
       }
     }
   });
