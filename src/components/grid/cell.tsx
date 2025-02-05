@@ -22,6 +22,7 @@ export default component$((props: Props) => {
   const invertedClass = inverted
     ? ' border-2 border-solid border-black bg-white text-black'
     : ' bg-black text-white';
+  const maxTextLen = 150;
 
   const outputRef = useSignal<Element>();
 
@@ -42,8 +43,10 @@ export default component$((props: Props) => {
       const clientHeight = el.clientHeight;
       if (el.scrollHeight == clientHeight) return;
 
-      let textLen = span.textContent.length;
+      // cap the text length to maxTextLen
+      let textLen = Math.min(span.textContent.length, maxTextLen);
       while (span.offsetHeight + 50 > clientHeight && textLen > 3) {
+        // Reduce the text length by 5% of the current length or 3, whichever is greater
         textLen -= Math.max(3, Math.floor(textLen / 20));
         const truncStr: string = span.textContent.slice(0, textLen);
         span.textContent = truncStr + '…';
