@@ -31,7 +31,7 @@
     "@builder.io/qwik": "^1.9.1",
     "@builder.io/qwik-city": "^1.9.1",
     "@nozbe/microfuzz": "^1.0.0",
-    "@qwik-ui/headless": "^0.6.2",
+    "@qwik-ui/headless": "^0.6.5",
     "@types/dompurify": "^3.0.5",
     "@types/eslint": "^8.56.5",
     "@types/node": "^20.17.6",
