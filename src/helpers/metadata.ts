@@ -20,6 +20,8 @@ export function logTypeToString(type: string) {
       return 'QCAT 0xB826 hexdump';
     case 'M':
       return 'MEDIATEK CA_COMB_INFO';
+    case 'MNR':
+      return 'MEDIATEK NR Trace Log';
     case 'O':
       return 'OSIX UE Capability';
     case 'QC':

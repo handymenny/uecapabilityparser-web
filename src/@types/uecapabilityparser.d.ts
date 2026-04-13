@@ -33,6 +33,7 @@ export enum LogType {
   QLTE = 'QLTE',
   QNR = 'QNR',
   M = 'M',
+  MNR = 'MNR',
   O = 'O',
   QC = 'QC',
   T = 'T',
